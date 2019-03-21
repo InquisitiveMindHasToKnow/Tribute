@@ -9,5 +9,8 @@
     <string name="view_class_list">View Class List</string>
     <string name="generate_list">Generate List</string>
     <string name="pick_random_person">Pick Random Person</string>
+    <string name="omar_s_linkedin">Omar\'s LinkedIn</string>
+    <string name="omar_s_github">Omar\'s Github</string>
+    <string name="omar_info">omar_info</string>
 </resources>
 

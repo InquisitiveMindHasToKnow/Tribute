@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/omars_linkedin"
+        android:icon="@drawable/linkedin"
+        android:title="@string/omar_s_github"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/omars_github"
+        android:icon="@drawable/github"
+        android:title="@string/omar_s_linkedin"
+        app:showAsAction="ifRoom"/>
+
+</menu>
