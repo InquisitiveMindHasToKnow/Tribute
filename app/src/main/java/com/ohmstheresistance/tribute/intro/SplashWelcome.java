@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,11 +15,14 @@ import com.squareup.picasso.Picasso;
 public class SplashWelcome extends AppCompatActivity {
 
     ImageView splashImage;
-    private static int SPLASH_SCREEN_TIMER = 5000;
+    private static int SPLASH_SCREEN_TIMER = 6000;
     private Intent toLoginScreenIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_welcome);
 

@@ -5,5 +5,9 @@
     <string name="enter_your_email_address">Enter your email address</string>
     <string name="attempts_remaining">Attempts Remaining: </string>
     <string name="login_attempts_text">Attempts Remaining:</string>
+    <string name="welcome_omar">WELCOME, OMAR!</string>
+    <string name="view_class_list">View Class List</string>
+    <string name="generate_list">Generate List</string>
+    <string name="pick_random_person">Pick Random Person</string>
 </resources>
 
