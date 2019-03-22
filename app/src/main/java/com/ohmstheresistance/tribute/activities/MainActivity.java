@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView buttonRecyclerView;
 
     private TextView welcomeTextView;
-    private Button infoFromInternetButton;
-    private Button generateOwnListButton;
-    private Button pickRandomPerson;
     private ImageView welcomeScreenImageView;
+    private Intent navigationIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,4 +91,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }
