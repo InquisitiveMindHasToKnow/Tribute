@@ -6,14 +6,19 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.FellowAPI;
+import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.network.RetrofitSingleton;
 import com.ohmstheresistance.tribute.network.FellowService;
 import com.ohmstheresistance.tribute.rv.FellowAdapter;
+
+import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +30,8 @@ public class ViewFellowListActivity extends AppCompatActivity {
     private static final String TAG = "FellowJSON.TAG";
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
+    private Random random;
+    List<Fellows> fellowList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,13 @@ public class ViewFellowListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_fellow_list);
         fellowRecyclerView = findViewById(R.id.fellow_list_recycler);
         pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
+
+        pickRandomFellowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                random = new Random();
+            }
+        });
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         FellowService fellowService = retrofit.create(FellowService.class);
