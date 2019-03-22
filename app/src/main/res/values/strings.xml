@@ -7,7 +7,7 @@
     <string name="login_attempts_text">Attempts Remaining:</string>
     <string name="welcome_omar">WELCOME, OMAR!</string>
     <string name="view_class_list">View Person List</string>
-    <string name="generate_list">Generate List</string>
+    <string name="generate_list">Generate Person List</string>
     <string name="pick_random_person">Pick Random Person</string>
     <string name="omar_s_linkedin">Omar\'s LinkedIn</string>
     <string name="omar_s_github">Omar\'s Github</string>
