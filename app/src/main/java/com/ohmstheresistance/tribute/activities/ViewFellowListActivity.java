@@ -24,12 +24,14 @@ public class ViewFellowListActivity extends AppCompatActivity {
 
     private static final String TAG = "FellowJSON.TAG";
     private RecyclerView fellowRecyclerView;
+    private Button pickRandomFellowButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_fellow_list);
         fellowRecyclerView = findViewById(R.id.fellow_list_recycler);
+        pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         FellowService fellowService = retrofit.create(FellowService.class);
