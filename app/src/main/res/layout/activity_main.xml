@@ -47,7 +47,7 @@
             android:text="@string/view_class_list"/>
 
         <Button
-            android:id="@+id/pick_random_person"
+            android:id="@+id/pick_random_person_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pick_random_person"/>

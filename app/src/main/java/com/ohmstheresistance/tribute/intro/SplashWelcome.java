@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.activities.LoginActivity;
 import com.squareup.picasso.Picasso;
@@ -20,9 +17,6 @@ public class SplashWelcome extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_welcome);
 
@@ -31,6 +25,7 @@ public class SplashWelcome extends AppCompatActivity {
         Picasso.get()
                 .load(R.drawable.questiondice)
                 .into(splashImage);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -41,5 +36,8 @@ public class SplashWelcome extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_SCREEN_TIMER);
+
     }
+
 }
+
