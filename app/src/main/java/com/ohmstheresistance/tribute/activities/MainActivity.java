@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.ButtonAPI;
-import com.ohmstheresistance.tribute.network.ButtonRetrofit;
+import com.ohmstheresistance.tribute.network.RetrofitSingleton;
 import com.ohmstheresistance.tribute.network.ButtonService;
 import com.ohmstheresistance.tribute.rv.ButtonAdapter;
 import com.squareup.picasso.Picasso;
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView welcomeTextView;
     private ImageView welcomeScreenImageView;
-    private Intent navigationIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 .load(R.drawable.guesswho)
                 .into(welcomeScreenImageView);
 
-        Retrofit retrofit = ButtonRetrofit.getRetrofitInstance();
+        Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         ButtonService buttonService = retrofit.create(ButtonService.class);
         buttonService.getButtons().enqueue(new Callback<ButtonAPI>() {
             @Override
             public void onResponse(Call<ButtonAPI> call, Response<ButtonAPI> response) {
-                Log.d(TAG, "This retrofit call works, Omar!" + response.body().getMessage().get(0));
+                Log.d(TAG, "Button retrofit call works, Omar!" + response.body().getMessage().get(0));
                 ButtonAdapter adapter = new ButtonAdapter(response.body().getMessage());
                 buttonRecyclerView.setAdapter(adapter);
                 buttonRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ButtonAPI> call, Throwable t) {
-                Log.d(TAG, "Retrofit call failed! " + t.getMessage());
+                Log.d(TAG, "Button retrofit call failed! " + t.getMessage());
             }
         });
 
