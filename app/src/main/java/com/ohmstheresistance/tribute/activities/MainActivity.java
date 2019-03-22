@@ -42,12 +42,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonRecyclerView = findViewById(R.id.button_recycler);
         welcomeTextView = findViewById(R.id.welcome_textview);
         welcomeScreenImageView = findViewById(R.id.welcome_screen_imageview);
-//        pickRandomPerson = findViewById(R.id.pick_random_person_button);
-//        generateOwnListButton = findViewById(R.id.generate_own_list_button);
-//        infoFromInternetButton = findViewById(R.id.info_from_internet_button);
+        buttonRecyclerView = findViewById(R.id.button_recycler);
 
         Picasso.get()
                 .load(R.drawable.guesswho)
@@ -95,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(linkedInIntent);
                 break;
         }
-
         return true;
     }
 }
