@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -13,14 +12,11 @@ import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.FellowAPI;
-import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.network.RetrofitSingleton;
 import com.ohmstheresistance.tribute.network.FellowService;
 import com.ohmstheresistance.tribute.rv.FellowAdapter;
 
-import java.lang.annotation.ElementType;
 import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,8 +30,6 @@ public class ViewFellowListActivity extends AppCompatActivity {
     private TextView allstar_textview;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
-    private List<Fellows> fellowList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +43,8 @@ public class ViewFellowListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random randomFellow = new Random();
-               // Fellows fellows = fellowList.get(randomFellow.nextInt(fellowList.size()));
-                Intent randomFellowIntent =  new Intent(getApplicationContext(), RandomFellowPickedView.class);
+
+                Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedView.class);
                 startActivity(randomFellowIntent);
             }
         });
@@ -76,8 +69,5 @@ public class ViewFellowListActivity extends AppCompatActivity {
         });
 
     }
-
-
-
 }
 

@@ -1,5 +1,6 @@
 package com.ohmstheresistance.tribute.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ public class RandomFellowPickedView extends AppCompatActivity {
     private TextView chosenFellowTextView;
     private TextView fellowMotivationTextView;
     private ImageView chosenFellowImageview;
+    private Intent chosenFellowIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
