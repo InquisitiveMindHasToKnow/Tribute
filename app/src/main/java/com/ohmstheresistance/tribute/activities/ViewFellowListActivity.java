@@ -27,23 +27,24 @@ import retrofit2.Retrofit;
 
 public class ViewFellowListActivity extends AppCompatActivity {
 
+
     private static final String TAG = "FellowJSON.TAG";
+    private TextView allstar_textview;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
-    private Random random;
-    List<Fellows> fellowList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_fellow_list);
         fellowRecyclerView = findViewById(R.id.fellow_list_recycler);
+        allstar_textview = findViewById(R.id.allstar_fellow_textview);
         pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
 
         pickRandomFellowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                random = new Random();
             }
         });
 

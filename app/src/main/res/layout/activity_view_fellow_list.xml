@@ -5,6 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".8">
+
+        <TextView
+            android:id="@+id/allstar_fellow_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/android_5_4_all_stars"
+            android:background="#000000"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            />
+
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,12 +41,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".9">
+        android:layout_weight=".8">
 
         <Button
             android:id="@+id/pick_random_fellow_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#000000"
             android:gravity="center"
             android:text="@string/pick_fellow"
@@ -34,7 +54,6 @@
             android:textSize="24sp" />
 
     </RelativeLayout>
-
 
 </LinearLayout>
 
