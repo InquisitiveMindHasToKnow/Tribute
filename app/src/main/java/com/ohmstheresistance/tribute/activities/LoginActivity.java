@@ -16,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
    private int loginCounter = 5;
    private TextView loginCounterTextView;
    private Button submitButton;
+   private Button resetButton;
    private EditText userEmailEditText;
    private EditText userPasswordEditText;
 
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         userPasswordEditText = findViewById(R.id.user_password_edittext);
         loginCounterTextView = findViewById(R.id.login_countdown);
         submitButton = findViewById(R.id.submit_button);
+        resetButton = findViewById(R.id.reset_button);
 
         loginCounterTextView.setText("Login Attempts Remaining: 5");
 
@@ -39,6 +41,21 @@ public class LoginActivity extends AppCompatActivity {
                 checkCredentials(userEmailEditText.getText().toString(), userPasswordEditText.getText().toString());
 
          }
+        });
+
+        resetButton.setEnabled(false);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                loginCounter = 5;
+                if(loginCounter > 0) {
+                    resetButton.setEnabled(false);
+                    submitButton.setEnabled(true);
+                    loginCounterTextView.setText("Login Attempts Remaining: " + String.valueOf(loginCounter));
+                }
+            }
         });
     }
 
@@ -56,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Too many incorrect login attempts. Please try again later!",
                         Toast.LENGTH_LONG).show();
+
+                resetButton.setEnabled(true);
             }
 
         }
