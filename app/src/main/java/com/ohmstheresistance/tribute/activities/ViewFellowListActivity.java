@@ -33,7 +33,7 @@ public class ViewFellowListActivity extends AppCompatActivity {
     private TextView allstar_textview;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
-    private FellowAdapter fellowAdapter;
+
     private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
 
     private List<Fellows> fellowList;

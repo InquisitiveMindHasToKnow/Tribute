@@ -41,10 +41,6 @@ public class FellowAdapter extends RecyclerView.Adapter<FellowViewHolder> {
     }
 
 }
-//    public Fellows pickRandomFellow(List<Fellows> fellowsList){
-//
-//            return fellowsList.get(new Random().nextInt(fellowsList.size()));
-//        }
-//    }
+
 
 

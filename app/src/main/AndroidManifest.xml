@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
         <activity android:name=".activities.RandomFellowPickedView"></activity>
-        <activity android:name=".activities.FellowTributeActivity" />
+        <activity android:name=".activities.AcceptanceSpeechActivity" />
         <activity android:name=".activities.ViewFellowListActivity" />
         <activity android:name=".activities.CreateListActivity" />
         <activity android:name=".intro.SplashWelcome">
