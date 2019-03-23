@@ -1,5 +1,6 @@
 package com.ohmstheresistance.tribute.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +18,7 @@ import com.ohmstheresistance.tribute.network.RetrofitSingleton;
 import com.ohmstheresistance.tribute.network.FellowService;
 import com.ohmstheresistance.tribute.rv.FellowAdapter;
 
+import java.lang.annotation.ElementType;
 import java.util.List;
 import java.util.Random;
 
@@ -32,6 +34,7 @@ public class ViewFellowListActivity extends AppCompatActivity {
     private TextView allstar_textview;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
+    private List<Fellows> fellowList;
 
 
     @Override
@@ -45,6 +48,11 @@ public class ViewFellowListActivity extends AppCompatActivity {
         pickRandomFellowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Random randomFellow = new Random();
+               // Fellows fellows = fellowList.get(randomFellow.nextInt(fellowList.size()));
+                Intent randomFellowIntent =  new Intent(getApplicationContext(), RandomFellowPickedView.class);
+                startActivity(randomFellowIntent);
             }
         });
 
@@ -68,6 +76,8 @@ public class ViewFellowListActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 }
 
