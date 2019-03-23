@@ -15,7 +15,7 @@ public class FellowAdapter extends RecyclerView.Adapter<FellowViewHolder> {
 
     private List<Fellows> fellowList;
 
-    public FellowAdapter(List<Fellows> fellowList){
+    public FellowAdapter(List<Fellows> fellowList) {
         this.fellowList = fellowList;
     }
 
@@ -36,6 +36,15 @@ public class FellowAdapter extends RecyclerView.Adapter<FellowViewHolder> {
 
     @Override
     public int getItemCount() {
+
         return fellowList.size();
     }
+
 }
+//    public Fellows pickRandomFellow(List<Fellows> fellowsList){
+//
+//            return fellowsList.get(new Random().nextInt(fellowsList.size()));
+//        }
+//    }
+
+

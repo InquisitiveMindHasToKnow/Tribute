@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.FellowAPI;
+import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.network.RetrofitSingleton;
 import com.ohmstheresistance.tribute.network.FellowService;
 import com.ohmstheresistance.tribute.rv.FellowAdapter;
 
+
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +33,10 @@ public class ViewFellowListActivity extends AppCompatActivity {
     private TextView allstar_textview;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
+    private FellowAdapter fellowAdapter;
+    private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
+
+    private List<Fellows> fellowList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +50,10 @@ public class ViewFellowListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                Random randomNumber = new Random();
+                Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size()));
                 Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedView.class);
+                randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
                 startActivity(randomFellowIntent);
             }
         });
@@ -54,11 +63,13 @@ public class ViewFellowListActivity extends AppCompatActivity {
         fellowService.getFellows().enqueue(new Callback<FellowAPI>() {
             @Override
             public void onResponse(Call<FellowAPI> call, Response<FellowAPI> response) {
-                Log.d(TAG, "Fellow retrofit call works, Omar!" + response.body().getMessage().get(0));
-                FellowAdapter fellowAdapter = new FellowAdapter(response.body().getMessage());
+                Log.d(TAG, "Fellow retrofit call works, Omar!" + response.body().getFellows().get(0));
+                FellowAdapter fellowAdapter = new FellowAdapter(response.body().getFellows());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
                 fellowRecyclerView.setLayoutManager(gridLayoutManager);
                 fellowRecyclerView.setAdapter(fellowAdapter);
+
+                fellowList = response.body().getFellows();
 
             }
 

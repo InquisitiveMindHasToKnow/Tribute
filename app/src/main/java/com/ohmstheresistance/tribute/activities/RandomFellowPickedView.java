@@ -15,15 +15,20 @@ public class RandomFellowPickedView extends AppCompatActivity {
     private TextView fellowMotivationTextView;
     private ImageView chosenFellowImageview;
     private Intent chosenFellowIntent;
+    private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_fellow_picked_view);
 
+        chosenFellowIntent = getIntent();
+
         chosenFellowTextView = findViewById(R.id.randomly_selected_fellow_textview);
         chosenFellowImageview = findViewById(R.id.i_choose_you_gif_imageview);
         fellowMotivationTextView = findViewById(R.id.fellow_motivation);
 
+        chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
          Glide.with(this).load(R.drawable.ichooseyou).into(chosenFellowImageview);
     }
 }

@@ -1,12 +1,15 @@
 package com.ohmstheresistance.tribute.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class FellowAPI {
 
-    private List<Fellows> message;
+    @SerializedName("message")
+    private List<Fellows> fellows;
 
-    public List<Fellows> getMessage(){
-        return message;
+    public List<Fellows> getFellows(){
+        return fellows;
     }
 }
