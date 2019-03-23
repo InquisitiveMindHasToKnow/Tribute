@@ -11,6 +11,7 @@ import com.ohmstheresistance.tribute.R;
 public class RandomFellowPickedView extends AppCompatActivity {
 
     private TextView chosenFellowTextView;
+    private TextView fellowMotivationTextView;
     private ImageView chosenFellowImageview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class RandomFellowPickedView extends AppCompatActivity {
 
         chosenFellowTextView = findViewById(R.id.randomly_selected_fellow_textview);
         chosenFellowImageview = findViewById(R.id.i_choose_you_gif_imageview);
+        fellowMotivationTextView = findViewById(R.id.fellow_motivation);
 
          Glide.with(this).load(R.drawable.ichooseyou).into(chosenFellowImageview);
     }

@@ -23,17 +23,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".3">
+        android:layout_weight=".6"
+        >
     <TextView
         android:id="@+id/randomly_selected_fellow_textview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="56sp"
+        android:text="Random Fellow"
         android:textColor="@color/colorAccent"
         android:background="#000000"
         />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".5"
+        >
+        <TextView
+            android:id="@+id/fellow_motivation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="32sp"
+            android:text="@string/random_fellow_motivation"
+            android:textColor="@color/colorAccent"
+            android:background="#000000"
+            />
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>
