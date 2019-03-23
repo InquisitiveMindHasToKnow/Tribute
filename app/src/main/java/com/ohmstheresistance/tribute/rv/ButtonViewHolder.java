@@ -50,7 +50,6 @@ public class ButtonViewHolder extends RecyclerView.ViewHolder {
                         navigationIntent = new Intent(context, AcceptanceSpeechActivity.class);
                         context.startActivity(navigationIntent);
                         break;
-
                 }
 
             }

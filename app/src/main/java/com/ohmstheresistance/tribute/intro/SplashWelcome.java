@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 public class SplashWelcome extends AppCompatActivity {
 
     ImageView splashImage;
-    private static int SPLASH_SCREEN_TIMER = 6000;
+    private static int SPLASH_SCREEN_TIMER = 3000;
     private Intent toLoginScreenIntent;
 
     @Override

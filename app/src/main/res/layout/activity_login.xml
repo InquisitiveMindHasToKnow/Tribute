@@ -3,31 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/login_screen_title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sign_in_prompt_textview"/>
+
+    <TextView
+        android:id="@+id/sign_in_prompt_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_prompt"
+        android:textColor="@color/colorAccent"
+        android:layout_marginStart="112dp"
+        app:layout_constraintTop_toBottomOf="@id/login_screen_title_textview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/user_email_edittext"
+        />
 
     <EditText
+
         android:id="@+id/user_email_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="328dp"
+        android:layout_height="72dp"
         android:layout_marginTop="120dp"
         android:hint="@string/enter_your_email_address"
+        android:background="@drawable/oval"
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_prompt_textview"/>
+
     <EditText
         android:id="@+id/user_password_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="328dp"
+        android:layout_height="72dp"
         android:hint="@string/enter_your_password"
+        android:layout_marginTop="24dp"
+        android:textAlignment="center"
         android:inputType="textPassword"
+        android:background="@drawable/oval"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_email_edittext" />
 
     <Button
         android:id="@+id/submit_button"
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:text="@string/submit_button_hint"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_password_edittext" />
 
 
@@ -36,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/attempts_remaining"
+        android:textColor="@color/colorAccent"
         app:layout_constraintTop_toBottomOf="@id/submit_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
