@@ -1,9 +1,11 @@
 package com.ohmstheresistance.tribute.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,12 +15,12 @@ import com.ohmstheresistance.tribute.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-   private int loginCounter = 5;
-   private TextView loginCounterTextView;
-   private Button submitButton;
-   private Button resetButton;
-   private EditText userEmailEditText;
-   private EditText userPasswordEditText;
+    private int loginCounter = 5;
+    private TextView loginCounterTextView;
+    private Button submitButton;
+    private Button resetButton;
+    private EditText userEmailEditText;
+    private EditText userPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                closeKeyboard();
                 checkCredentials(userEmailEditText.getText().toString(), userPasswordEditText.getText().toString());
 
-         }
+            }
         });
 
         resetButton.setEnabled(false);
@@ -50,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 loginCounter = 5;
-                if(loginCounter > 0) {
+                if (loginCounter > 0) {
                     resetButton.setEnabled(false);
                     submitButton.setEnabled(true);
                     loginCounterTextView.setText("Login Attempts Remaining: " + String.valueOf(loginCounter));
@@ -59,16 +62,16 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void checkCredentials(String loginUserName, String loginPassword){
-        if((loginUserName.equals("soloproject@omarraymond.org")) && (loginPassword.equals("Password"))){
+    private void checkCredentials(String loginUserName, String loginPassword) {
+        if ((loginUserName.equals("soloproject@omarraymond.org")) && (loginPassword.equals("Password"))) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-        }else{
+        } else {
             loginCounter--;
 
             loginCounterTextView.setText("Login Attempts Remaining: " + String.valueOf(loginCounter));
 
-            if(loginCounter == 0){
+            if (loginCounter == 0) {
                 submitButton.setEnabled(false);
 
                 Toast.makeText(getApplicationContext(), "Too many incorrect login attempts. Please try again later!",
@@ -78,7 +81,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+
     }
-
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 }
-

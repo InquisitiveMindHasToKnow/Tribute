@@ -1,0 +1,45 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "81870fdce6d517e15bf69505e689d91c",
+    "entities": [
+      {
+        "tableName": "person_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`personID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `personName` TEXT, `personGender` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "personID",
+            "columnName": "personID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "personName",
+            "columnName": "personName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "personGender",
+            "columnName": "personGender",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "personID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"81870fdce6d517e15bf69505e689d91c\")"
+    ]
+  }
+}
