@@ -22,8 +22,8 @@ public interface PersonDao {
     void delete(Person person);
 
     @Query("DELETE FROM person_table")
-    void deleteAllNotes();
+    void deleteAllPersons();
 
-    @Query("SELECT * FROM person_table ORDER BY personID DESC")
+    @Query("SELECT * FROM person_table ORDER BY personID ASC")
     LiveData<List<Person>> getAllPersons();
 }

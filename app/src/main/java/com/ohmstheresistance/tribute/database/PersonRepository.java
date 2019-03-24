@@ -17,43 +17,43 @@ public class PersonRepository {
     }
 
     public void addPerson(Person person) {
-        new InsertNoteAsyncTask(personDao).execute(person);
+        new AddPersonAsyncTask(personDao).execute(person);
     }
 
     public void updatePerson(Person person) {
-        new UpdateNoteAsyncTask(personDao).execute(person);
+        new UpdatePersonAsyncTask(personDao).execute(person);
     }
 
     public void deletePerson(Person person) {
-        new DeleteNoteAsyncTask(personDao).execute(person);
+        new DeletePersonAsyncTask(personDao).execute(person);
     }
 
     public void deleteAllPersons() {
-        new DeleteAllNotesAsyncTask(personDao).execute();
+        new DeleteAllPersonsAsyncTask(personDao).execute();
     }
 
     public LiveData<List<Person>> getAllPersons() {
         return allPersons;
     }
 
-    private static class InsertNoteAsyncTask extends AsyncTask<Person, Void, Void> {
+    private static class AddPersonAsyncTask extends AsyncTask<Person, Void, Void> {
         private PersonDao personDao;
 
-        private InsertNoteAsyncTask(PersonDao personDao) {
+        private AddPersonAsyncTask(PersonDao personDao) {
             this.personDao = personDao;
         }
 
         @Override
-        protected Void doInBackground(Person... notes) {
-            personDao.addPerson(notes[0]);
+        protected Void doInBackground(Person... persons) {
+            personDao.addPerson(persons[0]);
             return null;
         }
     }
 
-    private static class UpdateNoteAsyncTask extends AsyncTask<Person, Void, Void> {
+    private static class UpdatePersonAsyncTask extends AsyncTask<Person, Void, Void> {
         private PersonDao personDao;
 
-        private UpdateNoteAsyncTask(PersonDao personDao) {
+        private UpdatePersonAsyncTask(PersonDao personDao) {
             this.personDao = personDao;
         }
 
@@ -64,30 +64,30 @@ public class PersonRepository {
         }
     }
 
-    private static class DeleteNoteAsyncTask extends AsyncTask<Person, Void, Void> {
+    private static class DeletePersonAsyncTask extends AsyncTask<Person, Void, Void> {
         private PersonDao personDao;
 
-        private DeleteNoteAsyncTask(PersonDao personDao) {
+        private DeletePersonAsyncTask(PersonDao personDao) {
             this.personDao = personDao;
         }
 
         @Override
-        protected Void doInBackground(Person... notes) {
-            personDao.delete(notes[0]);
+        protected Void doInBackground(Person... persons) {
+            personDao.delete(persons[0]);
             return null;
         }
     }
 
-    private static class DeleteAllNotesAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class DeleteAllPersonsAsyncTask extends AsyncTask<Void, Void, Void> {
         private PersonDao personDao;
 
-        private DeleteAllNotesAsyncTask(PersonDao personDao) {
+        private DeleteAllPersonsAsyncTask(PersonDao personDao) {
             this.personDao = personDao;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            personDao.deleteAllNotes();
+            personDao.deleteAllPersons();
             return null;
         }
     }

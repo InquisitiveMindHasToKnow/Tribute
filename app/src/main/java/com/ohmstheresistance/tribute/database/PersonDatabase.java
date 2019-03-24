@@ -35,17 +35,17 @@ public abstract class PersonDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private PersonDao noteDao;
+        private PersonDao personDao;
 
         private PopulateDbAsyncTask(PersonDatabase db) {
-            noteDao = db.personDao();
+            personDao = db.personDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.addPerson(new Person("Omar", "Male"));
-            noteDao.addPerson(new Person("Gemma", "Female"));
-            noteDao.addPerson(new Person("Catherine", "Female"));
+            personDao.addPerson(new Person("Omar", "Male"));
+            personDao.addPerson(new Person("Gemma", "Female"));
+            personDao.addPerson(new Person("Catherine", "Female"));
             return null;
         }
     }

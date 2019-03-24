@@ -32,7 +32,7 @@ public class PersonViewModel extends AndroidViewModel {
         personRepository.deletePerson(person);
     }
 
-    public void deleteAllNotes() {
+    public void deleteAllPersons() {
         personRepository.deleteAllPersons();
     }
 
