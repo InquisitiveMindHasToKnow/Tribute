@@ -1,6 +1,5 @@
 package com.ohmstheresistance.tribute.database;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -25,5 +24,5 @@ public interface PersonDao {
     void deleteAllPersons();
 
     @Query("SELECT * FROM person_table ORDER BY personID ASC")
-    LiveData<List<Person>> getAllPersons();
+    List<Person> getAllPersons();
 }

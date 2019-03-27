@@ -1,19 +1,19 @@
 package com.ohmstheresistance.tribute.database;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonRepository {
     private PersonDao personDao;
-    private LiveData<List<Person>> allPersons;
+    private List<Person> allPersons = new ArrayList<>();
 
     public PersonRepository(Application application) {
         PersonDatabase database = PersonDatabase.getInstance(application);
         personDao = database.personDao();
-        allPersons = personDao.getAllPersons();
     }
 
     public void addPerson(Person person) {
@@ -32,8 +32,12 @@ public class PersonRepository {
         new DeleteAllPersonsAsyncTask(personDao).execute();
     }
 
-    public LiveData<List<Person>> getAllPersons() {
-        return allPersons;
+    public List<Person> getAllPersons() {
+        return personDao.getAllPersons();
+    }
+
+    public PersonDao getPersonDao(){
+        return personDao;
     }
 
     private static class AddPersonAsyncTask extends AsyncTask<Person, Void, Void> {

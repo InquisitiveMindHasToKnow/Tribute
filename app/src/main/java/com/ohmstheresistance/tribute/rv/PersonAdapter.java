@@ -26,14 +26,15 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
 
     @Override
     public void onBindViewHolder(@NonNull PersonHolder holder, int position) {
-        Person currentNote = personList.get(position);
-        holder.personNameTextView.setText(currentNote.getPersonName());
-        holder.personGenderTextView.setText(currentNote.getPersonGender());
-        holder.personIDTextView.setText(String.valueOf(currentNote.getPersonID()));
+        Person currentPerson = personList.get(position);
+        holder.personNameTextView.setText(currentPerson.getPersonName());
+        holder.personGenderTextView.setText(currentPerson.getPersonGender());
+        holder.personIDTextView.setText(String.valueOf(currentPerson.getPersonID()));
     }
 
     @Override
     public int getItemCount() {
+
         return personList.size();
     }
 

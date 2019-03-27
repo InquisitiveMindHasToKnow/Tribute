@@ -36,8 +36,6 @@ public class SplashWelcome extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_SCREEN_TIMER);
-
     }
-
 }
 

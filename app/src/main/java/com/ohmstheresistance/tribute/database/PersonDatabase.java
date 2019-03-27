@@ -43,9 +43,18 @@ public abstract class PersonDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            personDao.addPerson(new Person("Omar", "Male"));
+            personDao.addPerson(new Person("GREG", "Male"));
             personDao.addPerson(new Person("Gemma", "Female"));
             personDao.addPerson(new Person("Catherine", "Female"));
+            personDao.addPerson(new Person("Jermaine", "Male"));
+            personDao.addPerson(new Person("Kari", "Female"));
+            personDao.addPerson(new Person("Latoya", "Female"));
+            personDao.addPerson(new Person("Jonelle", "Female"));
+            personDao.addPerson(new Person("Jeff", "Male"));
+            personDao.addPerson(new Person("Vivs", "Female"));
+            personDao.addPerson(new Person("Vicky", "Female"));
+            personDao.addPerson(new Person("Anna", "Female"));
+            personDao.addPerson(new Person("Gabby", "Female"));
             return null;
         }
     }

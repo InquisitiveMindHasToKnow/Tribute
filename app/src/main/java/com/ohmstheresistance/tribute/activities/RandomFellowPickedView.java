@@ -1,6 +1,8 @@
 package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -28,7 +30,15 @@ public class RandomFellowPickedView extends AppCompatActivity {
         chosenFellowImageview = findViewById(R.id.i_choose_you_gif_imageview);
         fellowMotivationTextView = findViewById(R.id.fellow_motivation);
 
-        chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
-         Glide.with(this).load(R.drawable.ichooseyou).into(chosenFellowImageview);
+        Glide.with(this).load(R.drawable.ashchoseyou).into(chosenFellowImageview);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
+                chosenFellowTextView.setBackgroundColor(Color.parseColor("#FBF1C6"));
+            }
+        }, 3000);
     }
 }
