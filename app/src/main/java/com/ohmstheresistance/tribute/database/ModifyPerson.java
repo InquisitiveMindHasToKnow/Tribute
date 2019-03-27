@@ -1,4 +1,4 @@
 package com.ohmstheresistance.tribute.database;
 
-public class PersonRepository {
+public interface ModifyPerson {
 }
