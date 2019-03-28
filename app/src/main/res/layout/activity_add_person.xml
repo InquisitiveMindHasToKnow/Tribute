@@ -4,23 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#283593"
+    android:background="@color/colorPrimary"
     tools:context=".activities.AddPersonActivity">
+
+    <TextView
+        android:id="@+id/add_person_prompt_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_person_prompt_textview"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:textSize="32sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_person_name_edittext"
+        />
 
     <EditText
         android:id="@+id/add_person_name_edittext"
         android:layout_width="300dp"
         android:layout_height="64dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginStart="60dp"
-        android:inputType="text"
-        android:hint="@string/person_name"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/oval"
-        android:textAlignment="center"
+        android:hint="@string/person_name"
         android:imeOptions="actionDone"
+        android:inputType="text"
         android:singleLine="true"
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/add_person_prompt_textview" />
 
     <EditText
         android:id="@+id/add_person_number_edittext"

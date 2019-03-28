@@ -24,5 +24,6 @@
     <string name="person_phone_number">Person Phone Number</string>
     <string name="person_name">Person Name</string>
     <string name="person_email">Person Email Address</string>
+    <string name="add_person_prompt_textview">Enter Person Info Below:</string>
 </resources>
 
