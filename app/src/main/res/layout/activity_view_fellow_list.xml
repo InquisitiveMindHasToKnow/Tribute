@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#283593"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -14,15 +15,13 @@
             android:id="@+id/allstar_fellow_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#1a237e"
             android:gravity="center"
             android:text="@string/android_5_4_all_stars"
-            android:background="#000000"
-            android:textColor="@color/colorAccent"
+            android:textColor="#FFEB3B"
             android:textSize="24sp"
             android:textStyle="bold"
             />
-
-
     </RelativeLayout>
 
 
@@ -34,26 +33,27 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fellow_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:layout_weight=".8">
 
         <Button
             android:id="@+id/pick_random_fellow_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000000"
+            android:background="#1a237e"
             android:gravity="center"
             android:text="@string/pick_fellow"
-            android:textColor="@color/colorAccent"
+            android:textColor="#ffeb3b"
             android:textSize="24sp" />
 
     </RelativeLayout>
-
 </LinearLayout>
 

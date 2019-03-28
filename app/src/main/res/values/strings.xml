@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tribute</string>
+    <string name="welcome_textview">Welcome</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="submit_button_hint">Login</string>
     <string name="enter_your_email_address">Enter your email address</string>
@@ -12,12 +12,17 @@
     <string name="omar_s_linkedin">Omar\'s LinkedIn</string>
     <string name="omar_s_github">Omar\'s Github</string>
     <string name="omar_info">omar_info</string>
-    <string name="pick_fellow">Randomly Pick A Fellow</string>
+    <string name="pick_fellow">Tap To Randomly Pick A Fellow</string>
     <string name="android_5_4_all_stars">ANDROID 5.4 ALL-STARS</string>
     <string name="random_fellow_motivation">Don\'t worry, you can do it!!! If for any reason you feel you can\'t, just know everyone\'s probably in the same boat!!!</string>
     <string name="acceptance_speech_header">Acceptance Speech</string>
     <string name="acceptance_speech">Hey, look, man! Creating this app was a rollercoaster ride to say the least. I had my ups, I had my downs, I had moments when I just had to walk away from the laptops because regardless of what I did, nothing would work but I sticked it out, and what we have here is the end product of a lot of hard work and persistence. Real quick, I just want to thank God, my mom, TAs like Bryant and Yoki who helped me overcome some of those obstacles I mentioned earlier, and fellow classmates who encouraged me to continue when frustration started kicking in. In closing, if I would pass anything on, anything at all, it would be that you should never give up. If you need to take a break, take a break..if you want to take a quick nap and return to tackle your problem(s) with a fresh perspective, you do just that! \n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tREMEMBER \nThere are no secrets to success. It is the result of preparation, hard work, and learning from failure. \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t-Colin Powell</string>
     <string name="sign_in_prompt">Please sign in to continue</string>
     <string name="reset_button_text">Reset</string>
+    <string name="app_name">Tribute</string>
+    <string name="submit_person_info_button_textview">Submit Person Info</string>
+    <string name="person_phone_number">Person Phone Number</string>
+    <string name="person_name">Person Name</string>
+    <string name="person_email">Person Email Address</string>
 </resources>
 

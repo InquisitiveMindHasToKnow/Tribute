@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#1a237e"
     tools:context=".intro.SplashWelcome">
 
     <TextView
-        android:id="@+id/spash_sceen_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/splash_screen_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
         android:text="@string/app_name"
-        android:textSize="@dimen/splash_text_size"
+        android:gravity="center"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        android:textColor="#FFEB3B"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -24,7 +24,7 @@
         android:id="@+id/splash_screen_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/spash_sceen_text"
+        app:layout_constraintTop_toBottomOf="@id/splash_screen_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

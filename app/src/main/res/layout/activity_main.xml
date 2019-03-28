@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#283593"
     tools:context=".activities.MainActivity">
 
 
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/welcome_omar"
+        android:textColor="#FFEB3B"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/welcome_screen_imageview"
@@ -27,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@id/welcome_screen_buttons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+        app:layout_constraintTop_toBottomOf="@id/welcome_textview"/>
 
     <LinearLayout
         android:id="@+id/welcome_screen_buttons"

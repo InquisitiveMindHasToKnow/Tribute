@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkCredentials(String loginUserName, String loginPassword) {
-        if ((loginUserName.equals("soloproject@omarraymond.org")) && (loginPassword.equals("Password"))) {
+        if ((loginUserName.equals("Omar")) && (loginPassword.equals("Password"))) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         } else {
