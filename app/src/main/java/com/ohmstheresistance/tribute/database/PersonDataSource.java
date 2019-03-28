@@ -5,19 +5,18 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-public class PersonRepository implements ModifyPerson{
+public class PersonDataSource implements ModifyPerson{
 
-    private static PersonRepository personInstance;
+    private static PersonDataSource personInstance;
     private PersonDao personDao;
 
-    public PersonRepository(PersonDao personDao) {
+    public PersonDataSource(PersonDao personDao) {
         this.personDao = personDao;
     }
 
-    public static PersonRepository getPersonInstance(PersonDao personDao){
+    public static PersonDataSource getPersonInstance(PersonDao personDao){
         if(personInstance == null){
-
-            personInstance = new PersonRepository(personDao);
+            personInstance = new PersonDataSource(personDao);
         }
         return personInstance;
 

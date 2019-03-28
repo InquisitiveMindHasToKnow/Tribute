@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 public class SplashWelcome extends AppCompatActivity {
 
     ImageView splashImage;
-    private static int SPLASH_SCREEN_TIMER = 3000;
+    private static int SPLASH_SCREEN_TIMER = 6000;
     private Intent toLoginScreenIntent;
 
     @Override
@@ -23,7 +23,7 @@ public class SplashWelcome extends AppCompatActivity {
         splashImage = findViewById(R.id.splash_screen_image);
 
         Picasso.get()
-                .load(R.drawable.questiondice)
+                .load(R.drawable.rollingdiceforintromatching)
                 .into(splashImage);
 
 
