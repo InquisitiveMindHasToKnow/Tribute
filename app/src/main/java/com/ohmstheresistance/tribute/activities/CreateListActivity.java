@@ -82,14 +82,13 @@ public class CreateListActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
                 int position = viewHolder.getAdapterPosition();
-                personAdapter.deletePerson(position);
+                Person person = personAdapter.getPersonAtPosition(position);
 
                 Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_LONG).show();
                 Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
 
-                        Person person = personAdapter.getPersonAtPosition(position);
                         personRepository.deletePerson(person);
 
                     }
@@ -100,7 +99,7 @@ public class CreateListActivity extends AppCompatActivity {
 
                             @Override
                             public void accept(Object o) throws Exception {
-
+                                personAdapter.deletePerson(position);
                             }
                         }, new Consumer<Throwable>() {
                             @Override
@@ -156,7 +155,6 @@ public class CreateListActivity extends AppCompatActivity {
 
         people.size();
         personAdapter.setPersons(people);
-        personAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -218,7 +216,7 @@ public class CreateListActivity extends AppCompatActivity {
 
                             }
                         });
-                 compositeDisposable.add(disposable);
+                compositeDisposable.add(disposable);
 
             }
 

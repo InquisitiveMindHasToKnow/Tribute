@@ -33,15 +33,10 @@ public class LoginActivity extends AppCompatActivity {
 
         userEmailEditText = findViewById(R.id.user_email_edittext);
         userPasswordEditText = findViewById(R.id.user_password_edittext);
-        welcomeImageView = findViewById(R.id.welcome_screen_picture);
         loginCounterTextView = findViewById(R.id.login_countdown);
         submitButton = findViewById(R.id.submit_button);
         resetButton = findViewById(R.id.reset_button);
 
-
-        Picasso.get()
-                .load(R.drawable.diceforwelcomescreentotry)
-                .into(welcomeImageView);
 
         loginCounterTextView.setText("Login Attempts Remaining: 5");
 
