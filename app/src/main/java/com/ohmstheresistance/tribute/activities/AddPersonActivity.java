@@ -14,7 +14,6 @@ import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
-import com.ohmstheresistance.tribute.rv.PersonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +61,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 Intent saveIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
                 Person person = new Person(addPersonNameEditText.getText().toString(),
                         addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());
-                //think the db adding works here but I need it to be shown on rv and its not so revisit
+
                         personList.add(person);
 
 

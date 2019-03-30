@@ -46,13 +46,21 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
 
     @Override
     public int getItemCount() {
-
         return personList.size();
     }
 
     public void setPersons(List<Person> persons) {
         this.personList = persons;
         notifyDataSetChanged();
+    }
+
+    public void deletePerson(int position){
+        personList.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public Person getPersonAtPosition(int position) {
+        return personList.get(position);
     }
 
     class PersonHolder extends RecyclerView.ViewHolder {

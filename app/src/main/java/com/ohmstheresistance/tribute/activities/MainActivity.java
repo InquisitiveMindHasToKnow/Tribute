@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.ButtonAPI;
 import com.ohmstheresistance.tribute.network.RetrofitSingleton;

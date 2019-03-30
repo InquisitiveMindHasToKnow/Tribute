@@ -1,7 +1,6 @@
 package com.ohmstheresistance.tribute.database;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
