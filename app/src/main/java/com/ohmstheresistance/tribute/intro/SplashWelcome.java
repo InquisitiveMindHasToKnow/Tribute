@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.activities.LoginActivity;
 import com.squareup.picasso.Picasso;
@@ -22,8 +24,8 @@ public class SplashWelcome extends AppCompatActivity {
 
         splashImage = findViewById(R.id.splash_screen_image);
 
-        Picasso.get()
-                .load(R.drawable.rollingdiceforintromatching)
+        Glide.with(SplashWelcome.this)
+                .load(R.drawable.splashscreenimage)
                 .into(splashImage);
 
 
