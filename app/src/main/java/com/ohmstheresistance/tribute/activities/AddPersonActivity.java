@@ -35,7 +35,6 @@ public class AddPersonActivity extends AppCompatActivity {
 
     private Button addUserButton;
     private PersonRepository personRepository;
-    private CompositeDisposable compositeDisposable;
     private List<Person> personList = new ArrayList<>();
     private EditText addPersonNameEditText;
     private EditText addPersonNumberEditText;
@@ -80,7 +79,7 @@ public class AddPersonActivity extends AppCompatActivity {
 
                     setResult(RESULT_OK, saveIntent);
 
-                    Toast.makeText(AddPersonActivity.this, "Person added to List" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
 
 
                     Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
@@ -111,7 +110,6 @@ public class AddPersonActivity extends AppCompatActivity {
 
                                 }
                             });
-                    // compositeDisposable.add(disposable);
 
                 }
                 finish();
