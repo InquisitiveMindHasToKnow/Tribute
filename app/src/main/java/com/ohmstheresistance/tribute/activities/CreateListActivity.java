@@ -1,14 +1,21 @@
 package com.ohmstheresistance.tribute.activities;
 
 
+
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
@@ -19,15 +26,18 @@ import com.ohmstheresistance.tribute.rv.PersonAdapter;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
 
 public class CreateListActivity extends AppCompatActivity {
 
@@ -69,36 +79,6 @@ public class CreateListActivity extends AppCompatActivity {
                 addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
                 startActivity(addPersonIntent);
 
-                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                        Person person = new Person("Omar", "9191919191","soloproject@omarraymond.org");
-                        Person person2 = new Person ("Catherine", "4445554333","catherine@google.gov");
-                        personRepository.addPerson(person);
-                        emitter.onComplete();
-                    }
-                })
-
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Consumer<Object>() {
-
-                            @Override
-                            public void accept(Object o) throws Exception {
-                                Toast.makeText(CreateListActivity.this, "Person Added", Toast.LENGTH_LONG).show();
-
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                Toast.makeText(CreateListActivity.this, "Error Adding Person" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }, new Action() {
-                            @Override
-                            public void run() throws Exception {
-                                getInfo();
-                            }
-                        });
             }
         });
     }
@@ -116,7 +96,7 @@ public class CreateListActivity extends AppCompatActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(CreateListActivity.this, "Get person info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         compositeDisposable.add(disposable);
@@ -129,7 +109,67 @@ public class CreateListActivity extends AppCompatActivity {
         personAdapter.setPersons(people);
         personAdapter.notifyDataSetChanged();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.database_menu, menu);
+        return true;
+    }
 
-}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.database_delete_all:
+
+                deleteDatabase();
+
+                break;
+
+        }
+        return true;
+    }
+
+    private void deleteDatabase(){
+
+        Toast.makeText(CreateListActivity.this, "Database Cleared" , Toast.LENGTH_LONG).show();
+        Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+
+                personRepository.deleteAllPersons();
+                emitter.onComplete();
+
+            }
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<Object>() {
+
+                    @Override
+                    public void accept(Object o) throws Exception {
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(CreateListActivity.this, "Database Cleared" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+
+                    }
+                });
+        // compositeDisposable.add(disposable);
+
+    }
+
+
+    }
+
+
+
+
+
 
 

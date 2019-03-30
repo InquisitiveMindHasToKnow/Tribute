@@ -29,3 +29,4 @@ public interface PersonDao {
     @Query("SELECT * FROM person_table ORDER BY personID ASC")
     Flowable<List<Person>> getAllPersons();
 }
+

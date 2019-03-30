@@ -31,7 +31,7 @@
         android:layout_height="match_parent"
         android:textSize="72sp"
         android:gravity="center"
-        android:background="#283593"
+        android:background="@color/colorPrimary"
         />
 
     </RelativeLayout>
@@ -47,8 +47,7 @@
             android:layout_height="match_parent"
             android:textSize="32sp"
             android:text="@string/random_fellow_motivation"
-            android:textColor="#000000"
-            android:background="#283593"
+            android:background="@color/colorPrimary"
             />
 
     </RelativeLayout>
