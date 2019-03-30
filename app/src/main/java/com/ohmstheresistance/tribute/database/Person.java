@@ -24,6 +24,15 @@ public class Person {
         this.personEmail = personEmail;
     }
 
+    @Ignore
+    public Person( int PersonID, String personName, String personPhoneNumber, String personEmail) {
+
+        this.personID = getPersonID();
+        this.personName = personName;
+        this.personPhoneNumber = personPhoneNumber;
+        this.personEmail = personEmail;
+    }
+
     public int getPersonID() {
         return personID;
     }

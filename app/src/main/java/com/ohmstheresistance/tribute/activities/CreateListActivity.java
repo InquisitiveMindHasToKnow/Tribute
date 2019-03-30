@@ -3,7 +3,7 @@ package com.ohmstheresistance.tribute.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,11 +28,9 @@ import com.ohmstheresistance.tribute.rv.PersonAdapter;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -59,7 +58,7 @@ public class CreateListActivity extends AppCompatActivity {
 
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
 
-        personRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(true);
         personAdapter = new PersonAdapter(this);
         personRecyclerView.setAdapter(personAdapter);
@@ -72,6 +71,55 @@ public class CreateListActivity extends AppCompatActivity {
         personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
 
         getInfo();
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+                int position = viewHolder.getAdapterPosition();
+                personAdapter.deletePerson(position);
+
+                Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_LONG).show();
+                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+
+                        Person person = personAdapter.getPersonAtPosition(position);
+                        personRepository.deletePerson(person);
+
+                    }
+                })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Consumer<Object>() {
+
+                            @Override
+                            public void accept(Object o) throws Exception {
+
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+
+                                //this error only happens when there are 2 or less items in the db.
+                                Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }, new Action() {
+                            @Override
+                            public void run() throws Exception {
+
+                            }
+                        });
+                compositeDisposable.add(disposable);
+
+            }
+
+        }).attachToRecyclerView(personRecyclerView);
 
         personFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +218,7 @@ public class CreateListActivity extends AppCompatActivity {
 
                             }
                         });
-                // compositeDisposable.add(disposable);
+                 compositeDisposable.add(disposable);
 
             }
 
@@ -179,7 +227,7 @@ public class CreateListActivity extends AppCompatActivity {
                 .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Action for "Cancel".
+
                     }
                 });
 
@@ -187,7 +235,6 @@ public class CreateListActivity extends AppCompatActivity {
         alert.show();
 
     }
-
 
 }
 
