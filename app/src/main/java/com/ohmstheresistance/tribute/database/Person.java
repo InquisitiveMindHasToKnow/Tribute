@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.database;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -18,6 +19,15 @@ public class Person {
 
     public Person( String personName, String personPhoneNumber, String personEmail) {
 
+        this.personName = personName;
+        this.personPhoneNumber = personPhoneNumber;
+        this.personEmail = personEmail;
+    }
+
+    @Ignore
+    public Person( int PersonID, String personName, String personPhoneNumber, String personEmail) {
+
+        this.personID = getPersonID();
         this.personName = personName;
         this.personPhoneNumber = personPhoneNumber;
         this.personEmail = personEmail;

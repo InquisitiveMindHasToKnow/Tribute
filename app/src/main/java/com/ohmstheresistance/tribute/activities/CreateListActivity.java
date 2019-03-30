@@ -81,15 +81,44 @@ public class CreateListActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-
-
                 int position = viewHolder.getAdapterPosition();
                 personAdapter.deletePerson(position);
 
-                Person person = personAdapter.getPersonAtPosition(position);
-                personRepository.deletePerson(person);
+                Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_LONG).show();
+                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+
+                        Person person = personAdapter.getPersonAtPosition(position);
+                        personRepository.deletePerson(person);
+
+                    }
+                })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Consumer<Object>() {
+
+                            @Override
+                            public void accept(Object o) throws Exception {
+
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+
+                                //this error only happens when there are 2 or less items in the db.
+                                Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }, new Action() {
+                            @Override
+                            public void run() throws Exception {
+
+                            }
+                        });
+                compositeDisposable.add(disposable);
 
             }
+
         }).attachToRecyclerView(personRecyclerView);
 
         personFab.setOnClickListener(new View.OnClickListener() {
@@ -206,8 +235,6 @@ public class CreateListActivity extends AppCompatActivity {
         alert.show();
 
     }
-
-
 
 }
 
