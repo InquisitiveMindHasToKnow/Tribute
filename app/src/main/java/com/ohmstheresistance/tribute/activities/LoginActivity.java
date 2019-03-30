@@ -8,15 +8,18 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
+import com.squareup.picasso.Picasso;
 
 public class LoginActivity extends AppCompatActivity {
 
     private int loginCounter = 5;
     private TextView loginCounterTextView;
+    private ImageView welcomeImageView;
     private Button submitButton;
     private Button resetButton;
     private EditText userEmailEditText;
@@ -30,9 +33,15 @@ public class LoginActivity extends AppCompatActivity {
 
         userEmailEditText = findViewById(R.id.user_email_edittext);
         userPasswordEditText = findViewById(R.id.user_password_edittext);
+        welcomeImageView = findViewById(R.id.welcome_screen_picture);
         loginCounterTextView = findViewById(R.id.login_countdown);
         submitButton = findViewById(R.id.submit_button);
         resetButton = findViewById(R.id.reset_button);
+
+
+        Picasso.get()
+                .load(R.drawable.diceforwelcomescreentotry)
+                .into(welcomeImageView);
 
         loginCounterTextView.setText("Login Attempts Remaining: 5");
 

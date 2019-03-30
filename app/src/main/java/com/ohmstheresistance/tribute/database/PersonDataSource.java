@@ -1,6 +1,5 @@
 package com.ohmstheresistance.tribute.database;
 
-
 import java.util.List;
 
 import io.reactivex.Flowable;

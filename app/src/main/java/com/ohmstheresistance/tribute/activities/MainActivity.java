@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.ButtonAPI;
 import com.ohmstheresistance.tribute.network.RetrofitSingleton;
@@ -43,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
         buttonRecyclerView = findViewById(R.id.button_recycler);
 
         Picasso.get()
-                .load(R.drawable.guesswho)
+                .load(R.drawable.mainpagedie)
                 .into(welcomeScreenImageView);
+
+
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         ButtonService buttonService = retrofit.create(ButtonService.class);
