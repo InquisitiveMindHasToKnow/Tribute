@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".activities.EditPersonDataActivity"></activity>
+        <activity android:name=".activities.AnxietyBuilderActivity"></activity>
+        <activity android:name=".activities.RandomPersonPickedActivity" />
+        <activity android:name=".activities.EditPersonDataActivity" />
         <activity android:name=".activities.AddPersonActivity" />
-        <activity android:name=".activities.RandomFellowPickedView" />
+        <activity android:name=".activities.RandomFellowPickedActivity" />
         <activity android:name=".activities.AcceptanceSpeechActivity" />
         <activity android:name=".activities.ViewFellowListActivity" />
         <activity android:name=".activities.CreateListActivity" />

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.activities.LoginActivity;
-import com.squareup.picasso.Picasso;
 
 public class SplashWelcome extends AppCompatActivity {
 

@@ -25,6 +25,20 @@
         tools:layout_editor_absoluteX="328dp"
         tools:layout_editor_absoluteY="595dp" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/select_random_person_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="192dp"
+        android:backgroundTint="#b175ff"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/randomfabicon"
+        app:fabCustomSize="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/create_person_recycler_view"
