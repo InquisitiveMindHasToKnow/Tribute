@@ -25,5 +25,6 @@
     <string name="person_name">Person Name</string>
     <string name="person_email">Person Email Address</string>
     <string name="add_person_prompt_textview">Enter Person Info Below:</string>
+    <string name="submit_editted_info_button_text">Submit Modifed Info</string>
 </resources>
 

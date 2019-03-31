@@ -5,15 +5,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.ohmstheresistance.tribute.R;
+import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.model.Buttons;
 
 import java.util.List;
 
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonViewHolder> {
 
-    List<Buttons> buttonList;
+    private List<Buttons> buttonList;
+    private PersonViewHolder personViewHolder;
 
     public ButtonAdapter (List<Buttons> buttonList){
         this.buttonList = buttonList;
@@ -36,6 +39,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonViewHolder> {
 
     @Override
     public int getItemCount() {
+
         return buttonList.size();
     }
 }

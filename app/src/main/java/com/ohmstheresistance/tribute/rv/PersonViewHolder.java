@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
+import com.ohmstheresistance.tribute.database.Person;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonViewHolder extends RecyclerView.ViewHolder {
 
@@ -20,7 +24,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
         numberTextView = itemView.findViewById(R.id.person_phone_number_textview);
         emailTextView = itemView.findViewById(R.id.person_email_textview);
 
-    }
 
+    }
 
 }

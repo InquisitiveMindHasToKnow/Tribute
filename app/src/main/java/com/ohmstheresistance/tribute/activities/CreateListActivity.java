@@ -25,6 +25,7 @@ import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
+import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class CreateListActivity extends AppCompatActivity {
     private PersonAdapter personAdapter;
     private Intent addPersonIntent;
 
+    private PersonViewHolder personViewHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,23 +116,39 @@ public class CreateListActivity extends AppCompatActivity {
 
                             }
                         });
-                compositeDisposable.add(disposable);
+                // compositeDisposable.add(disposable);
 
             }
 
         }).attachToRecyclerView(personRecyclerView);
 
-        personFab.setOnClickListener(new View.OnClickListener() {
+        personAdapter.SetItemClickListener(new PersonAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClicked(Person person) {
 
-                addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
-                startActivity(addPersonIntent);
+                Intent editPersonIntent = new Intent(CreateListActivity.this, EditPersonDataActivity.class);
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_ID, person.getPersonID());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NAME, person.getPersonName());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
+                startActivity(editPersonIntent);
 
             }
         });
-    }
+        {
 
+
+            personFab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
+                    startActivity(addPersonIntent);
+
+                }
+            });
+        }
+    }
     private void getInfo() {
 
         Disposable disposable = personRepository.getAllPersons()
@@ -147,7 +165,7 @@ public class CreateListActivity extends AppCompatActivity {
                         Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-        compositeDisposable.add(disposable);
+        // compositeDisposable.add(disposable);
 
     }
 
@@ -216,7 +234,7 @@ public class CreateListActivity extends AppCompatActivity {
 
                             }
                         });
-                compositeDisposable.add(disposable);
+                // compositeDisposable.add(disposable);
 
             }
 
