@@ -15,9 +15,6 @@ import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -36,7 +33,6 @@ public class EditPersonDataActivity extends AppCompatActivity {
 
     private Button editPersonButton;
     private PersonRepository personRepository;
-    // private List<Person> personList = new ArrayList<>();
     private EditText editPersonNameEditText;
     private EditText editPersonNumberEditText;
     private EditText editPersonEmailEditText;
@@ -69,34 +65,47 @@ public class EditPersonDataActivity extends AppCompatActivity {
         editPersonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent saveIntent = new Intent(EditPersonDataActivity.this, CreateListActivity.class);
-                //Person person = new Person(editPersonNameEditText.getText().toString(), editPersonNumberEditText.toString(), editPersonEmailEditText.getText().toString());
+                Intent modifyPersonIntent = new Intent(EditPersonDataActivity.this, CreateListActivity.class);
+
 
                 if (TextUtils.isEmpty(editPersonNameEditText.getText()) || TextUtils.isEmpty(editPersonNumberEditText.getText())
                         || TextUtils.isEmpty(editPersonEmailEditText.getText())) {
-                    setResult(RESULT_CANCELED, saveIntent);
+                    setResult(RESULT_CANCELED, modifyPersonIntent);
 
                 } else {
-                    String person_name = editPersonNameEditText.getText().toString();
-                    String person_number = editPersonNumberEditText.getText().toString();
-                    String person_email = editPersonEmailEditText.getText().toString();
 
-                    saveIntent.putExtra(PERSON_NAME, person_name);
-                    saveIntent.putExtra(PERSON_NUMBER, person_number);
-                    saveIntent.putExtra(PERSON_EMAIL, person_email);
+                    String personName = editPersonNameEditText.getText().toString();
+                    String personNumber = editPersonNumberEditText.getText().toString();
+                    String personEmail = editPersonEmailEditText.getText().toString();
 
-                    setResult(RESULT_OK, editIntent);
+
+                    modifyPersonIntent.putExtra(PERSON_NAME, personName);
+                    modifyPersonIntent.putExtra(PERSON_NUMBER, personNumber);
+                    modifyPersonIntent.putExtra(PERSON_EMAIL, personEmail);
+
+                    int personID = getIntent().getIntExtra(PERSON_ID, -1);
+                    if (personID != -1) {
+                        modifyPersonIntent.putExtra(PERSON_ID, personID);
+
+                    }
+
+                    setResult(RESULT_OK, modifyPersonIntent);
+
+
 
                     Toast.makeText(EditPersonDataActivity.this, "Person Data Updated", Toast.LENGTH_LONG).show();
 
                     Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
                         @Override
                         public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                            editPerson();
-                            Person person = new Person(person_name, person_number, person_email);
+
+                            Person person = new Person(personName, personNumber, personEmail);
+                            person.setPersonID(personID);
+
                             personRepository.updatePerson(person);
                             emitter.onComplete();
                         }
+
                     })
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
@@ -121,29 +130,10 @@ public class EditPersonDataActivity extends AppCompatActivity {
 
                 }
                 finish();
-
             }
         });
-    }
 
-    private void editPerson() {
-        String personName = editPersonNameEditText.getText().toString();
-        String personNumber = editPersonNumberEditText.getText().toString();
-        String personEmail = editPersonEmailEditText.getText().toString();
-
-
-        Intent intent = new Intent();
-        intent.putExtra(PERSON_NAME, personName);
-        intent.putExtra(PERSON_NUMBER, personNumber);
-        intent.putExtra(PERSON_EMAIL, personEmail);
-
-        int personID = getIntent().getIntExtra(PERSON_ID, -1);
-        if (personID != -1) {
-            intent.putExtra(PERSON_ID, personID);
-
-        }
     }
 }
-
 
 
