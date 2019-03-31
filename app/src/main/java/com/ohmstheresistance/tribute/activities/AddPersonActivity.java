@@ -56,7 +56,7 @@ public class AddPersonActivity extends AppCompatActivity {
         addPersonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent saveIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
+                Intent addPersonIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
                 Person person = new Person(addPersonNameEditText.getText().toString(),
                         addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());
 
@@ -65,18 +65,18 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
                         || TextUtils.isEmpty(addPersonEmailEditText.getText())){
-                    setResult(RESULT_CANCELED, saveIntent);
+                    setResult(RESULT_CANCELED, addPersonIntent);
                 } else {
                     String person_name= addPersonNameEditText.getText().toString();
                     String person_number = addPersonNumberEditText.getText().toString();
                     String person_email = addPersonEmailEditText.getText().toString();
 
 
-                    saveIntent.putExtra(PERSON_NAME, person_name);
-                    saveIntent.putExtra(PERSON_NUMBER, person_number);
-                    saveIntent.putExtra(PERSON_EMAIL, person_email);
+                    addPersonIntent.putExtra(PERSON_NAME, person_name);
+                    addPersonIntent.putExtra(PERSON_NUMBER, person_number);
+                    addPersonIntent.putExtra(PERSON_EMAIL, person_email);
 
-                    setResult(RESULT_OK, saveIntent);
+                    setResult(RESULT_OK, addPersonIntent);
 
                     Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
 
