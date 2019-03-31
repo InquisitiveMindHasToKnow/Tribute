@@ -4,6 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".activities.EditPersonDataActivity">
+
+    <TextView
+        android:id="@+id/edit_person_prompt_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modify Person Info Below:"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:textSize="32sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_person_name_edittext" />
+
+    <EditText
+        android:id="@+id/edit_person_name_edittext"
+        android:layout_width="300dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/oval"
+        android:hint="@string/person_name"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_person_prompt_textview" />
+
+    <EditText
+        android:id="@+id/edit_person_number_edittext"
+        android:layout_width="300dp"
+        android:layout_height="64dp"
+        android:inputType="number"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/oval"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:hint="@string/person_phone_number"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/edit_person_name_edittext"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_person_email_edittext"
+        android:layout_width="300dp"
+        android:layout_height="64dp"
+        android:background="@drawable/oval"
+        android:hint="@string/person_email"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="60dp"
+        android:textAlignment="center"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/edit_person_number_edittext"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/edit_person_submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="@string/submit_editted_info_button_text"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_person_email_edittext" />
 
 </android.support.constraint.ConstraintLayout>

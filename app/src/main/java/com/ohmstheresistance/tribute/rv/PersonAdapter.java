@@ -16,6 +16,7 @@ import java.util.List;
 
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHolder>{
     private List<Person> personList = new ArrayList<>();
+    private OnItemClickListener itemClickListener;
 
     private final LayoutInflater layoutInflater;
     private Context layoutContext;
@@ -75,6 +76,26 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
             personPhoneNumberTextView = itemView.findViewById(R.id.person_phone_number_textview);
             personEmailTextview = itemView.findViewById(R.id.person_email_textview);
             personIDTextView = itemView.findViewById(R.id.person_idtext_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (itemClickListener != null && position != RecyclerView.NO_POSITION) {
+                        itemClickListener.onItemClicked(personList.get(position));
+                    }
+                }
+            });
+
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClicked(Person person);
+    }
+
+    public void SetItemClickListener(PersonAdapter.OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+
     }
 }

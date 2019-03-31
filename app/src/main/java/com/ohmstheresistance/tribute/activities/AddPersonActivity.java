@@ -21,7 +21,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -33,7 +32,7 @@ public class AddPersonActivity extends AppCompatActivity {
     public static final String PERSON_NUMBER = "person_number";
     public static final String PERSON_EMAIL = "person_email";
 
-    private Button addUserButton;
+    private Button addPersonButton;
     private PersonRepository personRepository;
     private List<Person> personList = new ArrayList<>();
     private EditText addPersonNameEditText;
@@ -53,8 +52,8 @@ public class AddPersonActivity extends AppCompatActivity {
         PersonDatabase personDatabase = PersonDatabase.getInstance(this);
         personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
 
-        addUserButton = findViewById(R.id.add_person_submit_button);
-        addUserButton.setOnClickListener(new View.OnClickListener() {
+        addPersonButton = findViewById(R.id.add_person_submit_button);
+        addPersonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent saveIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
