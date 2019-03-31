@@ -91,6 +91,8 @@ public class EditPersonDataActivity extends AppCompatActivity {
 
                     setResult(RESULT_OK, modifyPersonIntent);
 
+                    Person person = new Person(personName, personNumber, personEmail);
+                    person.setPersonID(personID);
 
 
                     Toast.makeText(EditPersonDataActivity.this, "Person Data Updated", Toast.LENGTH_LONG).show();
@@ -99,8 +101,6 @@ public class EditPersonDataActivity extends AppCompatActivity {
                         @Override
                         public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
 
-                            Person person = new Person(personName, personNumber, personEmail);
-                            person.setPersonID(personID);
 
                             personRepository.updatePerson(person);
                             emitter.onComplete();

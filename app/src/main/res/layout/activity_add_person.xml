@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/add_person_prompt_textview"
         android:layout_marginTop="48dp"
+        android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
         android:textSize="32sp"
         app:layout_constraintTop_toTopOf="parent"

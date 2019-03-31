@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorAccent"
             android:gravity="center"
             android:text="@string/android_5_4_all_stars"
 
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorAccent"
             android:gravity="center"
             android:text="@string/pick_fellow"
             android:textSize="24sp" />
