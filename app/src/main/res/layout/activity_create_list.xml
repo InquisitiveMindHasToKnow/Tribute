@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="104dp"
-        android:backgroundTint="#0044CC"
+        android:backgroundTint="#a44757"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/addpersonicon"

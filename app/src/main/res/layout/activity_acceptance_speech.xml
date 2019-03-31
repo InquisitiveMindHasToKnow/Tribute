@@ -22,6 +22,7 @@
             android:lineSpacingExtra="6dp"
             android:textSize="24sp"
             android:padding="8dp"
+            android:textColor="@color/colorPrimaryDark"
             android:background="@color/colorPrimary"
             android:text="@string/acceptance_speech"
              />
@@ -41,8 +42,9 @@
         android:id="@+id/speech_header_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
         android:paddingLeft="8dp"
+        android:background="@color/colorPrimary"
         android:text="@string/acceptance_speech_header"
         android:textSize="32sp"
         android:gravity="center"
