@@ -12,7 +12,7 @@ import com.ohmstheresistance.tribute.R;
 public class AnxietyBuilderActivity extends AppCompatActivity {
 
     ImageView anxietyBuilderImage;
-    private static int ANXITY_BUILDER_TIMER = 8000;
+    private static int ANXITY_BUILDER_TIMER = 7000;
     private Intent toDisplayPersonPicked;
 
     @Override

@@ -24,7 +24,6 @@ import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
-import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
 import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
@@ -80,6 +79,7 @@ public class CreateListActivity extends AppCompatActivity {
 
         getInfo();
 
+
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
@@ -134,10 +134,10 @@ public class CreateListActivity extends AppCompatActivity {
 
                 //REVISIT TO GET RANDOM PERSON
 
-                //Random randomNumber = new Random();
-                //Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+//                Random randomNumber = new Random();
+//                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
                 Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
-                //randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+//                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
                 startActivity(randomPersonIntent);
 
             }

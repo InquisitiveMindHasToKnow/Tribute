@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
+import com.ohmstheresistance.tribute.activities.AboutTheCreator;
 import com.ohmstheresistance.tribute.activities.CreateListActivity;
 import com.ohmstheresistance.tribute.activities.AcceptanceSpeechActivity;
 import com.ohmstheresistance.tribute.activities.ViewFellowListActivity;
@@ -47,7 +48,7 @@ public class ButtonViewHolder extends RecyclerView.ViewHolder {
                         break;
 
                     case 2:
-                        navigationIntent = new Intent(context, AcceptanceSpeechActivity.class);
+                        navigationIntent = new Intent(context, AboutTheCreator.class);
                         context.startActivity(navigationIntent);
                         break;
                 }

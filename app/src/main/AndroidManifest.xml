@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".activities.AnxietyBuilderActivity"></activity>
+        <activity
+            android:name=".activities.AboutTheCreator"
+            android:label="@string/title_activity_about_the_creator"></activity>
+        <activity android:name=".activities.AnxietyBuilderActivity" />
         <activity android:name=".activities.RandomPersonPickedActivity" />
         <activity android:name=".activities.EditPersonDataActivity" />
         <activity android:name=".activities.AddPersonActivity" />
