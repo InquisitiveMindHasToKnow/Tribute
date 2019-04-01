@@ -28,6 +28,7 @@ import com.ohmstheresistance.tribute.rv.PersonAdapter;
 import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
 import java.util.List;
+import java.util.Random;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -44,6 +45,7 @@ public class CreateListActivity extends AppCompatActivity {
 
     private RecyclerView personRecyclerView;
     private FloatingActionButton personFab;
+    private FloatingActionButton randomPersonFab;
     private CompositeDisposable compositeDisposable;
     private PersonRepository personRepository;
 
@@ -52,6 +54,8 @@ public class CreateListActivity extends AppCompatActivity {
     private Intent addPersonIntent;
 
     private PersonViewHolder personViewHolder;
+
+    private static final String RANDOM_PERSON_KEY = "randomPersonKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,7 @@ public class CreateListActivity extends AppCompatActivity {
         personRecyclerView.setAdapter(personAdapter);
 
         personFab = findViewById(R.id.create_person_action_button);
+        randomPersonFab = findViewById(R.id.select_random_person_action_button);
 
         compositeDisposable = new CompositeDisposable();
 
@@ -73,6 +78,7 @@ public class CreateListActivity extends AppCompatActivity {
         personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
 
         getInfo();
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -121,6 +127,22 @@ public class CreateListActivity extends AppCompatActivity {
             }
 
         }).attachToRecyclerView(personRecyclerView);
+
+        randomPersonFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //REVISIT TO GET RANDOM PERSON
+
+//                Random randomNumber = new Random();
+//                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+                Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
+//                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+                startActivity(randomPersonIntent);
+
+            }
+        });
+
 
         personAdapter.SetItemClickListener(new PersonAdapter.OnItemClickListener() {
             @Override

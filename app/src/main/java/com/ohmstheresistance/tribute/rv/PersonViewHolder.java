@@ -13,16 +13,16 @@ import java.util.List;
 
 public class PersonViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView nameTextView;
-    private TextView numberTextView;
-    private TextView emailTextView;
+//    private TextView nameTextView;
+//    private TextView numberTextView;
+//    private TextView emailTextView;
 
     public PersonViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        nameTextView = itemView.findViewById(R.id.person_name_textview);
-        numberTextView = itemView.findViewById(R.id.person_phone_number_textview);
-        emailTextView = itemView.findViewById(R.id.person_email_textview);
+//        nameTextView = itemView.findViewById(R.id.person_name_textview);
+//        numberTextView = itemView.findViewById(R.id.person_phone_number_textview);
+//        emailTextView = itemView.findViewById(R.id.person_email_textview);
 
 
     }
