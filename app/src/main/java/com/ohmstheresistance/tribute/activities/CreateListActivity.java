@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import com.ohmstheresistance.tribute.database.PersonRepository;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
 import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -63,6 +65,7 @@ public class CreateListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_list);
 
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
+        personList = new ArrayList<>();
 
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(true);
@@ -132,12 +135,11 @@ public class CreateListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //REVISIT TO GET RANDOM PERSON
-
-//                Random randomNumber = new Random();
-//                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+                Random randomNumber = new Random();
+                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+                Log.e("personList: ", personList.size() + "");
                 Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
-//                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
                 startActivity(randomPersonIntent);
 
             }
@@ -180,6 +182,9 @@ public class CreateListActivity extends AppCompatActivity {
                     @Override
                     public void accept(List<Person> people) throws Exception {
                         onGetInfoSuccess(people);
+                        Log.e("listSize2:", people.size() + "");
+                        personList.addAll(people);
+
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -194,7 +199,9 @@ public class CreateListActivity extends AppCompatActivity {
     private void onGetInfoSuccess(List<Person> people) {
 
         people.size();
+        Log.e("listSize: ", people.size() + "");
         personAdapter.setPersons(people);
+
     }
 
     @Override
