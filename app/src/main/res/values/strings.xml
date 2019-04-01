@@ -21,17 +21,13 @@
     <string name="reset_button_text">Reset</string>
     <string name="app_name">Tribute</string>
     <string name="submit_person_info_button_textview">Submit Person Info</string>
-    <string name="person_phone_number">Person Phone Number</string>
+    <string name="person_phone_number">Person Contact Number</string>
     <string name="person_name">Person Name</string>
     <string name="person_email">Person Email Address</string>
     <string name="add_person_prompt_textview">Enter Person Info Below:</string>
     <string name="submit_editted_info_button_text">Submit Modifed Info</string>
     <string name="title_activity_about_the_creator">AboutTheCreator</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_creators_info">CreatorsInfo</string>
 
 </resources>
