@@ -11,7 +11,7 @@
         android:text="Randomly Chosen Person"
         android:textSize="56sp"
         android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bluetoyellowgradientreversed"
         android:gravity="center" />
 
 </RelativeLayout>

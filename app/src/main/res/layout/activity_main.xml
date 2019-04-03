@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bluetoyellowgradientreversed"
     tools:context=".activities.MainActivity">
 
 
@@ -29,17 +29,17 @@
         app:layout_constraintBottom_toTopOf="@id/button_recycler"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_textview"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/button_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="#00FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_screen_imageview" />
 
 </android.support.constraint.ConstraintLayout>
