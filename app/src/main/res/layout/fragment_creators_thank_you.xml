@@ -23,7 +23,7 @@
             android:textSize="24sp"
             android:padding="8dp"
             android:textColor="@color/colorPrimaryDark"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bluetoyellowgradientreversed"
             android:text="@string/acceptance_speech" />
     </ScrollView>
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:paddingLeft="8dp"
-        android:background="@color/colorPrimary"
+        android:background="#1E90FF"
         android:text="@string/acceptance_speech_header"
         android:textSize="32sp"
         android:gravity="center"

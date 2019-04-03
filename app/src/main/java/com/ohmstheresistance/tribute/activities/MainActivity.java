@@ -68,29 +68,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.omarsmenu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.omars_github:
-                Uri githubUri = Uri.parse("https://github.com/InquisitiveMindHasToKnow");
-                Intent githubIntent = new Intent(Intent.ACTION_VIEW, githubUri);
-                startActivity(githubIntent);
-                break;
-
-            case R.id.omars_linkedin:
-                Uri linkedInUri = Uri.parse("https://www.linkedin.com/in/omar-raymond-7411a5b2/");
-                Intent linkedInIntent = new Intent(Intent.ACTION_VIEW, linkedInUri);
-                startActivity(linkedInIntent);
-                break;
-        }
-        return true;
-    }
-
 }
