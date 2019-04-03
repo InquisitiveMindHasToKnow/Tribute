@@ -28,8 +28,9 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "ButtonJSON.TAG";
+    private static final String USER_NAME_KEY = "currentUser";
     private RecyclerView buttonRecyclerView;
-
+    private Intent userNameIntent;
     private TextView welcomeTextView;
     private ImageView welcomeScreenImageView;
 
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 .load(R.drawable.mainpagedie)
                 .into(welcomeScreenImageView);
 
-
+        userNameIntent = getIntent();
+        String userName = userNameIntent.getStringExtra(USER_NAME_KEY);
+        welcomeTextView.setText("Welcome " + userName);
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         ButtonService buttonService = retrofit.create(ButtonService.class);

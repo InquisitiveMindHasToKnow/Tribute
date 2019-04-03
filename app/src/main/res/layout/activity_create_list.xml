@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@drawable/bluetoyellowgradientreversed"
-    tools:context=".activities.CreateListActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFF00"
+    android:orientation="vertical">
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/create_person_action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="104dp"
-        android:backgroundTint="#a44757"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/addpersonicon"
-        app:fabCustomSize="72dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="328dp"
-        tools:layout_editor_absoluteY="595dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/select_random_person_action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="192dp"
-        android:backgroundTint="#b175ff"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/randomfabicon"
-        app:fabCustomSize="72dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/create_person_recycler_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/person_item" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bluetoyellowgradientreversed"
+        android:layout_weight=".1">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/create_person_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:listitem="@layout/person_item" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/create_person_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/addpersonicon"
+            app:fabCustomSize="72dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight=".9">
+
+        <Button
+            android:id="@+id/select_random_person_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:background="#00FFFFFF"
+            android:gravity="center"
+            android:text="Pick Random Person"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+</LinearLayout>
