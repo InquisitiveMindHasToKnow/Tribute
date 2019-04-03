@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 public class RandomPersonPickedActivity extends AppCompatActivity {
 
     private TextView randomlySelectedPerson;
+    private ImageView randomPersonSelectedImageView;
     private Intent chosenPersonIntent;
     private static final String RANDOM_PERSON_KEY = "randomPersonKey";
 
@@ -22,10 +23,11 @@ public class RandomPersonPickedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_random_person_picked);
 
         randomlySelectedPerson = findViewById(R.id.randomly_selected_person_textview);
+        randomPersonSelectedImageView = findViewById(R.id.random_person_selected_imageview);
 
         chosenPersonIntent = getIntent();
-
         randomlySelectedPerson.setText(chosenPersonIntent.getStringExtra(RANDOM_PERSON_KEY));
+
 
     }
 }

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -47,13 +48,13 @@ public class CreateListActivity extends AppCompatActivity {
 
     private RecyclerView personRecyclerView;
     private FloatingActionButton personFab;
-    private FloatingActionButton randomPersonFab;
     private CompositeDisposable compositeDisposable;
     private PersonRepository personRepository;
 
     private List<Person> personList;
     private PersonAdapter personAdapter;
     private Intent addPersonIntent;
+    private Button selectRandomPerson;
 
     private PersonViewHolder personViewHolder;
 
@@ -73,7 +74,7 @@ public class CreateListActivity extends AppCompatActivity {
         personRecyclerView.setAdapter(personAdapter);
 
         personFab = findViewById(R.id.create_person_action_button);
-        randomPersonFab = findViewById(R.id.select_random_person_action_button);
+        selectRandomPerson = findViewById(R.id.select_random_person_button);
 
         compositeDisposable = new CompositeDisposable();
 
@@ -131,7 +132,7 @@ public class CreateListActivity extends AppCompatActivity {
 
         }).attachToRecyclerView(personRecyclerView);
 
-        randomPersonFab.setOnClickListener(new View.OnClickListener() {
+        selectRandomPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
