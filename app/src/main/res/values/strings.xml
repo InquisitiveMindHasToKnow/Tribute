@@ -29,6 +29,12 @@
     <string name="title_activity_about_the_creator">AboutTheCreator</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_creators_info">CreatorsInfo</string>
+    <string name="re_enter_your_password">Re-enter Your Password</string>
+    <string name="registration_enter_your_password">Enter Your Password</string>
+    <string name="please_enter_desired_credentials_below">Please Enter Desired Credentials Below:</string>
+    <string name="register_enter_your_username">Enter Your Username</string>
+    <string name="register_button_text">Register</string>
+    <string name="checkboxstring">Remember me</string>
 
 </resources>
 

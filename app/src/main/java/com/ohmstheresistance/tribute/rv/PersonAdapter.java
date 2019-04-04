@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.rv;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -69,6 +70,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
         private TextView personPhoneNumberTextView;
         private TextView personEmailTextview;
         private TextView personIDTextView;
+        private long lastButtonClickTime = 0;
 
         public PersonHolder(View itemView) {
             super(itemView);
@@ -80,6 +82,10 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                        return;
+                    }
+                    lastButtonClickTime = SystemClock.elapsedRealtime();
                     int position = getAdapterPosition();
                     if (itemClickListener != null && position != RecyclerView.NO_POSITION) {
                         itemClickListener.onItemClicked(personList.get(position));
