@@ -14,25 +14,25 @@ import com.ohmstheresistance.tribute.R;
 public class UserRegistrationActivity extends AppCompatActivity {
 
     private SharedPreferences registrationSharedPrefs;
-    private EditText registrationUsernameEdittext;
-    private EditText registrationPasswordEdittext;
-    private EditText confirmPasswordEdittext;
+    private EditText registrationUserName;
+    private EditText registrationPassword;
+    private EditText confirmPassword;
+    private Intent registrationIntent;
     private long lastButtonClickTime = 0;
     private Button registerButton;
-    private Intent registrationIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
 
-        registrationUsernameEdittext = findViewById(R.id.user_registration_name_edittext);
-        registrationPasswordEdittext = findViewById(R.id.user_registration_password_edittext);
-        confirmPasswordEdittext = findViewById(R.id.user_registration_confirm_password_edittext);
+        registrationUserName = findViewById(R.id.user_registration_name_edittext);
+        registrationPassword = findViewById(R.id.user_registration_password_edittext);
+        confirmPassword = findViewById(R.id.user_registration_confirm_password_edittext);
         registerButton = findViewById(R.id.user_registration_submit_button);
 
         registrationIntent = getIntent();
-        registrationSharedPrefs = getApplicationContext().getSharedPreferences(registrationIntent.getStringExtra("userTest"), MODE_PRIVATE);
+        registrationSharedPrefs = getApplicationContext().getSharedPreferences(registrationIntent.getStringExtra("testKey"), MODE_PRIVATE);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,11 +43,11 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 lastButtonClickTime = SystemClock.elapsedRealtime();
 
                 SharedPreferences.Editor editor = registrationSharedPrefs.edit();
-
-                if (registrationUsernameEdittext.getText() != null && registrationPasswordEdittext.getText() != null && confirmPasswordEdittext.getText() != null &&
-                        registrationPasswordEdittext.getText().toString().equals(confirmPasswordEdittext.getText().toString())) {
-                    editor.putString("username1" + registrationUsernameEdittext.getText().toString(), registrationUsernameEdittext.getText().toString());
-                    editor.putString("password1" + registrationPasswordEdittext.getText().toString(), registrationPasswordEdittext.getText().toString());
+                if (registrationUserName.getText() != null && registrationPassword.getText() != null && confirmPassword.getText() != null &&
+                        registrationPassword.getText().toString().equals(confirmPassword.getText().toString()
+                        )) {
+                    editor.putString("user" + registrationUserName.getText().toString(), registrationUserName.getText().toString());
+                    editor.putString("password" + registrationUserName.getText().toString(), registrationPassword.getText().toString());
                     editor.commit();
                     finish();
                 }
