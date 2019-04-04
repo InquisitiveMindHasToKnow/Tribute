@@ -40,6 +40,11 @@ public class FellowAdapter extends RecyclerView.Adapter<FellowViewHolder> {
         return fellowList.size();
     }
 
+    public void setData(List<Fellows> newFellowList) {
+        this.fellowList = newFellowList;
+        notifyDataSetChanged();
+    }
+
 }
 
 
