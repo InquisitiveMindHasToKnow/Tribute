@@ -3,6 +3,7 @@ package com.ohmstheresistance.tribute.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,16 +11,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
-import com.squareup.picasso.Picasso;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String SHARED_PREFS_KEY = "sharedPrefs";
+    private long lastButtonClickTime = 0;
     private SharedPreferences loginSharedPreferences;
     private EditText userPasswordEditText;
     private EditText userNameEditText;
@@ -49,6 +48,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                    return;
+                }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
+
                 SharedPreferences.Editor editor = loginSharedPreferences.edit();
                 if (checkBox.isChecked()) {
                     editor.putString("username", userNameEditText.getText().toString());
@@ -79,8 +83,14 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                    return;
+                }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
+
                 Intent registrationIntent = new Intent(LoginActivity.this, UserRegistrationActivity.class);
                 registrationIntent.putExtra("userTest", SHARED_PREFS_KEY);
+                registrationIntent.putExtra("userPasswordTest", SHARED_PREFS_KEY);
                 startActivity(registrationIntent);
             }
         });

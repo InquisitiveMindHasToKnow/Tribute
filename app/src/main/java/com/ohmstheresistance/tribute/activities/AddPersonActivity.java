@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +32,7 @@ public class AddPersonActivity extends AppCompatActivity {
     public static final String PERSON_NAME = "person_name";
     public static final String PERSON_NUMBER = "person_number";
     public static final String PERSON_EMAIL = "person_email";
+    private long lastButtonClickTime = 0;
 
     private Button addPersonButton;
     private PersonRepository personRepository;
@@ -56,6 +58,12 @@ public class AddPersonActivity extends AppCompatActivity {
         addPersonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                    return;
+                }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
+
                 Intent addPersonIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
                 Person person = new Person(addPersonNameEditText.getText().toString(),
                         addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());

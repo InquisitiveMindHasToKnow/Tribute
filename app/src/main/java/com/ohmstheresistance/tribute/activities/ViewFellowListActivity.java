@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,7 +34,7 @@ public class ViewFellowListActivity extends AppCompatActivity {
     private TextView allstar_textview;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
-
+    private long lastButtonClickTime = 0;
     private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
 
     private List<Fellows> fellowList;
@@ -49,6 +50,10 @@ public class ViewFellowListActivity extends AppCompatActivity {
         pickRandomFellowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                    return;
+                }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
 
                 Random randomNumber = new Random();
                 Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() + 1));

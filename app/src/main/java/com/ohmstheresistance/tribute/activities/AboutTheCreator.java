@@ -16,15 +16,12 @@ public class AboutTheCreator extends AppCompatActivity {
 
     private static final String TAG = "About The Creator";
     private ViewPager viewPager;
-    //private CreatorsInfoAdapter creatorsInfoAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_the_creator);
 
-        //creatorsInfoAdapter = new CreatorsInfoAdapter(getSupportFragmentManager());
 
         viewPager = findViewById(R.id.container);
         setUpViewPager(viewPager);

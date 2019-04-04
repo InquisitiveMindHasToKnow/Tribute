@@ -3,6 +3,7 @@ package com.ohmstheresistance.tribute.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -56,7 +57,7 @@ public class CreateListActivity extends AppCompatActivity {
     private Intent addPersonIntent;
     private Intent cancelRandomIntent;
     private Button selectRandomPerson;
-
+    private long lastButtonClickTime = 0;
     private PersonViewHolder personViewHolder;
 
     private static final String RANDOM_PERSON_KEY = "randomPersonKey";
@@ -118,7 +119,6 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
 
-                                //this error only happens when there are 2 or less items in the db.
                                 Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }, new Action() {
@@ -137,7 +137,12 @@ public class CreateListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (personList.size() <= 0) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                    return;
+                }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
+
+                if (personList.size() == 0) {
                     cancelRandomIntent = new Intent(CreateListActivity.this, CreateListActivity.class);
                     Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
 
@@ -172,6 +177,10 @@ public class CreateListActivity extends AppCompatActivity {
             personFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                        return;
+                    }
+                    lastButtonClickTime = SystemClock.elapsedRealtime();
 
                     addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
                     startActivity(addPersonIntent);
