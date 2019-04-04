@@ -34,7 +34,7 @@ public class AboutTheCreator extends AppCompatActivity {
 
         CreatorsInfoAdapter creatorsInfoAdapter = new CreatorsInfoAdapter(getSupportFragmentManager());
         creatorsInfoAdapter.addFragments(new ContactCreatorFragment(), "Contact Me");
-        creatorsInfoAdapter.addFragments(new CreatorsThankYou(), "Thank You Message");
+        creatorsInfoAdapter.addFragments(new CreatorsThankYou(), "Vote Of Thanks");
         viewPager.setAdapter(creatorsInfoAdapter);
     }
 }

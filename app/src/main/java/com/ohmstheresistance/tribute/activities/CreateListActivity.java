@@ -311,7 +311,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     public boolean onQueryTextChange(String s) {
         List<Person> newFellowList = new ArrayList<>();
         for (Person persons : personList) {
-            if (persons.getPersonName().toLowerCase().startsWith(s.toLowerCase())) {
+            if (persons.getPersonName().toLowerCase().contains(s.toLowerCase())) {
                 newFellowList.add(persons);
             }
 

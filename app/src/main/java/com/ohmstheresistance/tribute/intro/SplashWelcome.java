@@ -13,7 +13,7 @@ import com.ohmstheresistance.tribute.activities.LoginActivity;
 public class SplashWelcome extends AppCompatActivity {
 
     ImageView splashImage;
-    private static int SPLASH_SCREEN_TIMER = 8000;
+    private static int SPLASH_SCREEN_TIMER = 5500;
     private Intent toLoginScreenIntent;
 
     @Override
