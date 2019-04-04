@@ -104,12 +104,11 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
     public boolean onQueryTextChange(String s) {
         List<Fellows> newFellowList = new ArrayList<>();
         for (Fellows fellows : fellowList) {
-            if (fellows.getFellow().toLowerCase().startsWith(s.toLowerCase())) {
+
+            if (fellows.getFellow().toLowerCase().contains(s.toLowerCase())) {
                 newFellowList.add(fellows);
             }
-
         }
-
         fellowAdapter.setData(newFellowList);
         return false;
     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
+import com.ohmstheresistance.tribute.model.Fellows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,5 +104,10 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
     public void SetItemClickListener(PersonAdapter.OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
 
+    }
+
+    public void setData(List<Person> newPersonList) {
+        this.personList = newPersonList;
+        notifyDataSetChanged();
     }
 }
