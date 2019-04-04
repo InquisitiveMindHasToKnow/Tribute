@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String SHARED_PREFS_KEY = "sharedPrefs";
-    private static final String USER_NAME_KEY = "currentUser";
     private SharedPreferences loginSharedPreferences;
     private EditText userPasswordEditText;
     private EditText userNameEditText;
@@ -55,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("username", userNameEditText.getText().toString());
                     editor.putString("password", userPasswordEditText.getText().toString());
                     editor.putBoolean("isChecked", checkBox.isChecked());
-                    editor.commit();
+                    editor.apply();
 
                 } else {
                     editor.putBoolean("isChecked", checkBox.isChecked());
@@ -67,8 +66,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (userNameEditText.getText().toString().equalsIgnoreCase(loginSharedPreferences.getString(checkUserName, null))
                         && userPasswordEditText.getText().toString().equals(loginSharedPreferences.getString(checkPassword, null))) {
                     Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    loginIntent.putExtra(USER_NAME_KEY, userNameEditText.getText().toString());
+                    loginIntent.putExtra("currentUser", userNameEditText.getText().toString());
+                    closeKeyboard();
                     startActivity(loginIntent);
+
                 } else {
                     Toast.makeText(LoginActivity.this, "Username or password invalid! Please try again.", Toast.LENGTH_LONG).show();
                 }
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent registrationIntent = new Intent(LoginActivity.this, UserRegistrationActivity.class);
-                registrationIntent.putExtra(USER_NAME_KEY, SHARED_PREFS_KEY);
+                registrationIntent.putExtra("userTest", SHARED_PREFS_KEY);
                 startActivity(registrationIntent);
             }
         });

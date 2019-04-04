@@ -57,6 +57,7 @@
         android:layout_height="64dp"
         android:background="@drawable/oval"
         android:hint="@string/person_email"
+        android:inputType="textWebEmailAddress"
         android:layout_marginTop="16dp"
         android:layout_marginStart="60dp"
         android:textAlignment="center"
