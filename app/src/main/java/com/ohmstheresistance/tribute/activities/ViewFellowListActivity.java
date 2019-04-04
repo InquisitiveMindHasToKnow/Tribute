@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.ohmstheresistance.tribute.network.FellowService;
 import com.ohmstheresistance.tribute.rv.FellowAdapter;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,17 +29,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ViewFellowListActivity extends AppCompatActivity {
+public class ViewFellowListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
 
     private static final String TAG = "FellowJSON.TAG";
     private TextView allstar_textview;
+    private FellowAdapter fellowAdapter;
     private RecyclerView fellowRecyclerView;
     private Button pickRandomFellowButton;
+    private SearchView fellowSearchView;
     private long lastButtonClickTime = 0;
     private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
 
-    private List<Fellows> fellowList;
+    private List<Fellows> fellowList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +49,8 @@ public class ViewFellowListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_fellow_list);
         fellowRecyclerView = findViewById(R.id.fellow_list_recycler);
         allstar_textview = findViewById(R.id.allstar_fellow_textview);
+        fellowSearchView = findViewById(R.id.fellow_search_view);
         pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
-
         pickRandomFellowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,10 +73,15 @@ public class ViewFellowListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<FellowAPI> call, Response<FellowAPI> response) {
                 Log.d(TAG, "Fellow retrofit call works, Omar!" + response.body().getFellows().get(0));
-                FellowAdapter fellowAdapter = new FellowAdapter(response.body().getFellows());
+
+                for (Fellows fellows : response.body().getFellows()) {
+                    fellowList.add(fellows);
+                }
+                fellowAdapter = new FellowAdapter(response.body().getFellows());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
                 fellowRecyclerView.setLayoutManager(gridLayoutManager);
                 fellowRecyclerView.setAdapter(fellowAdapter);
+                fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
 
                 fellowList = response.body().getFellows();
 
@@ -84,6 +93,24 @@ public class ViewFellowListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        List<Fellows> newFellowList = new ArrayList<>();
+        for (Fellows fellows : fellowList) {
+
+            if (fellows.getFellow().toLowerCase().contains(s.toLowerCase())) {
+                newFellowList.add(fellows);
+            }
+        }
+        fellowAdapter.setData(newFellowList);
+        return false;
     }
 }
 

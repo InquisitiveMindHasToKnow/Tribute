@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +28,7 @@ import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
+import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
 import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
@@ -45,7 +47,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class CreateListActivity extends AppCompatActivity {
+public class CreateListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView personRecyclerView;
     private FloatingActionButton personFab;
@@ -58,7 +60,8 @@ public class CreateListActivity extends AppCompatActivity {
     private Intent cancelRandomIntent;
     private Button selectRandomPerson;
     private long lastButtonClickTime = 0;
-    private PersonViewHolder personViewHolder;
+    private SearchView personSearchView;
+
 
     private static final String RANDOM_PERSON_KEY = "randomPersonKey";
 
@@ -66,7 +69,7 @@ public class CreateListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_list);
-
+        personSearchView = findViewById(R.id.person_search_view);
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
         personList = new ArrayList<>();
 
@@ -199,6 +202,7 @@ public class CreateListActivity extends AppCompatActivity {
                     public void accept(List<Person> people) throws Exception {
                         onGetInfoSuccess(people);
                         Log.e("listSize2:", people.size() + "");
+                        personSearchView.setOnQueryTextListener(CreateListActivity.this);
                         personList.addAll(people);
 
                     }
@@ -296,6 +300,25 @@ public class CreateListActivity extends AppCompatActivity {
         final AlertDialog alert = dialog.create();
         alert.show();
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        List<Person> newFellowList = new ArrayList<>();
+        for (Person persons : personList) {
+            if (persons.getPersonName().toLowerCase().startsWith(s.toLowerCase())) {
+                newFellowList.add(persons);
+            }
+
+        }
+
+        personAdapter.setData(newFellowList);
+        return false;
     }
 
 }
