@@ -51,7 +51,7 @@ public class ViewFellowListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Random randomNumber = new Random();
-                Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size()));
+                Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() + 1));
                 Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
                 randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
                 startActivity(randomFellowIntent);

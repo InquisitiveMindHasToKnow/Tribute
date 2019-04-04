@@ -60,6 +60,7 @@
         android:background="@drawable/oval"
         android:hint="@string/person_email"
         android:layout_marginTop="16dp"
+        android:inputType="textWebEmailAddress"
         android:layout_marginStart="60dp"
         android:textAlignment="center"
         android:imeOptions="actionDone"

@@ -54,6 +54,7 @@ public class CreateListActivity extends AppCompatActivity {
     private List<Person> personList;
     private PersonAdapter personAdapter;
     private Intent addPersonIntent;
+    private Intent cancelRandomIntent;
     private Button selectRandomPerson;
 
     private PersonViewHolder personViewHolder;
@@ -136,13 +137,18 @@ public class CreateListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random randomNumber = new Random();
-                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
-                Log.e("personList: ", personList.size() + "");
-                Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
-                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
-                startActivity(randomPersonIntent);
+                if (personList.size() <= 0) {
+                    cancelRandomIntent = new Intent(CreateListActivity.this, CreateListActivity.class);
+                    Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
 
+                } else {
+                    Random randomNumber = new Random();
+                    Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size() + 1));
+                    Log.e("personList: ", personList.size() + "");
+                    Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
+                    randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+                    startActivity(randomPersonIntent);
+                }
             }
         });
 
@@ -240,6 +246,7 @@ public class CreateListActivity extends AppCompatActivity {
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
 
+                        personList.clear();
                         personRepository.deleteAllPersons();
                         emitter.onComplete();
 
