@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -82,6 +83,8 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 fellowRecyclerView.setLayoutManager(gridLayoutManager);
                 fellowRecyclerView.setAdapter(fellowAdapter);
                 fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
+
+                // fellowSearchView.setBackgroundColor(Color.parseColor("#1E90FF"));
 
                 fellowList = response.body().getFellows();
 
