@@ -64,6 +64,9 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() + 1));
                 Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
                 randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
+
+                //Trying to stop random name being repeated
+                fellowList.remove(randomFellowPicked);
                 startActivity(randomFellowIntent);
             }
         });
@@ -83,8 +86,6 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 fellowRecyclerView.setLayoutManager(gridLayoutManager);
                 fellowRecyclerView.setAdapter(fellowAdapter);
                 fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
-
-                // fellowSearchView.setBackgroundColor(Color.parseColor("#1E90FF"));
 
                 fellowList = response.body().getFellows();
 
