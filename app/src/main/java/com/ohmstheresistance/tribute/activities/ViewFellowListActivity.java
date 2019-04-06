@@ -64,6 +64,8 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() + 1));
                 Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
                 randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
+                Log.e("fellowList: ", fellowList.size() + "");
+
 
                 //Trying to stop random name being repeated
                 fellowList.remove(randomFellowPicked);
@@ -80,6 +82,10 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
 
                 for (Fellows fellows : response.body().getFellows()) {
                     fellowList.add(fellows);
+
+                    if (fellowList.size() <= 1) {
+                        fellowList.add(fellows);
+                    }
                 }
                 fellowAdapter = new FellowAdapter(response.body().getFellows());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);

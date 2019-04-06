@@ -130,7 +130,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
                             }
                         });
-                // compositeDisposable.add(disposable);
+                compositeDisposable.add(disposable);
 
             }
 
@@ -150,14 +150,21 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
 
                 } else {
+
+                    if (personList.size() <= 1) {
+                        getInfo();
+                    }
+
                     Random randomNumber = new Random();
-                    Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size() + 1));
+                    Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
                     Log.e("personList: ", personList.size() + "");
                     Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
                     randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
 
                     //trying to stop repeated name from generated list.
                     personList.remove(randomPersonPicked);
+
+                    //trying to stop the list from going empty which crashes the activity annd returns the app to the main screen
                     startActivity(randomPersonIntent);
                 }
             }
@@ -215,7 +222,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                         Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-        // compositeDisposable.add(disposable);
+        compositeDisposable.add(disposable);
 
     }
 
@@ -287,7 +294,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
                             }
                         });
-                // compositeDisposable.add(disposable);
+                compositeDisposable.add(disposable);
 
             }
 
