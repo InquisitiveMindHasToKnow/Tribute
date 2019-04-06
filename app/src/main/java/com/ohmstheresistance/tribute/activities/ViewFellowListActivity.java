@@ -69,6 +69,8 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
 
                 //Trying to stop random name being repeated
                 fellowList.remove(randomFellowPicked);
+                fellowAdapter.setData(fellowList);
+
                 startActivity(randomFellowIntent);
             }
         });

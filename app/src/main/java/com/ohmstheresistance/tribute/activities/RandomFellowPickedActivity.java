@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ohmstheresistance.tribute.R;
+import com.squareup.picasso.Picasso;
 
 public class RandomFellowPickedActivity extends AppCompatActivity {
 
@@ -38,7 +39,9 @@ public class RandomFellowPickedActivity extends AppCompatActivity {
             public void run() {
                 chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
                 chosenFellowTextView.setBackgroundColor(Color.parseColor("#FBF1C6"));
+
             }
         }, 3000);
+
     }
 }
