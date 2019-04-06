@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -63,6 +64,9 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() + 1));
                 Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
                 randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
+
+                //Trying to stop random name being repeated
+                fellowList.remove(randomFellowPicked);
                 startActivity(randomFellowIntent);
             }
         });

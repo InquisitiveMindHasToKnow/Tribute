@@ -155,6 +155,9 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     Log.e("personList: ", personList.size() + "");
                     Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
                     randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+
+                    //trying to stop repeated name from generated list.
+                    personList.remove(randomPersonPicked);
                     startActivity(randomPersonIntent);
                 }
             }

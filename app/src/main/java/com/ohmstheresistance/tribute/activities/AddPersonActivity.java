@@ -74,6 +74,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
                         || TextUtils.isEmpty(addPersonEmailEditText.getText())){
                     setResult(RESULT_CANCELED, addPersonIntent);
+                    Toast.makeText(AddPersonActivity.this, "Person Data Not Added. All fields must be filled.", Toast.LENGTH_LONG).show();
                 } else {
                     String person_name= addPersonNameEditText.getText().toString();
                     String person_number = addPersonNumberEditText.getText().toString();
