@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
 
@@ -43,13 +44,20 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 lastButtonClickTime = SystemClock.elapsedRealtime();
 
                 SharedPreferences.Editor editor = registrationSharedPrefs.edit();
+
+
                 if (registrationUserName.getText() != null && registrationPassword.getText() != null && confirmPassword.getText() != null &&
                         registrationPassword.getText().toString().equals(confirmPassword.getText().toString()
                         )) {
                     editor.putString("user" + registrationUserName.getText().toString(), registrationUserName.getText().toString());
                     editor.putString("password" + registrationUserName.getText().toString(), registrationPassword.getText().toString());
-                    editor.commit();
+                    editor.apply();
                     finish();
+                }
+
+                if (!registrationPassword.getText().toString().equals(confirmPassword.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Try again. Both passwords have to match", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
