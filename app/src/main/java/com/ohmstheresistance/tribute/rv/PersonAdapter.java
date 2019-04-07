@@ -16,7 +16,7 @@ import com.ohmstheresistance.tribute.model.Fellows;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHolder>{
+public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonViewHolder> {
     private List<Person> personList = new ArrayList<>();
     private OnItemClickListener itemClickListener;
 
@@ -32,16 +32,16 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
 
     @NonNull
     @Override
-    public PersonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.person_item, parent, false);
-        return new PersonHolder(itemView);
+        return new PersonViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PersonHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
         Person currentPerson = personList.get(position);
-        holder.personIDTextView.setText(String.valueOf(currentPerson.getPersonID()));
+        //holder.personIDTextView.setText(String.valueOf(currentPerson.getPersonID()));
         holder.personNameTextView.setText(currentPerson.getPersonName());
         holder.personPhoneNumberTextView.setText(currentPerson.getPersonPhoneNumber());
         holder.personEmailTextview.setText(currentPerson.getPersonEmail());
@@ -66,14 +66,14 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
         return personList.get(position);
     }
 
-    class PersonHolder extends RecyclerView.ViewHolder {
+    class PersonViewHolder extends RecyclerView.ViewHolder {
         private TextView personNameTextView;
         private TextView personPhoneNumberTextView;
         private TextView personEmailTextview;
         private TextView personIDTextView;
         private long lastButtonClickTime = 0;
 
-        public PersonHolder(View itemView) {
+        public PersonViewHolder(View itemView) {
             super(itemView);
             personNameTextView = itemView.findViewById(R.id.person_name_textview);
             personPhoneNumberTextView = itemView.findViewById(R.id.person_phone_number_textview);
