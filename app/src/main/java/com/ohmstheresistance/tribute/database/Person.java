@@ -15,6 +15,7 @@ public class Person {
     private String personName;
     private String personEmail;
     private String personPhoneNumber;
+    private String dateTime;
 
 
     public Person( String personName, String personPhoneNumber, String personEmail) {
@@ -60,5 +61,13 @@ public class Person {
     public String toString() {
         return new StringBuilder(personName).append("\n").append(personPhoneNumber).append("\n").append(personEmail).toString();
 
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 }

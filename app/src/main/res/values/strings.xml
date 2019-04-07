@@ -35,6 +35,6 @@
     <string name="register_enter_your_username">Enter Your Username</string>
     <string name="register_button_text">Register</string>
     <string name="checkboxstring">Remember me</string>
-
+    <string name="timethingy">%1$s:%2$s %3$s</string>
 </resources>
 

@@ -71,6 +71,17 @@
             app:layout_constraintTop_toBottomOf="@id/person_phone_number_textview"
             tools:text="randomemail@gmails.org" />
 
+        <TextView
+            android:id="@+id/date_made_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/textColor"
+            app:layout_constraintTop_toBottomOf="@id/person_email_textview"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="04/09/19" />
+
 
     </android.support.constraint.ConstraintLayout>
 

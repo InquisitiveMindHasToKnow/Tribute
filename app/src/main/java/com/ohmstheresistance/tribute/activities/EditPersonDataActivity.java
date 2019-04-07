@@ -92,6 +92,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
                     modifyPersonIntent.putExtra(PERSON_NUMBER, personNumber);
                     modifyPersonIntent.putExtra(PERSON_EMAIL, personEmail);
 
+
                     int personID = getIntent().getIntExtra(PERSON_ID, -1);
                     if (personID != -1) {
                         modifyPersonIntent.putExtra(PERSON_ID, personID);

@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,12 @@ import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -95,6 +100,12 @@ public class AddPersonActivity extends AppCompatActivity {
                         public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                             Person person = new Person(person_name, person_number, person_email);
 
+                            long currentTime = new Date().getTime();
+                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy\nhh:mm:ss a", Locale.US);
+                            String dateString = sdf.format(currentTime);
+
+                            person.setDateTime(dateString);
+
                             personRepository.addPerson(person);
                             emitter.onComplete();
                         }
@@ -110,6 +121,7 @@ public class AddPersonActivity extends AppCompatActivity {
                             }, new Consumer<Throwable>() {
                                 @Override
                                 public void accept(Throwable throwable) throws Exception {
+
                                     Toast.makeText(AddPersonActivity.this, "Error Adding Person" + throwable.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }, new Action() {
