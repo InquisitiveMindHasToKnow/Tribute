@@ -19,9 +19,9 @@
 
         <TextView
             android:id="@+id/person_idtext_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:textSize="24sp"
             android:textColor="@color/textColor"
             app:layout_constraintHorizontal_bias="0.164"
@@ -40,17 +40,30 @@
             android:textSize="32sp"
             android:gravity="center"
             android:textColor="@color/textColor"
-            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/person_idtext_view"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/person_phone_number_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/textColor"
+            app:layout_constraintLeft_toRightOf="@id/person_idtext_view"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/person_name_textview"
+            tools:text="999-999-9999" />
 
 
         <TextView
             android:id="@+id/person_email_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:gravity="center"
             android:textColor="@color/textColor"
             app:layout_constraintLeft_toRightOf="@id/person_idtext_view"
@@ -58,18 +71,6 @@
             app:layout_constraintTop_toBottomOf="@id/person_phone_number_textview"
             tools:text="randomemail@gmails.org" />
 
-
-        <TextView
-            android:id="@+id/person_phone_number_textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/textColor"
-            app:layout_constraintLeft_toRightOf="@id/person_idtext_view"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/person_name_textview"
-            tools:text="999-999-9999" />
 
     </android.support.constraint.ConstraintLayout>
 
