@@ -28,9 +28,7 @@ import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
-import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
-import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,6 +214,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        Log.e("createroomdatabase: ", "room not doing shit" + throwable.getMessage());
                         Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
