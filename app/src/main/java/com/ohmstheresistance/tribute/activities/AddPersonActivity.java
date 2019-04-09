@@ -100,12 +100,6 @@ public class AddPersonActivity extends AppCompatActivity {
                         public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                             Person person = new Person(person_name, person_number, person_email);
 
-                            long currentTime = new Date().getTime();
-                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy\nhh:mm:ss a", Locale.US);
-                            String dateString = sdf.format(currentTime);
-
-                            person.setDateTime(dateString);
-
                             personRepository.addPerson(person);
                             emitter.onComplete();
                         }

@@ -5,84 +5,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp"
-    app:cardCornerRadius="40dp"
+    app:cardCornerRadius="24dp"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="16dp">
 
-
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-       >
 
-        <TextView
-            android:id="@+id/person_idtext_view"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:textSize="24sp"
-            android:textColor="@color/textColor"
-            app:layout_constraintHorizontal_bias="0.164"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/person_name_textview"
-            tools:text="1" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/personicon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/usericon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/personnametitle_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Name:"
+                    android:textColor="@color/textColor" />
 
 
-        <TextView
-            android:id="@+id/person_name_textview"
+                <TextView
+                    android:id="@+id/person_name_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
+                    tools:text="Omar Raymond"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:textSize="32sp"
-            android:gravity="center"
-            android:textColor="@color/textColor"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/full_names" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/person_phone_number_textview"
+            <ImageView
+                android:id="@+id/callperson_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/userphone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/callpersontitle_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Phone:"
+                    android:textColor="@color/textColor" />
+
+                <TextView
+                    android:id="@+id/person_phone_number_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
+                    android:textSize="24sp"
+                    tools:text="999-999-9999" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/textColor"
-            app:layout_constraintLeft_toRightOf="@id/person_idtext_view"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/person_name_textview"
-            tools:text="999-999-9999" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/emailperson_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/emailuser" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/password_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Email:"
+                    android:textColor="@color/textColor" />
+
+                <TextView
+                    android:id="@+id/person_email_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
+                    android:textSize="24sp"
+                    tools:text="randomemail@gmail.edu" />
 
 
-        <TextView
-            android:id="@+id/person_email_textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:textColor="@color/textColor"
-            app:layout_constraintLeft_toRightOf="@id/person_idtext_view"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/person_phone_number_textview"
-            tools:text="randomemail@gmails.org" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/date_made_textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:textColor="@color/textColor"
-            app:layout_constraintTop_toBottomOf="@id/person_email_textview"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:text="04/09/19" />
-
-
-    </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

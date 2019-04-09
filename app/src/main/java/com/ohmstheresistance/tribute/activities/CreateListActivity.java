@@ -28,9 +28,7 @@ import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonDataSource;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
-import com.ohmstheresistance.tribute.model.Fellows;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
-import com.ohmstheresistance.tribute.rv.PersonViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
