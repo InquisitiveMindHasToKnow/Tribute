@@ -15,7 +15,6 @@ public class Person {
     private String personName;
     private String personEmail;
     private String personPhoneNumber;
-    private String dateTime;
 
 
     public Person( String personName, String personPhoneNumber, String personEmail) {
@@ -63,11 +62,4 @@ public class Person {
 
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
 }
