@@ -52,7 +52,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
         holder.personNameTextView.setText(currentPerson.getPersonName());
         holder.personPhoneNumberTextView.setText(currentPerson.getPersonPhoneNumber());
-        holder.personEmailTextview.setText(currentPerson.getPersonEmail());
+        holder.personEmailTextView.setText(currentPerson.getPersonEmail());
 
     }
 
@@ -78,7 +78,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
     class PersonViewHolder extends RecyclerView.ViewHolder {
         private TextView personNameTextView;
         private TextView personPhoneNumberTextView;
-        private TextView personEmailTextview;
+        private TextView personEmailTextView;
 
 
         private long lastButtonClickTime = 0;
@@ -90,7 +90,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
             personNameTextView = itemView.findViewById(R.id.person_name_textview);
             personPhoneNumberTextView = itemView.findViewById(R.id.person_phone_number_textview);
-            personEmailTextview = itemView.findViewById(R.id.person_email_textview);
+            personEmailTextView = itemView.findViewById(R.id.person_email_textview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

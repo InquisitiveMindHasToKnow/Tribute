@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +85,6 @@ public class AddPersonActivity extends AppCompatActivity {
                     String person_name= addPersonNameEditText.getText().toString();
                     String person_number = addPersonNumberEditText.getText().toString();
                     String person_email = addPersonEmailEditText.getText().toString();
-
 
                     addPersonIntent.putExtra(PERSON_NAME, person_name);
                     addPersonIntent.putExtra(PERSON_NUMBER, person_number);
