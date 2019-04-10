@@ -2,6 +2,8 @@ package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ public class RandomFellowPickedActivity extends AppCompatActivity {
     private TextView fellowMotivationTextView;
     private ImageView chosenFellowImageview;
     private Intent chosenFellowIntent;
+    ToneGenerator randomFellowSound;
     private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
 
     @Override
@@ -38,6 +41,9 @@ public class RandomFellowPickedActivity extends AppCompatActivity {
             public void run() {
                 chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
                 chosenFellowTextView.setBackgroundColor(Color.parseColor("#FBF1C6"));
+
+                randomFellowSound = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                randomFellowSound.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 600);
 
             }
         }, 3000);
