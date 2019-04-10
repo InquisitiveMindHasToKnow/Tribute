@@ -1,7 +1,6 @@
 package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
