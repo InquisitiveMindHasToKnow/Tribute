@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
-import com.squareup.picasso.Picasso;
 
 public class RandomPersonPickedActivity extends AppCompatActivity {
 

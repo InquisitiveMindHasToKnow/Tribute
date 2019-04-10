@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ohmstheresistance.tribute.R;
-import com.squareup.picasso.Picasso;
 
 public class RandomFellowPickedActivity extends AppCompatActivity {
 
