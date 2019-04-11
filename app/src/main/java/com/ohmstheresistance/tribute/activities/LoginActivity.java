@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         userRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();

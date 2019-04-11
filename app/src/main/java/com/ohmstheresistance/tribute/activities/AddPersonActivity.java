@@ -60,7 +60,7 @@ public class AddPersonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();

@@ -138,7 +138,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             @Override
             public void onClick(View v) {
 
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();
@@ -185,7 +185,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             personFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                         return;
                     }
                     lastButtonClickTime = SystemClock.elapsedRealtime();

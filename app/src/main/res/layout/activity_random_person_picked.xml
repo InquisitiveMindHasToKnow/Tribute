@@ -1,26 +1,18 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rel_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bluetoyellowgradientreversed">
 
 
-    <ImageView
-        android:id="@+id/random_person_selected_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/randomly_selected_person_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textSize="56sp"
-        android:layout_alignLeft="@id/random_person_selected_imageview"
-        android:layout_alignTop="@id/random_person_selected_imageview"
-        android:layout_alignRight="@id/random_person_selected_imageview"
-        android:layout_alignBottom="@id/random_person_selected_imageview"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

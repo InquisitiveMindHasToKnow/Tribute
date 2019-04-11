@@ -40,7 +40,7 @@ public class ButtonViewHolder extends RecyclerView.ViewHolder {
                 navigationIntent = new Intent();
                 switch (getAdapterPosition()){
                     case 0:
-                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                             return;
                         }
                         lastButtonClickTime = SystemClock.elapsedRealtime();
@@ -49,7 +49,7 @@ public class ButtonViewHolder extends RecyclerView.ViewHolder {
                         break;
 
                     case 1:
-                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                             return;
                         }
                         lastButtonClickTime = SystemClock.elapsedRealtime();
@@ -58,7 +58,7 @@ public class ButtonViewHolder extends RecyclerView.ViewHolder {
                         break;
 
                     case 2:
-                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
+                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                             return;
                         }
                         lastButtonClickTime = SystemClock.elapsedRealtime();

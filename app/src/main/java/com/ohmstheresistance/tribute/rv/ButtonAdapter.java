@@ -16,7 +16,6 @@ import java.util.List;
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonViewHolder> {
 
     private List<Buttons> buttonList;
-    private PersonViewHolder personViewHolder;
 
     public ButtonAdapter (List<Buttons> buttonList){
         this.buttonList = buttonList;
