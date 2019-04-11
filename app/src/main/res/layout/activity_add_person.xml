@@ -41,7 +41,7 @@
         android:id="@+id/add_person_number_edittext"
         android:layout_width="300dp"
         android:layout_height="64dp"
-        android:inputType="phone"
+        android:inputType="number"
         android:layout_marginStart="60dp"
         android:background="@drawable/oval"
         android:layout_marginTop="16dp"

@@ -32,6 +32,7 @@ public class SplashWelcome extends AppCompatActivity {
             @Override
             public void run() {
 
+
                 toLoginScreenIntent = new Intent(SplashWelcome.this, LoginActivity.class);
                 startActivity(toLoginScreenIntent);
                 finish();
