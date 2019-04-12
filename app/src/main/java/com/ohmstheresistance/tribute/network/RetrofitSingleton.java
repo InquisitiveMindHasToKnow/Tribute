@@ -5,19 +5,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitSingleton {
 
-        private static Retrofit buttonRetrofitInstance;
+    private static Retrofit retrofitInstance;
 
         private RetrofitSingleton(){}
 
         public static Retrofit getRetrofitInstance() {
-            if (buttonRetrofitInstance != null) {
-                return buttonRetrofitInstance;
+            if (retrofitInstance != null) {
+                return retrofitInstance;
             }
-            buttonRetrofitInstance = new Retrofit
+            retrofitInstance = new Retrofit
                     .Builder()
                     .baseUrl("https://gist.githubusercontent.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            return buttonRetrofitInstance;
+            return retrofitInstance;
         }
     }
