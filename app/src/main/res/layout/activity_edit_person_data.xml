@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/edit_person_name_edittext"
         android:layout_width="300dp"
-        android:layout_height="64dp"
+        android:layout_height="56dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/oval"
@@ -39,7 +39,7 @@
     <EditText
         android:id="@+id/edit_person_number_edittext"
         android:layout_width="300dp"
-        android:layout_height="64dp"
+        android:layout_height="56dp"
         android:inputType="number"
         android:layout_marginStart="60dp"
         android:background="@drawable/oval"
@@ -54,7 +54,7 @@
     <EditText
         android:id="@+id/edit_person_email_edittext"
         android:layout_width="300dp"
-        android:layout_height="64dp"
+        android:layout_height="56dp"
         android:background="@drawable/oval"
         android:hint="@string/person_email"
         android:inputType="textWebEmailAddress"
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="@string/submit_editted_info_button_text"
-        android:background="#00FFFFFF"
+        android:background="@layout/transparentbuttonborder"
         android:textSize="24sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintHorizontal_bias="0.498"

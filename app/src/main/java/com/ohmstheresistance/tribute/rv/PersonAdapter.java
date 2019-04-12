@@ -15,11 +15,7 @@ import com.ohmstheresistance.tribute.database.Person;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
-import static java.util.Calendar.getInstance;
-
 
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonViewHolder> {
     private List<Person> personList = new ArrayList<>();
@@ -27,8 +23,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     private final LayoutInflater layoutInflater;
     private Context layoutContext;
-
-    private Calendar calendar = getInstance();
 
 
     public PersonAdapter(Context context) {
@@ -41,9 +35,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
     @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.person_item, parent, false);
-        return new PersonViewHolder(itemView, calendar);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item, parent, false);
+        return new PersonViewHolder(itemView);
     }
 
     @Override
@@ -85,7 +78,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
 
         @SuppressLint("StringFormatMatches")
-        public PersonViewHolder(View itemView, Calendar calendar) {
+        public PersonViewHolder(View itemView) {
             super(itemView);
 
             personNameTextView = itemView.findViewById(R.id.person_name_textview);

@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.activities.AboutTheCreator;
 import com.ohmstheresistance.tribute.activities.CreateListActivity;
-import com.ohmstheresistance.tribute.activities.AcceptanceSpeechActivity;
 import com.ohmstheresistance.tribute.activities.ViewFellowListActivity;
 import com.ohmstheresistance.tribute.model.Buttons;
 
