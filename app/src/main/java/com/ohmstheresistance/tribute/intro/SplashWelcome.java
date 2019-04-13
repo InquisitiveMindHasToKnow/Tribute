@@ -28,15 +28,12 @@ public class SplashWelcome extends AppCompatActivity {
                 .into(splashImage);
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
 
-                toLoginScreenIntent = new Intent(SplashWelcome.this, LoginActivity.class);
-                startActivity(toLoginScreenIntent);
-                finish();
-            }
+            toLoginScreenIntent = new Intent(SplashWelcome.this, LoginActivity.class);
+            startActivity(toLoginScreenIntent);
+            finish();
         }, SPLASH_SCREEN_TIMER);
     }
 }

@@ -13,8 +13,6 @@ import com.ohmstheresistance.tribute.rv.CreatorsInfoAdapter;
 
 public class AboutTheCreator extends AppCompatActivity {
 
-
-    private static final String TAG = "About The Creator";
     private ViewPager viewPager;
 
     @Override

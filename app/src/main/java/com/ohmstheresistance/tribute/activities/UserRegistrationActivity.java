@@ -35,30 +35,27 @@ public class UserRegistrationActivity extends AppCompatActivity {
         registrationIntent = getIntent();
         registrationSharedPrefs = getApplicationContext().getSharedPreferences(registrationIntent.getStringExtra("testKey"), MODE_PRIVATE);
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                    return;
-                }
-                lastButtonClickTime = SystemClock.elapsedRealtime();
+        registerButton.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                return;
+            }
+            lastButtonClickTime = SystemClock.elapsedRealtime();
 
-                SharedPreferences.Editor editor = registrationSharedPrefs.edit();
+            SharedPreferences.Editor editor = registrationSharedPrefs.edit();
 
 
-                if (registrationUserName.getText() != null && registrationPassword.getText() != null && confirmPassword.getText() != null &&
-                        registrationPassword.getText().toString().equals(confirmPassword.getText().toString()
-                        )) {
-                    editor.putString("user" + registrationUserName.getText().toString(), registrationUserName.getText().toString());
-                    editor.putString("password" + registrationUserName.getText().toString(), registrationPassword.getText().toString());
-                    editor.apply();
-                    finish();
-                }
+            if (registrationUserName.getText() != null && registrationPassword.getText() != null && confirmPassword.getText() != null &&
+                    registrationPassword.getText().toString().equals(confirmPassword.getText().toString()
+                    )) {
+                editor.putString("user" + registrationUserName.getText().toString(), registrationUserName.getText().toString());
+                editor.putString("password" + registrationUserName.getText().toString(), registrationPassword.getText().toString());
+                editor.apply();
+                finish();
+            }
 
-                if (!registrationPassword.getText().toString().equals(confirmPassword.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Try again. Both passwords have to match", Toast.LENGTH_LONG).show();
+            if (!registrationPassword.getText().toString().equals(confirmPassword.getText().toString())) {
+                Toast.makeText(getApplicationContext(), "Try again. Both passwords have to match", Toast.LENGTH_LONG).show();
 
-                }
             }
         });
     }

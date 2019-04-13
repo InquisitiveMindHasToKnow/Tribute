@@ -85,17 +85,14 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
             personPhoneNumberTextView = itemView.findViewById(R.id.person_phone_number_textview);
             personEmailTextView = itemView.findViewById(R.id.person_email_textview);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                        return;
-                    }
-                    lastButtonClickTime = SystemClock.elapsedRealtime();
-                    int position = getAdapterPosition();
-                    if (itemClickListener != null && position != RecyclerView.NO_POSITION) {
-                        itemClickListener.onItemClicked(personList.get(position));
-                    }
+            itemView.setOnClickListener(v -> {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                    return;
+                }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
+                int position = getAdapterPosition();
+                if (itemClickListener != null && position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClicked(personList.get(position));
                 }
             });
         }

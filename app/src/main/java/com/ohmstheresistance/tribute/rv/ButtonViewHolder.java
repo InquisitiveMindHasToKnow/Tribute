@@ -32,41 +32,38 @@ public class ButtonViewHolder extends RecyclerView.ViewHolder {
 
         buttonNameTextView.setText(buttons.getButton());
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        itemView.setOnClickListener(v -> {
 
-                navigationIntent = new Intent();
-                switch (getAdapterPosition()){
-                    case 0:
-                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                            return;
-                        }
-                        lastButtonClickTime = SystemClock.elapsedRealtime();
-                        navigationIntent =  new Intent(context, ViewFellowListActivity.class);
-                        context.startActivity(navigationIntent);
-                        break;
+            navigationIntent = new Intent();
+            switch (getAdapterPosition()) {
+                case 0:
+                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                        return;
+                    }
+                    lastButtonClickTime = SystemClock.elapsedRealtime();
+                    navigationIntent = new Intent(context, ViewFellowListActivity.class);
+                    context.startActivity(navigationIntent);
+                    break;
 
-                    case 1:
-                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                            return;
-                        }
-                        lastButtonClickTime = SystemClock.elapsedRealtime();
-                        navigationIntent = new Intent(context, CreateListActivity.class);
-                        context.startActivity(navigationIntent);
-                        break;
+                case 1:
+                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                        return;
+                    }
+                    lastButtonClickTime = SystemClock.elapsedRealtime();
+                    navigationIntent = new Intent(context, CreateListActivity.class);
+                    context.startActivity(navigationIntent);
+                    break;
 
-                    case 2:
-                        if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                            return;
-                        }
-                        lastButtonClickTime = SystemClock.elapsedRealtime();
-                        navigationIntent = new Intent(context, AboutTheCreator.class);
-                        context.startActivity(navigationIntent);
-                        break;
-                }
-
+                case 2:
+                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                        return;
+                    }
+                    lastButtonClickTime = SystemClock.elapsedRealtime();
+                    navigationIntent = new Intent(context, AboutTheCreator.class);
+                    context.startActivity(navigationIntent);
+                    break;
             }
+
         });
     }
 }

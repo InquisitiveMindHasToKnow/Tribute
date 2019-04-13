@@ -36,16 +36,13 @@ public class AnxietyBuilderActivity extends AppCompatActivity {
                 .into(anxietyBuilderImage);
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                toDisplayPersonPicked = new Intent(AnxietyBuilderActivity.this, RandomPersonPickedActivity.class);
-                toDisplayPersonPicked.putExtra(RANDOM_PERSON_KEY, randomPerson);
-                Log.e("randomPerson: ", randomPerson);
-                startActivity(toDisplayPersonPicked);
-                finish();
-            }
+            toDisplayPersonPicked = new Intent(AnxietyBuilderActivity.this, RandomPersonPickedActivity.class);
+            toDisplayPersonPicked.putExtra(RANDOM_PERSON_KEY, randomPerson);
+            Log.e("randomPerson: ", randomPerson);
+            startActivity(toDisplayPersonPicked);
+            finish();
         }, ANXITY_BUILDER_TIMER);
     }
 }

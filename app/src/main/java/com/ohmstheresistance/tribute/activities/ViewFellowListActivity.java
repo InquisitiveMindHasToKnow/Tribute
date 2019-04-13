@@ -51,24 +51,20 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
         allstar_textview = findViewById(R.id.allstar_fellow_textview);
         fellowSearchView = findViewById(R.id.fellow_search_view);
         pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
-        pickRandomFellowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                    return;
-                }
-                lastButtonClickTime = SystemClock.elapsedRealtime();
-
-                Random randomNumber = new Random();
-                Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() - 1) + 1);
-                Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
-                randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
-                Log.e("fellowList: ", fellowList.size() + "");
-
-                fellowList.remove(randomFellowPicked);
-                fellowAdapter.setData(fellowList);
-                startActivity(randomFellowIntent);
+        pickRandomFellowButton.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                return;
             }
+            lastButtonClickTime = SystemClock.elapsedRealtime();
+
+            Random randomNumber = new Random();
+            Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() - 1) + 1);
+            Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
+            randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
+
+            fellowList.remove(randomFellowPicked);
+            fellowAdapter.setData(fellowList);
+            startActivity(randomFellowIntent);
         });
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
