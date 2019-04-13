@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -100,33 +99,11 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 Person person = personAdapter.getPersonAtPosition(position);
 
                 Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_LONG).show();
-                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-
-                        personRepository.deletePerson(person);
-
-                    }
-                })
+                Disposable disposable = Observable.create(emitter -> personRepository.deletePerson(person))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(new Consumer<Object>() {
+                        .subscribe(o -> personAdapter.deletePerson(position), throwable -> Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show(), () -> {
 
-                            @Override
-                            public void accept(Object o) throws Exception {
-                                personAdapter.deletePerson(position);
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-
-                                Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }, new Action() {
-                            @Override
-                            public void run() throws Exception {
-
-                            }
                         });
                 compositeDisposable.add(disposable);
 
@@ -134,66 +111,56 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
         }).attachToRecyclerView(personRecyclerView);
 
-        selectRandomPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        selectRandomPerson.setOnClickListener(v -> {
 
+            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                return;
+            }
+            lastButtonClickTime = SystemClock.elapsedRealtime();
+
+            if (personList.size() == 0) {
+                cancelRandomIntent = new Intent(CreateListActivity.this, CreateListActivity.class);
+                Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                if (personList.size() <= 1) {
+                    getInfo();
+                }
+
+                Random randomNumber = new Random();
+                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+                Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
+                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+
+                personList.remove(randomPersonPicked);
+                startActivity(randomPersonIntent);
+            }
+        });
+
+
+        personAdapter.SetItemClickListener(person -> {
+
+            Intent editPersonIntent = new Intent(CreateListActivity.this, EditPersonDataActivity.class);
+            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_ID, person.getPersonID());
+            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NAME, person.getPersonName());
+            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
+            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
+            startActivity(editPersonIntent);
+
+        });
+        {
+
+
+            personFab.setOnClickListener(v -> {
                 if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();
 
-                if (personList.size() == 0) {
-                    cancelRandomIntent = new Intent(CreateListActivity.this, CreateListActivity.class);
-                    Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
+                addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
+                startActivity(addPersonIntent);
 
-                } else {
-
-                    if (personList.size() <= 1) {
-                        getInfo();
-                    }
-
-                    Random randomNumber = new Random();
-                    Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
-                    Log.e("personList: ", personList.size() + "");
-                    Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
-                    randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
-
-                    personList.remove(randomPersonPicked);
-                    startActivity(randomPersonIntent);
-                }
-            }
-        });
-
-
-        personAdapter.SetItemClickListener(new PersonAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClicked(Person person) {
-
-                Intent editPersonIntent = new Intent(CreateListActivity.this, EditPersonDataActivity.class);
-                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_ID, person.getPersonID());
-                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NAME, person.getPersonName());
-                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
-                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
-                startActivity(editPersonIntent);
-
-            }
-        });
-        {
-
-
-            personFab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                        return;
-                    }
-                    lastButtonClickTime = SystemClock.elapsedRealtime();
-
-                    addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
-                    startActivity(addPersonIntent);
-
-                }
             });
         }
     }
@@ -202,21 +169,12 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         Disposable disposable = personRepository.getAllPersons()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<Person>>() {
-                    @Override
-                    public void accept(List<Person> people) throws Exception {
-                        onGetInfoSuccess(people);
-                        Log.e("listSize2:", people.size() + "");
-                        personSearchView.setOnQueryTextListener(CreateListActivity.this);
-                        personList.addAll(people);
+                .subscribe(people -> {
+                    onGetInfoSuccess(people);
+                    personSearchView.setOnQueryTextListener(CreateListActivity.this);
+                    personList.addAll(people);
 
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                }, throwable -> Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show());
         compositeDisposable.add(disposable);
 
     }
@@ -224,7 +182,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     private void onGetInfoSuccess(List<Person> people) {
 
         people.size();
-        Log.e("listSize: ", people.size() + "");
         personAdapter.setPersons(people);
 
     }
@@ -255,51 +212,32 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         dialog.setCancelable(false);
         dialog.setTitle("This option deletes the entire database!");
         dialog.setMessage("Are you sure you want to complete this action?");
-        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
+        dialog.setPositiveButton("YES", (dialog1, id) -> {
 
-                Toast.makeText(CreateListActivity.this, "Database Cleared", Toast.LENGTH_LONG).show();
-                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+            Toast.makeText(CreateListActivity.this, "Database Cleared", Toast.LENGTH_LONG).show();
+            Disposable disposable = Observable.create(emitter -> {
 
-                        personList.clear();
-                        personRepository.deleteAllPersons();
-                        emitter.onComplete();
+                personList.clear();
+                personRepository.deleteAllPersons();
+                emitter.onComplete();
 
-                    }
-                })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Consumer<Object>() {
+            })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(o -> {
 
-                            @Override
-                            public void accept(Object o) throws Exception {
+                    }, throwable -> Toast.makeText(CreateListActivity.this, "Database Cleared" + throwable.getMessage(), Toast.LENGTH_LONG).show(), new Action() {
+                        @Override
+                        public void run() {
 
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                Toast.makeText(CreateListActivity.this, "Database Cleared" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }, new Action() {
-                            @Override
-                            public void run() throws Exception {
-
-                            }
-                        });
-                compositeDisposable.add(disposable);
-
-            }
+                        }
+                    });
+            compositeDisposable.add(disposable);
 
         })
 
-                .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setNegativeButton("NO ", (dialog12, which) -> {
 
-                    }
                 });
 
         final AlertDialog alert = dialog.create();

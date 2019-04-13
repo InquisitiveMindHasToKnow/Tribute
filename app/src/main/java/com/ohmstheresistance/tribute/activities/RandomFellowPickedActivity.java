@@ -36,21 +36,18 @@ public class RandomFellowPickedActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.ashchoseyou).into(chosenFellowImageview);
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
-                chosenFellowTextView.setBackgroundColor(Color.parseColor("#FBF1C6"));
+        handler.postDelayed(() -> {
+            chosenFellowTextView.setText(chosenFellowIntent.getStringExtra(RANDOM_FELLOW_KEY));
+            chosenFellowTextView.setBackgroundColor(Color.parseColor("#FBF1C6"));
 
-                try {
-                    Uri randomFellowAlert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    Ringtone alert = RingtoneManager.getRingtone(getApplicationContext(), randomFellowAlert);
-                    alert.play();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                Uri randomFellowAlert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone alert = RingtoneManager.getRingtone(getApplicationContext(), randomFellowAlert);
+                alert.play();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
         }, 3000);
 
     }

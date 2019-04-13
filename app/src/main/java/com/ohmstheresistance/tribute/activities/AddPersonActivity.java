@@ -56,74 +56,61 @@ public class AddPersonActivity extends AppCompatActivity {
         personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
 
         addPersonButton = findViewById(R.id.add_person_submit_button);
-        addPersonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        addPersonButton.setOnClickListener(v -> {
 
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                    return;
-                }
-                lastButtonClickTime = SystemClock.elapsedRealtime();
+            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                return;
+            }
+            lastButtonClickTime = SystemClock.elapsedRealtime();
 
-                Intent addPersonIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
-                Person person = new Person(addPersonNameEditText.getText().toString(),
-                        addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());
+            Intent addPersonIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
+            Person person = new Person(addPersonNameEditText.getText().toString(),
+                    addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());
 
-                        personList.add(person);
+            personList.add(person);
 
 
-                if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
-                        || TextUtils.isEmpty(addPersonEmailEditText.getText())){
-                    setResult(RESULT_CANCELED, addPersonIntent);
-                    Toast.makeText(AddPersonActivity.this, "Person Data Not Added. All fields must be filled.", Toast.LENGTH_LONG).show();
-                } else {
-                    String person_name= addPersonNameEditText.getText().toString();
-                    String person_number = addPersonNumberEditText.getText().toString();
-                    String person_email = addPersonEmailEditText.getText().toString();
+            if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
+                    || TextUtils.isEmpty(addPersonEmailEditText.getText())) {
+                setResult(RESULT_CANCELED, addPersonIntent);
+                Toast.makeText(AddPersonActivity.this, "Person Data Not Added. All fields must be filled.", Toast.LENGTH_LONG).show();
+            } else {
+                String person_name = addPersonNameEditText.getText().toString();
+                String person_number = addPersonNumberEditText.getText().toString();
+                String person_email = addPersonEmailEditText.getText().toString();
 
-                    addPersonIntent.putExtra(PERSON_NAME, person_name);
-                    addPersonIntent.putExtra(PERSON_NUMBER, person_number);
-                    addPersonIntent.putExtra(PERSON_EMAIL, person_email);
+                addPersonIntent.putExtra(PERSON_NAME, person_name);
+                addPersonIntent.putExtra(PERSON_NUMBER, person_number);
+                addPersonIntent.putExtra(PERSON_EMAIL, person_email);
 
-                    setResult(RESULT_OK, addPersonIntent);
+                setResult(RESULT_OK, addPersonIntent);
 
-                    Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
 
 
-                    Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
-                        @Override
-                        public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                            Person person = new Person(person_name, person_number, person_email);
+                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Object> emitter) {
+                        Person person = new Person(person_name, person_number, person_email);
 
-                            personRepository.addPerson(person);
-                            emitter.onComplete();
-                        }
-                    })
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.io())
-                            .subscribe(new Consumer<Object>() {
+                        personRepository.addPerson(person);
+                        emitter.onComplete();
+                    }
+                })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(o -> {
 
-                                @Override
-                                public void accept(Object o) throws Exception {
+                        }, throwable -> Toast.makeText(AddPersonActivity.this, "Error Adding Person" + throwable.getMessage(), Toast.LENGTH_LONG).show(), new Action() {
+                            @Override
+                            public void run() {
 
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-
-                                    Toast.makeText(AddPersonActivity.this, "Error Adding Person" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }, new Action() {
-                                @Override
-                                public void run() throws Exception {
-
-                                }
-                            });
-
-                }
-                finish();
+                            }
+                        });
 
             }
+            finish();
+
         });
     }
 

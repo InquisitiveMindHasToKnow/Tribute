@@ -39,22 +39,16 @@ public class ContactCreatorFragment extends Fragment {
                 .load(R.drawable.omarsimage)
                 .into(creatorsImage);
 
-        linkedInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri linkedInUri = Uri.parse("https://www.linkedin.com/in/omar-raymond-7411a5b2/");
-                Intent linkedInIntent = new Intent(Intent.ACTION_VIEW, linkedInUri);
-                startActivity(linkedInIntent);
-            }
+        linkedInButton.setOnClickListener(v -> {
+            Uri linkedInUri = Uri.parse("https://www.linkedin.com/in/omar-raymond-7411a5b2/");
+            Intent linkedInIntent = new Intent(Intent.ACTION_VIEW, linkedInUri);
+            startActivity(linkedInIntent);
         });
 
-        githubButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri githubUri = Uri.parse("https://github.com/InquisitiveMindHasToKnow");
-                Intent githubIntent = new Intent(Intent.ACTION_VIEW, githubUri);
-                startActivity(githubIntent);
-            }
+        githubButton.setOnClickListener(v -> {
+            Uri githubUri = Uri.parse("https://github.com/InquisitiveMindHasToKnow");
+            Intent githubIntent = new Intent(Intent.ACTION_VIEW, githubUri);
+            startActivity(githubIntent);
         });
         return rootView;
     }

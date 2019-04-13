@@ -43,50 +43,44 @@ public class LoginActivity extends AppCompatActivity {
             checkBox.setChecked(loginSharedPreferences.getBoolean("isChecked", false));
         }
 
-        userLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        userLoginButton.setOnClickListener(v -> {
 
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                    return;
-                }
-                lastButtonClickTime = SystemClock.elapsedRealtime();
+            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                return;
+            }
+            lastButtonClickTime = SystemClock.elapsedRealtime();
 
-                SharedPreferences.Editor editor = loginSharedPreferences.edit();
-                if (checkBox.isChecked()) {
-                    editor.putString("username", loginUserName.getText().toString());
-                    editor.putString("password", loginPassword.getText().toString());
-                    editor.putBoolean("isChecked", checkBox.isChecked());
-                    editor.commit();
-                } else {
-                    editor.putBoolean("isChecked", checkBox.isChecked());
-                    editor.commit();
-                }
-                String checkUser = "user" + loginUserName.getText().toString();
-                String checkPassword = "password" + loginUserName.getText().toString();
+            SharedPreferences.Editor editor = loginSharedPreferences.edit();
+            if (checkBox.isChecked()) {
+                editor.putString("username", loginUserName.getText().toString());
+                editor.putString("password", loginPassword.getText().toString());
+                editor.putBoolean("isChecked", checkBox.isChecked());
+                editor.commit();
+            } else {
+                editor.putBoolean("isChecked", checkBox.isChecked());
+                editor.commit();
+            }
+            String checkUser = "user" + loginUserName.getText().toString();
+            String checkPassword = "password" + loginUserName.getText().toString();
 
-                if (loginUserName.getText().toString().equalsIgnoreCase(loginSharedPreferences.getString(checkUser, null))
-                        && loginPassword.getText().toString().equals(loginSharedPreferences.getString(checkPassword, null))) {
-                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    loginIntent.putExtra("currentUser", loginUserName.getText().toString());
-                    startActivity(loginIntent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Username or password invalid!", Toast.LENGTH_LONG).show();
-                }
+            if (loginUserName.getText().toString().equalsIgnoreCase(loginSharedPreferences.getString(checkUser, null))
+                    && loginPassword.getText().toString().equals(loginSharedPreferences.getString(checkPassword, null))) {
+                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                loginIntent.putExtra("currentUser", loginUserName.getText().toString());
+                startActivity(loginIntent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Username or password invalid!", Toast.LENGTH_LONG).show();
             }
         });
 
-        userRegistrationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                    return;
-                }
-                lastButtonClickTime = SystemClock.elapsedRealtime();
-                Intent registerIntent = new Intent(LoginActivity.this, UserRegistrationActivity.class);
-                registerIntent.putExtra("testKey", SHARED_PREFS_KEY);
-                startActivity(registerIntent);
+        userRegistrationButton.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                return;
             }
+            lastButtonClickTime = SystemClock.elapsedRealtime();
+            Intent registerIntent = new Intent(LoginActivity.this, UserRegistrationActivity.class);
+            registerIntent.putExtra("testKey", SHARED_PREFS_KEY);
+            startActivity(registerIntent);
         });
 
     }
