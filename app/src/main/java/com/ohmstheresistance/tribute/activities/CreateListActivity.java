@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -69,6 +70,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personSearchView = findViewById(R.id.person_search_view);
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
         personList = new ArrayList<>();
+        personSearchView.setIconified(false);
 
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(true);
@@ -99,7 +101,17 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 Person person = personAdapter.getPersonAtPosition(position);
 
                 Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_LONG).show();
-                Disposable disposable = Observable.create(emitter -> personRepository.deletePerson(person))
+                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Object> emitter) {
+                        //personList.remove(person);
+                        personRepository.deletePerson(person);
+                        Log.e("personListafterdelete: ", personList.size() + "");
+                        emitter.onComplete();
+
+
+                    }
+                })
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(o -> personAdapter.deletePerson(position), throwable -> Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show(), () -> {
@@ -164,6 +176,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             });
         }
     }
+
     private void getInfo() {
 
         Disposable disposable = personRepository.getAllPersons()
@@ -180,8 +193,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     }
 
     private void onGetInfoSuccess(List<Person> people) {
-
-        people.size();
         personAdapter.setPersons(people);
 
     }

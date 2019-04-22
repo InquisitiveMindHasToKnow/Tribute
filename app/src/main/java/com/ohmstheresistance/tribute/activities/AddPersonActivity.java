@@ -5,7 +5,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,7 +25,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class AddPersonActivity extends AppCompatActivity {
@@ -67,9 +66,6 @@ public class AddPersonActivity extends AppCompatActivity {
             Person person = new Person(addPersonNameEditText.getText().toString(),
                     addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());
 
-            personList.add(person);
-
-
             if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
                     || TextUtils.isEmpty(addPersonEmailEditText.getText())) {
                 setResult(RESULT_CANCELED, addPersonIntent);
@@ -84,6 +80,8 @@ public class AddPersonActivity extends AppCompatActivity {
                 addPersonIntent.putExtra(PERSON_EMAIL, person_email);
 
                 setResult(RESULT_OK, addPersonIntent);
+                personList.add(person);
+                Log.e("personListafterADDD: ", personList.size() + "");
 
                 Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
 
@@ -92,8 +90,8 @@ public class AddPersonActivity extends AppCompatActivity {
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) {
                         Person person = new Person(person_name, person_number, person_email);
-
                         personRepository.addPerson(person);
+
                         emitter.onComplete();
                     }
                 })
