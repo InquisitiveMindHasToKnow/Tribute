@@ -57,6 +57,9 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
             }
             lastButtonClickTime = SystemClock.elapsedRealtime();
 
+            fellowSearchView.setIconified(false);
+
+
             Random randomNumber = new Random();
             Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() - 1) + 1);
             Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
