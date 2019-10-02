@@ -85,10 +85,11 @@
 
     <Button
         android:id="@+id/add_person_submit_button"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="@string/submit_person_info_button_textview"
+        android:text="@string/submit_person_info"
+        android:textAllCaps="false"
         android:background="@layout/transparentbuttonborder"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
