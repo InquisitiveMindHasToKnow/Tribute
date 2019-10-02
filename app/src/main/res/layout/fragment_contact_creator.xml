@@ -9,28 +9,38 @@
 
     <ImageView
         android:id="@+id/creators_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/contact_creator_linkedIn_button" />
+        app:layout_constraintBottom_toTopOf="@id/connections_linear" />
+
+    <LinearLayout
+        android:id="@+id/connections_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/creators_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
 
     <Button
         android:id="@+id/contact_creator_linkedIn_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="104dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/linkedinimage"
-        app:layout_constraintTop_toBottomOf="@id/creators_image"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/contact_creator_github_button" />
+        />
 
     <Button
         android:id="@+id/contact_creator_github_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="104dp"
         android:background="@drawable/githublogo"
-        app:layout_constraintTop_toBottomOf="@id/creators_image"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/contact_creator_linkedIn_button" />
+        />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
