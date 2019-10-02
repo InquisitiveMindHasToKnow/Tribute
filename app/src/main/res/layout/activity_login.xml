@@ -12,7 +12,8 @@
         android:text="@string/welcome_textview"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
-        android:textSize="56sp"
+        android:layout_marginTop="40dp"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/sign_in_prompt_textview"/>
@@ -24,8 +25,8 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_in_prompt"
         android:textSize="24sp"
+        android:gravity="center_horizontal"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginStart="72dp"
         app:layout_constraintTop_toBottomOf="@id/login_screen_title_textview"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -36,8 +37,8 @@
     <EditText
 
         android:id="@+id/user_name_edittext"
-        android:layout_width="328dp"
-        android:layout_height="56dp"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/oval"
         android:hint="@string/enter_your_username"
@@ -52,8 +53,8 @@
 
     <EditText
         android:id="@+id/user_password_edittext"
-        android:layout_width="328dp"
-        android:layout_height="56dp"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
         android:hint="@string/enter_your_password"
         android:layout_marginTop="16dp"
         android:textAlignment="center"
@@ -64,12 +65,23 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_name_edittext" />
 
+    <LinearLayout
+        android:id="@+id/remember_me_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_password_edittext"
+        app:layout_constraintBottom_toTopOf="@id/login_button"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+
     <android.support.v7.widget.AppCompatCheckBox
         android:id="@+id/remember_me_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/user_password_edittext"
-        app:layout_constraintRight_toRightOf="@id/checkbox_prompt"
+        app:layout_constraintRight_toLeftOf="@id/checkbox_prompt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/login_button"
 
@@ -85,30 +97,29 @@
         app:layout_constraintTop_toBottomOf="@id/user_password_edittext"
         app:layout_constraintLeft_toRightOf="@id/remember_me_checkbox" />
 
+    </LinearLayout>
+
     <Button
         android:id="@+id/login_button"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@layout/transparentbuttonborder"
+        android:background="@android:color/transparent"
         android:text="@string/submit_button_hint"
-        android:textSize="32sp"
-
-        app:layout_constraintHorizontal_bias="0.517"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_password_edittext" />
+        app:layout_constraintBottom_toTopOf="@id/register_button"
+        app:layout_constraintTop_toBottomOf="@id/remember_me_linear" />
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="124dp"
-        android:background="@layout/transparentbuttonborder"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         android:text="@string/reset_button_text"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_button" />

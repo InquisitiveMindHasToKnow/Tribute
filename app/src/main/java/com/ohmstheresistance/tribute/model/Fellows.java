@@ -6,6 +6,7 @@ public class Fellows {
     private String gender;
 
     public Fellows(String fellow) {
+
         this.fellow = fellow;
     }
 

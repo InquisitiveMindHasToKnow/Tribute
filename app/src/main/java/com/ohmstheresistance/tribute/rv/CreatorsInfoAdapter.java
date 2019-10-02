@@ -15,6 +15,7 @@ public class CreatorsInfoAdapter extends FragmentPagerAdapter {
 
 
     public CreatorsInfoAdapter(FragmentManager fragmentManager) {
+
         super(fragmentManager);
     }
 
@@ -27,16 +28,19 @@ public class CreatorsInfoAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
+
         return fragmentTitleList.get(position);
     }
 
     @Override
     public Fragment getItem(int i) {
+
         return fragmentList.get(i);
     }
 
     @Override
     public int getCount() {
+
         return fragmentList.size();
     }
 }

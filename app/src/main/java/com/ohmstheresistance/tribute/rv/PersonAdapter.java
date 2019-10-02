@@ -65,6 +65,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
     }
 
     public Person getPersonAtPosition(int position) {
+
         return personList.get(position);
     }
 
