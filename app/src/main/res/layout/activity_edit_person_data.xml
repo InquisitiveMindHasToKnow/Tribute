@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Modify Person Info Below:"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
         android:textSize="32sp"
@@ -23,9 +23,8 @@
 
     <EditText
         android:id="@+id/edit_person_name_edittext"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="56dp"
-        android:layout_marginLeft="60dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/oval"
         android:hint="@string/person_name"
@@ -34,50 +33,66 @@
         android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_person_prompt_textview" />
 
     <EditText
         android:id="@+id/edit_person_number_edittext"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="56dp"
         android:inputType="number"
-        android:layout_marginStart="60dp"
         android:background="@drawable/oval"
         android:layout_marginTop="16dp"
         android:textAlignment="center"
         android:hint="@string/person_phone_number"
         android:imeOptions="actionDone"
         android:singleLine="true"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_person_name_edittext"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/edit_person_email_edittext"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="56dp"
         android:background="@drawable/oval"
         android:hint="@string/person_email"
         android:inputType="textWebEmailAddress"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="60dp"
         android:textAlignment="center"
         android:imeOptions="actionDone"
         android:singleLine="true"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_person_number_edittext"
         app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_person_notes_edittext"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:background="@drawable/oval"
+        android:hint="Person Notes"
+        android:layout_marginTop="16dp"
+        android:inputType="textMultiLine"
+        android:textAlignment="center"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/edit_person_email_edittext"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
         android:id="@+id/edit_person_submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:text="@string/submit_editted_info_button_text"
         android:background="@layout/transparentbuttonborder"
         android:textSize="24sp"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_person_email_edittext" />
+        app:layout_constraintTop_toBottomOf="@id/edit_person_notes_edittext" />
 
 </android.support.constraint.ConstraintLayout>

@@ -46,6 +46,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
         holder.personNameTextView.setText(currentPerson.getPersonName());
         holder.personPhoneNumberTextView.setText(currentPerson.getPersonPhoneNumber());
         holder.personEmailTextView.setText(currentPerson.getPersonEmail());
+        holder.personNotesTextView.setText(currentPerson.getPersonNotes());
 
     }
 
@@ -73,6 +74,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
         private TextView personNameTextView;
         private TextView personPhoneNumberTextView;
         private TextView personEmailTextView;
+        private TextView personNotesTextView;
 
 
         private long lastButtonClickTime = 0;
@@ -85,6 +87,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
             personNameTextView = itemView.findViewById(R.id.person_name_textview);
             personPhoneNumberTextView = itemView.findViewById(R.id.person_phone_number_textview);
             personEmailTextView = itemView.findViewById(R.id.person_email_textview);
+            personNotesTextView = itemView.findViewById(R.id.person_notes_textview);
 
             itemView.setOnClickListener(v -> {
                 if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {

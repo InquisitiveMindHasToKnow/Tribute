@@ -15,22 +15,25 @@ public class Person {
     private String personName;
     private String personEmail;
     private String personPhoneNumber;
+    private String personNotes;
 
 
-    public Person( String personName, String personPhoneNumber, String personEmail) {
+    public Person( String personName, String personPhoneNumber, String personEmail, String personNotes) {
 
         this.personName = personName;
         this.personPhoneNumber = personPhoneNumber;
         this.personEmail = personEmail;
+        this.personNotes = personNotes;
     }
 
     @Ignore
-    public Person( int PersonID, String personName, String personPhoneNumber, String personEmail) {
+    public Person( int PersonID, String personName, String personPhoneNumber, String personEmail, String personNotes) {
 
         this.personID = getPersonID();
         this.personName = personName;
         this.personPhoneNumber = personPhoneNumber;
         this.personEmail = personEmail;
+        this.personNotes = personNotes;
     }
 
     public int getPersonID() {
@@ -56,9 +59,15 @@ public class Person {
         return personPhoneNumber;
     }
 
+    public String getPersonNotes(){
+        return personNotes;
+    }
+
+
+
     @Override
     public String toString() {
-        return new StringBuilder(personName).append("\n").append(personPhoneNumber).append("\n").append(personEmail).toString();
+        return new StringBuilder(personName).append("\n").append(personPhoneNumber).append("\n").append(personEmail).append("\n").append(personNotes).toString();
 
     }
 

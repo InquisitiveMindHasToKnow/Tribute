@@ -31,6 +31,8 @@ public class EditPersonDataActivity extends AppCompatActivity {
     public static final String PERSON_NUMBER = "person_number";
     public static final String PERSON_EMAIL = "person_email";
     public static final String PERSON_ID = "person_id";
+    public static final String PERSON_NOTES = "person_notes";
+
     private long lastButtonClickTime = 0;
 
     private Button editPersonButton;
@@ -38,6 +40,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
     private EditText editPersonNameEditText;
     private EditText editPersonNumberEditText;
     private EditText editPersonEmailEditText;
+    private EditText editPersonNotesEditText;
     private Intent editIntent;
 
 
@@ -49,6 +52,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
         editPersonNameEditText = findViewById(R.id.edit_person_name_edittext);
         editPersonNumberEditText = findViewById(R.id.edit_person_number_edittext);
         editPersonEmailEditText = findViewById(R.id.edit_person_email_edittext);
+        editPersonNotesEditText = findViewById(R.id.edit_person_notes_edittext);
         editPersonButton = findViewById(R.id.edit_person_submit_button);
 
         PersonDatabase personDatabase = PersonDatabase.getInstance(this);
@@ -61,6 +65,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
             editPersonNameEditText.setText(editIntent.getStringExtra(PERSON_NAME));
             editPersonNumberEditText.setText(editIntent.getStringExtra(PERSON_NUMBER));
             editPersonEmailEditText.setText(editIntent.getStringExtra(PERSON_EMAIL));
+            editPersonNotesEditText.setText(editIntent.getStringExtra(PERSON_NOTES));
 
         }
 
@@ -74,7 +79,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
             Intent modifyPersonIntent = new Intent(EditPersonDataActivity.this, CreateListActivity.class);
 
             if (TextUtils.isEmpty(editPersonNameEditText.getText()) || TextUtils.isEmpty(editPersonNumberEditText.getText())
-                    || TextUtils.isEmpty(editPersonEmailEditText.getText())) {
+                    || TextUtils.isEmpty(editPersonEmailEditText.getText()) || TextUtils.isEmpty(editPersonNotesEditText.getText())) {
                 setResult(RESULT_CANCELED, modifyPersonIntent);
                 Toast.makeText(EditPersonDataActivity.this, "Person Data Not Modified. All fields must be filled!", Toast.LENGTH_LONG).show();
 
@@ -84,11 +89,13 @@ public class EditPersonDataActivity extends AppCompatActivity {
                 String personName = editPersonNameEditText.getText().toString();
                 String personNumber = editPersonNumberEditText.getText().toString();
                 String personEmail = editPersonEmailEditText.getText().toString();
+                String personNotes = editPersonNotesEditText.getText().toString();
 
 
                 modifyPersonIntent.putExtra(PERSON_NAME, personName);
                 modifyPersonIntent.putExtra(PERSON_NUMBER, personNumber);
                 modifyPersonIntent.putExtra(PERSON_EMAIL, personEmail);
+                modifyPersonIntent.putExtra(PERSON_NOTES, personNotes);
 
 
                 int personID = getIntent().getIntExtra(PERSON_ID, -1);
@@ -99,7 +106,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, modifyPersonIntent);
 
-                Person person = new Person(personName, personNumber, personEmail);
+                Person person = new Person(personName, personNumber, personEmail, personNotes);
                 person.setPersonID(personID);
 
 
