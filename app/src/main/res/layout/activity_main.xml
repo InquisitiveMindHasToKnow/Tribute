@@ -17,15 +17,25 @@
         android:textSize="32sp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/welcome_screen_imageview"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/main_page_image_and_buttons_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/welcome_textview"
+
+        >
     <ImageView
         android:id="@+id/welcome_screen_imageview"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
+        android:src="@drawable/mainpagedie"
         app:layout_constraintBottom_toTopOf="@id/button_recycler"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -36,10 +46,11 @@
         android:id="@+id/button_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
+        android:background="@android:color/transparent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_screen_imageview" />
 
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

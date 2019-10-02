@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         userNameIntent = getIntent();
         String userName = userNameIntent.getStringExtra(USER_NAME_KEY);
-        welcomeTextView.setText("Welcome " + userName);
+        welcomeTextView.setText("Welcome, " + userName);
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         ButtonService buttonService = retrofit.create(ButtonService.class);
