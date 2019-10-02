@@ -58,9 +58,10 @@
 
     <Button
         android:id="@+id/pick_random_fellow_button"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
+        android:layout_centerInParent="true"
+        android:background="@layout/transparentbuttonborder"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/pick_fellow"

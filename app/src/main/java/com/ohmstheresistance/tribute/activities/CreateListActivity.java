@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -41,7 +40,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -71,6 +69,9 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
         personList = new ArrayList<>();
         personSearchView.setIconified(false);
+        personSearchView.setFocusable(false);
+        personSearchView.setIconified(false);
+        personSearchView.clearFocus();
 
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(true);
