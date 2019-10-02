@@ -89,6 +89,9 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 fellowRecyclerView.setLayoutManager(gridLayoutManager);
                 fellowRecyclerView.setAdapter(fellowAdapter);
                 fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
+                fellowSearchView.setFocusable(false);
+                fellowSearchView.setIconified(false);
+                fellowSearchView.clearFocus();
 
                 fellowList = response.body().getFellows();
 
