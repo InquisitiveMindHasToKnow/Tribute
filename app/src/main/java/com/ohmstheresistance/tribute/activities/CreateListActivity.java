@@ -114,7 +114,9 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 })
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(o -> personAdapter.deletePerson(position), throwable -> Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show(), () -> {
+                        .subscribe(o -> personAdapter.deletePerson(position), throwable ->
+
+                                Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show(), () -> {
 
                         });
                 compositeDisposable.add(disposable);
@@ -223,32 +225,38 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         dialog.setCancelable(false);
         dialog.setTitle("This option deletes the entire database!");
         dialog.setMessage("Are you sure you want to complete this action?");
-        dialog.setPositiveButton("YES", (dialog1, id) -> {
+        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog1, int id) {
 
-            Toast.makeText(CreateListActivity.this, "Database Cleared", Toast.LENGTH_LONG).show();
-            Disposable disposable = Observable.create(emitter -> {
+                Toast.makeText(CreateListActivity.this, "Database Cleared", Toast.LENGTH_LONG).show();
+                Disposable disposable = Observable.create((ObservableEmitter<Object> emitter) -> {
 
-                personList.clear();
-                personRepository.deleteAllPersons();
-                emitter.onComplete();
+                    personList.clear();
+                    personRepository.deleteAllPersons();
+                    emitter.onComplete();
 
-            })
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(o -> {
+                })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(o -> {
 
-                    }, throwable -> Toast.makeText(CreateListActivity.this, "Database Cleared" + throwable.getMessage(), Toast.LENGTH_LONG).show(), new Action() {
-                        @Override
-                        public void run() {
+                        }, throwable -> Toast.makeText(CreateListActivity.this, "Database Cleared" + throwable.getMessage(), Toast.LENGTH_LONG).show(), new Action() {
+                            @Override
+                            public void run() {
 
-                        }
-                    });
-            compositeDisposable.add(disposable);
+                            }
+                        });
+                compositeDisposable.add(disposable);
 
+            }
         })
 
-                .setNegativeButton("NO ", (dialog12, which) -> {
+                .setNegativeButton("NO ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog12, int which) {
 
+                    }
                 });
 
         final AlertDialog alert = dialog.create();

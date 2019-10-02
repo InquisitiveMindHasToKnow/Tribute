@@ -81,7 +81,6 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, addPersonIntent);
                 personList.add(person);
-                Log.e("personListafterADDD: ", personList.size() + "");
 
                 Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
 

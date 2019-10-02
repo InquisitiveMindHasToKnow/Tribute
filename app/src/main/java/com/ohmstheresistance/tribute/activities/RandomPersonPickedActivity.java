@@ -35,7 +35,5 @@ public class RandomPersonPickedActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
     }
 }
