@@ -160,6 +160,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NAME, person.getPersonName());
             editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
             editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
+            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NOTES, person.getPersonNotes());
             startActivity(editPersonIntent);
 
         });

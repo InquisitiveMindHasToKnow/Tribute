@@ -32,6 +32,7 @@ public class AddPersonActivity extends AppCompatActivity {
     public static final String PERSON_NAME = "person_name";
     public static final String PERSON_NUMBER = "person_number";
     public static final String PERSON_EMAIL = "person_email";
+    public static final String PERSON_NOTES = "person_notes";
     private long lastButtonClickTime = 0;
 
     private Button addPersonButton;
@@ -40,6 +41,7 @@ public class AddPersonActivity extends AppCompatActivity {
     private EditText addPersonNameEditText;
     private EditText addPersonNumberEditText;
     private EditText addPersonEmailEditText;
+    private EditText addPersonNotesEditText;
 
 
     @Override
@@ -50,6 +52,7 @@ public class AddPersonActivity extends AppCompatActivity {
         addPersonNameEditText = findViewById(R.id.add_person_name_edittext);
         addPersonNumberEditText = findViewById(R.id.add_person_number_edittext);
         addPersonEmailEditText = findViewById(R.id.add_person_email_edittext);
+        addPersonNotesEditText = findViewById(R.id.add_person_notes_edittext);
 
         PersonDatabase personDatabase = PersonDatabase.getInstance(this);
         personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
@@ -64,20 +67,22 @@ public class AddPersonActivity extends AppCompatActivity {
 
             Intent addPersonIntent = new Intent(AddPersonActivity.this, CreateListActivity.class);
             Person person = new Person(addPersonNameEditText.getText().toString(),
-                    addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString());
+                    addPersonNumberEditText.toString(), addPersonEmailEditText.getText().toString(), addPersonNotesEditText.getText().toString());
 
             if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
-                    || TextUtils.isEmpty(addPersonEmailEditText.getText())) {
+                    || TextUtils.isEmpty(addPersonEmailEditText.getText())  || TextUtils.isEmpty(addPersonNotesEditText.getText())) {
                 setResult(RESULT_CANCELED, addPersonIntent);
                 Toast.makeText(AddPersonActivity.this, "Person Data Not Added. All fields must be filled.", Toast.LENGTH_LONG).show();
             } else {
                 String person_name = addPersonNameEditText.getText().toString();
                 String person_number = addPersonNumberEditText.getText().toString();
                 String person_email = addPersonEmailEditText.getText().toString();
+                String person_notes = addPersonNotesEditText.getText().toString();
 
                 addPersonIntent.putExtra(PERSON_NAME, person_name);
                 addPersonIntent.putExtra(PERSON_NUMBER, person_number);
                 addPersonIntent.putExtra(PERSON_EMAIL, person_email);
+                addPersonIntent.putExtra(PERSON_NOTES, person_notes);
 
                 setResult(RESULT_OK, addPersonIntent);
                 personList.add(person);
@@ -88,7 +93,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) {
-                        Person person = new Person(person_name, person_number, person_email);
+                        Person person = new Person(person_name, person_number, person_email, person_notes);
                         personRepository.addPerson(person);
 
                         emitter.onComplete();

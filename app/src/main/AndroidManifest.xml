@@ -21,8 +21,8 @@
         <activity android:name=".activities.AddPersonActivity" />
         <activity android:name=".activities.RandomFellowPickedActivity" />
         <activity android:name=".activities.AcceptanceSpeechActivity" />
-        <activity android:name=".activities.ViewFellowListActivity" />
-        <activity android:name=".activities.CreateListActivity" />
+        <activity android:name=".activities.ViewFellowListActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".activities.CreateListActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".intro.SplashWelcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

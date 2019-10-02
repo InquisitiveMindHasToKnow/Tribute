@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "c08861f7f0a92e98df8b23f43a5c1695",
+    "identityHash": "81857fd358d4e58d1b54f3e360523cab",
     "entities": [
       {
         "tableName": "person_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`personID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `personName` TEXT, `personEmail` TEXT, `personPhoneNumber` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`personID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `personName` TEXT, `personEmail` TEXT, `personPhoneNumber` TEXT, `personNotes` TEXT)",
         "fields": [
           {
             "fieldPath": "personID",
@@ -31,6 +31,12 @@
             "columnName": "personPhoneNumber",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "personNotes",
+            "columnName": "personNotes",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -45,7 +51,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c08861f7f0a92e98df8b23f43a5c1695\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"81857fd358d4e58d1b54f3e360523cab\")"
     ]
   }
 }

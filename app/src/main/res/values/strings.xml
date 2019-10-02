@@ -20,7 +20,7 @@
     <string name="sign_in_prompt">Please sign in to continue</string>
     <string name="reset_button_text">Register</string>
     <string name="app_name">Tribute</string>
-    <string name="submit_person_info_button_textview">Submit Person Info</string>
+    <string name="submit_person_info_button_textview">   Submit Person Info   </string>
     <string name="person_phone_number">Person Contact Number</string>
     <string name="person_name">Person Name</string>
     <string name="person_email">Person Email Address</string>
