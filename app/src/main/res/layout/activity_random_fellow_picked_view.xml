@@ -4,53 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RandomFellowPickedActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.RandomFellowPickedActivity">
 
-
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/i_choose_you_gif_imageview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".5">
+        android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/i_choose_you_gif_imageview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".6"
-        >
     <TextView
         android:id="@+id/randomly_selected_fellow_textview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="72sp"
+        android:layout_height="88dp"
         android:gravity="center"
-        android:background="@color/colorPrimary"
-        />
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp" />
 
-    </RelativeLayout>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/fellow_motivation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".5"
-        >
-        <TextView
-            android:id="@+id/fellow_motivation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="32sp"
-            android:text="@string/random_fellow_motivation"
-            android:background="@color/colorPrimary"
-            />
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/random_fellow_motivation"
+        android:textSize="32sp" />
 
-    </RelativeLayout>
 
 </LinearLayout>
