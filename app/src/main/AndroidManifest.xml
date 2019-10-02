@@ -17,12 +17,12 @@
             android:label="@string/title_activity_about_the_creator" />
         <activity android:name=".activities.AnxietyBuilderActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activities.RandomPersonPickedActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.EditPersonDataActivity" android:windowSoftInputMode="adjustNothing" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".activities.AddPersonActivity" android:windowSoftInputMode="adjustNothing" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".activities.EditPersonDataActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".activities.AddPersonActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".activities.RandomFellowPickedActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activities.AcceptanceSpeechActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.ViewFellowListActivity" android:windowSoftInputMode="adjustNothing" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.CreateListActivity" android:windowSoftInputMode="adjustNothing" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".activities.ViewFellowListActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".activities.CreateListActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".intro.SplashWelcome" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
