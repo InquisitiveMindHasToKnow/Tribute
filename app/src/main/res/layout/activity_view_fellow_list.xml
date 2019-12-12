@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fellow_list_recycler"
+        app:layout_constraintBottom_toTopOf="@id/recycler_and_button_linear"
         >
 
         <TextView
@@ -47,25 +47,34 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/recycler_and_button_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/search_bar_and_text_linear">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fellow_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_below="@id/search_bar_and_text_linear"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
 
             />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/pick_random_fellow_button"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:background="@layout/transparentbuttonborder"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
         android:text="@string/pick_fellow"
-        android:layout_below="@id/fellow_list_recycler"
         android:textSize="24sp" />
 </RelativeLayout>
 
