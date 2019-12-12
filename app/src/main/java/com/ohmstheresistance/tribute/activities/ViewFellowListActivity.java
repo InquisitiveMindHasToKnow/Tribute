@@ -58,6 +58,10 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
             lastButtonClickTime = SystemClock.elapsedRealtime();
 
             fellowSearchView.setIconified(false);
+            fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
+            fellowSearchView.setFocusable(false);
+            fellowSearchView.setIconified(false);
+            fellowSearchView.clearFocus();
 
 
             Random randomNumber = new Random();
