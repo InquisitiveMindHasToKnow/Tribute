@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bluetoyellowgradientreversed"
+    android:background="@color/mainBackgroundColor"
     tools:context=".activities.EditPersonDataActivity">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Modify Person Info Below:"
         android:layout_marginTop="24dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:gravity="center"
         android:textSize="32sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -87,10 +87,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/submit_modified_info"
-        android:background="@layout/transparentbuttonborder"
+        android:background="@color/colorPrimaryDark"
         android:textSize="16sp"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

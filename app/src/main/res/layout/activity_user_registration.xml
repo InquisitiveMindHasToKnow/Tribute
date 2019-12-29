@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bluetoyellowgradientreversed"
+    android:background="@color/mainBackgroundColor"
     tools:context=".activities.UserRegistrationActivity">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/please_enter_desired_credentials_below"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/user_registration_name_edittext"
@@ -73,7 +73,8 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@layout/transparentbuttonborder"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:text="@string/register_button_text"
         android:textSize="32sp"
         app:layout_constraintHorizontal_bias="0.517"

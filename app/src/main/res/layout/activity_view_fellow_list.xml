@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bluetoyellowgradientreversed"
+    android:background="@color/mainBackgroundColor"
     android:orientation="vertical">
 
 
@@ -24,7 +24,7 @@
             android:id="@+id/allstar_fellow_textview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#1E90FF"
+            android:background="@color/mainBackgroundColor"
             android:textColor="@color/colorAccent"
             android:gravity="center"
             android:text="@string/android_5_4_all_stars"
@@ -69,8 +69,8 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@layout/transparentbuttonborder"
-        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
