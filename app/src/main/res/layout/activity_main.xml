@@ -36,20 +36,45 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:src="@drawable/mainpagedie"
-        app:layout_constraintBottom_toTopOf="@id/button_recycler"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+         />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/button_recycler"
+    <Button
+        android:id="@+id/main_page_view_fellow_list_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_screen_imageview" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:text="View Fellow List"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+        <Button
+            android:id="@+id/main_page_generate_person_list_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/textColor"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp"
+            android:text="Generate Person List"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <Button
+            android:id="@+id/main_page_about_the_creator_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="12dp"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:text="About The Creator"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

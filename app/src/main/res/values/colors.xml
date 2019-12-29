@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="textColor">#F0D612</color>
-    <color name="mainBackgroundColor">#0540A3</color>
+    <color name="mainBackgroundColor">#063852</color>
 
-    <color name="colorPrimaryDark">#13075F</color>
+    <color name="colorPrimaryDark">#011A27</color>
 
-    <color name="colorPrimary">#13075F</color>
+    <color name="colorPrimary">#011A27</color>
     <color name="colorAccent">#F0D612</color>
+
+
 </resources>

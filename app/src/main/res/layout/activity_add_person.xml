@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bluetoyellowgradientreversed"
+    android:background="@color/mainBackgroundColor"
     tools:context=".activities.AddPersonActivity">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/add_person_prompt_textview"
         android:layout_marginTop="40dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:gravity="center"
         android:textSize="32sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +90,8 @@
         android:layout_marginTop="56dp"
         android:text="@string/submit_person_info"
         android:textAllCaps="false"
-        android:background="@layout/transparentbuttonborder"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/textColor"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
