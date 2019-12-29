@@ -72,7 +72,7 @@
         android:id="@+id/user_registration_submit_button"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="120dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/textColor"
         android:text="@string/register_button_text"
