@@ -90,7 +90,7 @@
         android:layout_marginTop="56dp"
         android:text="@string/submit_person_info"
         android:textAllCaps="false"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/roundedbutton"
         android:textColor="@color/textColor"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"

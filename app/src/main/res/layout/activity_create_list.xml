@@ -59,7 +59,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/roundedbutton"
             android:gravity="center"
             android:textAllCaps="false"
             android:text="Pick Random Person"

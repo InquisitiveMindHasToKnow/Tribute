@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/submit_modified_info"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/roundedbutton"
         android:textSize="16sp"
         android:textAllCaps="false"
         android:textColor="@color/textColor"
