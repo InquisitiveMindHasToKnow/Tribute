@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="@color/mainBackgroundColor"
     tools:context=".activities.RandomFellowPickedActivity">
 
     <ImageView
@@ -28,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimary"
+        android:background="@color/mainBackgroundColor"
+        android:textColor="@color/textColor"
         android:gravity="center"
         android:text="@string/random_fellow_motivation"
         android:textSize="32sp" />

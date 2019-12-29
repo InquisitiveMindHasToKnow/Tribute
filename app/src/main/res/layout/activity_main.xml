@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bluetoyellowgradientreversed"
+    android:background="@color/mainBackgroundColor"
     tools:context=".activities.MainActivity">
 
 
@@ -15,7 +15,7 @@
         android:gravity="center_horizontal"
         android:text="@string/welcome_omar"
         android:textSize="32sp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         android:textStyle="bold"
 
         app:layout_constraintLeft_toLeftOf="parent"
