@@ -16,16 +16,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/speech_header_textview">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bluetoyellowgradientreversed"
+
+            >
         <TextView
             android:id="@+id/acceptance_speech_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/colorPrimaryDark"
-            android:background="@drawable/bluetoyellowgradientreversed"
-            android:text="@string/acceptance_speech" />
+            android:text="Hey, look, man! Creating this app was a rollercoaster ride to say the least. I had my ups, I had my downs, I had moments when I just had to walk away from the laptops because regardless of what I did, nothing would work but I stuck it out, and what we have here is the end product of a lot of hard work and persistence."
+             />
+
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textSize="16sp"
+             android:gravity="center"
+             android:layout_gravity="center_horizontal"
+             android:textColor="@color/colorPrimaryDark"
+             android:layout_marginTop="8dp"
+             android:text=" Real quick, I just want to thank God, my mom, TAs like Victoria, Bryant, Darnell, Jose(OG) and Yoki who helped me overcome some of those obstacles I mentioned earlier, and fellow classmates who encouraged me to continue when frustration started kicking in. "
+             />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="8dp"
+                android:text="In closing, if I would pass anything on, anything at all, it would be that you should never give up. If you need to take a break, take a break..if you want to take a quick nap and return to tackle your problem(s) with a fresh perspective, you do just that!"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="REMEMBER"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="8dp"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="8dp"
+                android:text="There are no secrets to success. It is the result of preparation, hard work, and learning from failure."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textSize="16sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text=" -Colin Powell"/>
+        </LinearLayout>
     </ScrollView>
 
     <ImageView
