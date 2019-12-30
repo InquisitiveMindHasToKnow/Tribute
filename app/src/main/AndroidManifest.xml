@@ -20,7 +20,6 @@
         <activity android:name=".activities.EditPersonDataActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".activities.AddPersonActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".activities.RandomFellowPickedActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.AcceptanceSpeechActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activities.ViewFellowListActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activities.CreateListActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".intro.SplashWelcome" android:configChanges="keyboardHidden|orientation|screenSize">
