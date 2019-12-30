@@ -8,5 +8,5 @@
     <color name="colorPrimary">#011A27</color>
     <color name="colorAccent">#F0D612</color>
 
-
+    <color name="alertTextColor">#f0810f</color>
 </resources>
