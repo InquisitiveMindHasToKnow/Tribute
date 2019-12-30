@@ -105,11 +105,20 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) {
-                        //personList.remove(person);
+
                         personRepository.deletePerson(person);
                         Log.e("personListafterdelete: ", personList.size() + "");
                         emitter.onComplete();
 
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                               personAdapter.notifyDataSetChanged();
+
+                            }
+                        });
 
                     }
                 })
@@ -133,8 +142,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             }
             lastButtonClickTime = SystemClock.elapsedRealtime();
 
-            if (personList.size() == 0) {
-                cancelRandomIntent = new Intent(CreateListActivity.this, CreateListActivity.class);
+            if (personList.isEmpty()) {
+
                 Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
 
             } else {
@@ -213,7 +222,14 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         switch (item.getItemId()) {
             case R.id.database_delete_all:
 
-                deleteDatabase();
+                if(personList.isEmpty()){
+
+                    Toast.makeText(getApplicationContext(), "Nothing to delete.", Toast.LENGTH_LONG).show();
+
+                }else{
+
+                    deleteDatabase();
+                }
 
                 break;
 
@@ -223,7 +239,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
     private void deleteDatabase() {
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(CreateListActivity.this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(CreateListActivity.this, R.style.CustomAlertDialog);
         dialog.setCancelable(false);
         dialog.setTitle("This option deletes the entire database!");
         dialog.setMessage("Are you sure you want to complete this action?");
