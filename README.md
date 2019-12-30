@@ -2,13 +2,15 @@
 ## The Ultimate Randomizer - Volunteer...or be volunteered!
 
 Using this app is quite simple. Input your desired username and password and voila!
-<img width="338" alt="Screen Shot 2019-10-02 at 2 28 25 PM" src="https://user-images.githubusercontent.com/42800271/66072447-0ad72a00-e523-11e9-9816-ab9290006a0c.png"> 
+
+![Screenshot_20191229-195438_Tribute (1)](https://user-images.githubusercontent.com/42800271/71565041-34e3ae00-2a78-11ea-94da-b5d83432ea02.jpg)
+
 
 Once signed in, you'll be taken to the main navigation screen where you can choose to select a random person from a list already create by the app, create your own list to ranndomize or view some information about the app's creator.
 
-<img width="335" alt="Screen Shot 2019-10-02 at 2 30 04 PM" src="https://user-images.githubusercontent.com/42800271/66072510-2a6e5280-e523-11e9-8ecc-c35b532932bd.png">
+![Screenshot_20191229-195456_Tribute](https://user-images.githubusercontent.com/42800271/71565049-4e84f580-2a78-11ea-9c7b-ad0f55c3c160.jpg)
 
-<img width="336" alt="Screen Shot 2019-10-02 at 2 30 44 PM" src="https://user-images.githubusercontent.com/42800271/66072579-4e319880-e523-11e9-874e-5bf02ef481cd.png">
+![Screenshot_20191229-195517_Tribute](https://user-images.githubusercontent.com/42800271/71565067-75432c00-2a78-11ea-8697-37da448f0708.jpg)
 
 If you select the option to create your own list, you'll be able to add, delete, modify information at will with a simple swipe to the left or right, or the tap of a button!                                   
-<img width="330" alt="Screen Shot 2019-10-02 at 2 37 24 PM" src="https://user-images.githubusercontent.com/42800271/66072611-5c7fb480-e523-11e9-833e-644c159b1163.png">
+![Screenshot_20191229-200053_Tribute](https://user-images.githubusercontent.com/42800271/71565077-960b8180-2a78-11ea-93eb-88d145a55043.jpg)
