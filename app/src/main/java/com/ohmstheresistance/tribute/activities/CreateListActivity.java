@@ -106,6 +106,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     @Override
                     public void subscribe(ObservableEmitter<Object> emitter) {
 
+
+
                         personRepository.deletePerson(person);
                         Log.e("personListafterdelete: ", personList.size() + "");
                         emitter.onComplete();
@@ -115,6 +117,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                             @Override
                             public void run() {
 
+                                personList.remove(person);
                                personAdapter.notifyDataSetChanged();
 
                             }
@@ -145,6 +148,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             if (personList.isEmpty()) {
 
                 Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
+
 
             } else {
 
