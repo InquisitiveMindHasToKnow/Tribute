@@ -17,7 +17,7 @@ import com.ohmstheresistance.tribute.activities.LoginActivity;
 
 public class SplashWelcome extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN_TIMER = 3000;
+    private static int SPLASH_SCREEN_TIMER = 2500;
     private Intent toLoginScreenIntent;
     private ConstraintLayout splashConstraintLayout;
 
@@ -76,7 +76,7 @@ public class SplashWelcome extends AppCompatActivity {
         splashScreenImageTwentyImageView = findViewById(R.id.splash_screen_image20);
 
 
-        splashConstraintLayout.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_once));
+        splashConstraintLayout.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scaleup));
 
 
 
@@ -134,7 +134,7 @@ public class SplashWelcome extends AppCompatActivity {
                 blinkingAnimation.setRepeatCount(Animation.INFINITE);
                 splashImage.startAnimation(blinkingAnimation);
             }
-        }, 2000);
+        }, 1000);
 
 
         new Handler().postDelayed(new Runnable() {
