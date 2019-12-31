@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.model.FellowAPI;
@@ -21,6 +22,7 @@ import com.ohmstheresistance.tribute.rv.FellowAdapter;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -58,6 +60,7 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
         fellowSearchView.setIconified(false);
         fellowSearchView.clearFocus();
 
+        populateFellowList();
 
         pickRandomFellowButton.setOnClickListener(v -> {
             if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
@@ -65,45 +68,21 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
             }
             lastButtonClickTime = SystemClock.elapsedRealtime();
 
+            if (fellowList.size() == 1) {
+                Toast.makeText(ViewFellowListActivity.this, "There is only one name left" , Toast.LENGTH_LONG).show();
+                return;
+                }
 
 
             Random randomNumber = new Random();
             Fellows randomFellowPicked = fellowList.get(randomNumber.nextInt(fellowList.size() - 1) + 1);
-            Intent randomFellowIntent = new Intent(getApplicationContext(), RandomFellowPickedActivity.class);
+            Intent randomFellowIntent = new Intent(ViewFellowListActivity.this, RandomFellowPickedActivity.class);
             randomFellowIntent.putExtra(RANDOM_FELLOW_KEY, randomFellowPicked.getFellow());
 
+            Log.d("FellowListCount", ": " + fellowList.size());
             fellowList.remove(randomFellowPicked);
             fellowAdapter.setData(fellowList);
             startActivity(randomFellowIntent);
-        });
-
-        Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
-        FellowService fellowService = retrofit.create(FellowService.class);
-        fellowService.getFellows().enqueue(new Callback<FellowAPI>() {
-            @Override
-            public void onResponse(Call<FellowAPI> call, Response<FellowAPI> response) {
-                Log.d(TAG, "Fellow retrofit call works, Omar!" + response.body().getFellows().get(0));
-
-
-                for (Fellows fellows : response.body().getFellows()) {
-                    fellowList.add(fellows);
-
-                    if (fellowList.size() <= 1) {
-                        fellowList.add(fellows);
-                    }
-                }
-                fellowAdapter = new FellowAdapter(response.body().getFellows());
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
-                fellowRecyclerView.setLayoutManager(gridLayoutManager);
-                fellowRecyclerView.setAdapter(fellowAdapter);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<FellowAPI> call, Throwable t) {
-                Log.d(TAG, "Fellow retrofit call failed! " + t.getMessage());
-            }
         });
 
     }
@@ -124,6 +103,34 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
         }
         fellowAdapter.setData(newFellowList);
         return false;
+    }
+
+    private void populateFellowList(){
+
+        Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
+        FellowService fellowService = retrofit.create(FellowService.class);
+        fellowService.getFellows().enqueue(new Callback<FellowAPI>() {
+            @Override
+            public void onResponse(Call<FellowAPI> call, Response<FellowAPI> response) {
+                Log.d(TAG, "Fellow retrofit call works, Omar!" + response.body().getFellows().get(0));
+
+
+                fellowList.addAll(response.body().getFellows());
+                Collections.shuffle(fellowList);
+                fellowAdapter = new FellowAdapter(fellowList);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
+                fellowRecyclerView.setLayoutManager(gridLayoutManager);
+                fellowRecyclerView.setAdapter(fellowAdapter);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<FellowAPI> call, Throwable t) {
+                Log.d(TAG, "Fellow retrofit call failed! " + t.getMessage());
+            }
+        });
+
     }
 }
 
