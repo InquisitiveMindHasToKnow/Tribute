@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -88,7 +89,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
         getInfo();
 
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
@@ -112,13 +112,13 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                         Log.e("personListafterdelete: ", personList.size() + "");
                         emitter.onComplete();
 
+
                         runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
 
-
-                               personAdapter.notifyDataSetChanged();
+                                personAdapter.notifyDataSetChanged();
 
                             }
                         });
