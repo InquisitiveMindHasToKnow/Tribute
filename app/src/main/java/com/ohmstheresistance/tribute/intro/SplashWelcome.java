@@ -2,6 +2,7 @@ package com.ohmstheresistance.tribute.intro;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +17,12 @@ import com.ohmstheresistance.tribute.activities.LoginActivity;
 
 public class SplashWelcome extends AppCompatActivity {
 
-    ImageView splashImage;
-    private static int SPLASH_SCREEN_TIMER = 5000;
+    private static int SPLASH_SCREEN_TIMER = 3000;
     private Intent toLoginScreenIntent;
+    private ConstraintLayout splashConstraintLayout;
 
     private TextView splashImageBackGroundTextView;
+    private ImageView splashImage;
     private ImageView splashScreenImageOneImageView;
     private ImageView splashScreenImageTwoImageView;
     private ImageView splashScreenImageThreeImageView;
@@ -49,6 +51,7 @@ public class SplashWelcome extends AppCompatActivity {
         setContentView(R.layout.activity_splash_welcome);
 
         splashImageBackGroundTextView = findViewById(R.id.splash_image_background_textview);
+        splashConstraintLayout = findViewById(R.id.splash_layout);
 
         splashImage = findViewById(R.id.splash_screen_image);
         splashScreenImageOneImageView = findViewById(R.id.splash_screen_image1);
@@ -71,6 +74,10 @@ public class SplashWelcome extends AppCompatActivity {
         splashScreenImageEighteenImageView = findViewById(R.id.splash_screen_image18);
         splashScreenImageNineteenImageView = findViewById(R.id.splash_screen_image19);
         splashScreenImageTwentyImageView = findViewById(R.id.splash_screen_image20);
+
+
+        splashConstraintLayout.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_once));
+
 
 
         new Handler().postDelayed(new Runnable() {
@@ -120,14 +127,6 @@ public class SplashWelcome extends AppCompatActivity {
                 splashScreenImageNineteenImageView.setVisibility(View.INVISIBLE);
                 splashScreenImageTwentyImageView.setVisibility(View.INVISIBLE);
 
-            }
-        }, 1500);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-
                 Animation blinkingAnimation = new AlphaAnimation(0.0f, 1.0f);
                 blinkingAnimation.setDuration(100);
                 blinkingAnimation.setStartOffset(300);
@@ -135,7 +134,8 @@ public class SplashWelcome extends AppCompatActivity {
                 blinkingAnimation.setRepeatCount(Animation.INFINITE);
                 splashImage.startAnimation(blinkingAnimation);
             }
-        }, 3000);
+        }, 2000);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
