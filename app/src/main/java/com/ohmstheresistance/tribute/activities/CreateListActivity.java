@@ -107,7 +107,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     public void subscribe(ObservableEmitter<Object> emitter) {
 
 
-
+                        personList.remove(person);
                         personRepository.deletePerson(person);
                         Log.e("personListafterdelete: ", personList.size() + "");
                         emitter.onComplete();
@@ -117,7 +117,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                             @Override
                             public void run() {
 
-                                personList.remove(person);
+
                                personAdapter.notifyDataSetChanged();
 
                             }

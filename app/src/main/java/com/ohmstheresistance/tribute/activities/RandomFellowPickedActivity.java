@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ohmstheresistance.tribute.R;
 
 public class RandomFellowPickedActivity extends AppCompatActivity {
@@ -33,7 +34,11 @@ public class RandomFellowPickedActivity extends AppCompatActivity {
         chosenFellowImageview = findViewById(R.id.i_choose_you_gif_imageview);
         fellowMotivationTextView = findViewById(R.id.fellow_motivation);
 
-        Glide.with(this).load(R.drawable.ashchoseyou).into(chosenFellowImageview);
+        Glide.with(this)
+                .load(R.drawable.ashchoseyou)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(chosenFellowImageview);
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
