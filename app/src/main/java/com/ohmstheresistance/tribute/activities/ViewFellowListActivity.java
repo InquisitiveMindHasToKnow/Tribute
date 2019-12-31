@@ -51,17 +51,20 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
         allstar_textview = findViewById(R.id.allstar_fellow_textview);
         fellowSearchView = findViewById(R.id.fellow_search_view);
         pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
+
+        fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
+        fellowSearchView.setIconified(false);
+        fellowSearchView.setFocusable(false);
+        fellowSearchView.setIconified(false);
+        fellowSearchView.clearFocus();
+
+
         pickRandomFellowButton.setOnClickListener(v -> {
             if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
                 return;
             }
             lastButtonClickTime = SystemClock.elapsedRealtime();
 
-            fellowSearchView.setIconified(false);
-            fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
-            fellowSearchView.setFocusable(false);
-            fellowSearchView.setIconified(false);
-            fellowSearchView.clearFocus();
 
 
             Random randomNumber = new Random();
@@ -81,6 +84,7 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
             public void onResponse(Call<FellowAPI> call, Response<FellowAPI> response) {
                 Log.d(TAG, "Fellow retrofit call works, Omar!" + response.body().getFellows().get(0));
 
+
                 for (Fellows fellows : response.body().getFellows()) {
                     fellowList.add(fellows);
 
@@ -92,12 +96,7 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
                 fellowRecyclerView.setLayoutManager(gridLayoutManager);
                 fellowRecyclerView.setAdapter(fellowAdapter);
-                fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
-                fellowSearchView.setFocusable(false);
-                fellowSearchView.setIconified(false);
-                fellowSearchView.clearFocus();
 
-                fellowList = response.body().getFellows();
 
             }
 
