@@ -5,24 +5,20 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
-import com.ohmstheresistance.tribute.database.PersonDataSource;
+import com.ohmstheresistance.tribute.database.PersonViewModel;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class EditPersonDataActivity extends AppCompatActivity {
@@ -56,7 +52,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
         editPersonButton = findViewById(R.id.edit_person_submit_button);
 
         PersonDatabase personDatabase = PersonDatabase.getInstance(this);
-        personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
+        personRepository = PersonRepository.getInstance(PersonViewModel.getPersonInstance(personDatabase.personDao()));
 
 
         editIntent = getIntent();

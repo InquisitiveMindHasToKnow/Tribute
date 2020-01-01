@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
-import com.ohmstheresistance.tribute.database.PersonDataSource;
+import com.ohmstheresistance.tribute.database.PersonViewModel;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
@@ -87,7 +87,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         compositeDisposable = new CompositeDisposable();
 
         PersonDatabase personDatabase = PersonDatabase.getInstance(this);
-        personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
+        personRepository = PersonRepository.getInstance(PersonViewModel.getPersonInstance(personDatabase.personDao()));
 
         getInfo();
 

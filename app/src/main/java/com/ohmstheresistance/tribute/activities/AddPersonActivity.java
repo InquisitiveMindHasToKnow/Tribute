@@ -5,14 +5,13 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
-import com.ohmstheresistance.tribute.database.PersonDataSource;
+import com.ohmstheresistance.tribute.database.PersonViewModel;
 import com.ohmstheresistance.tribute.database.PersonDatabase;
 import com.ohmstheresistance.tribute.database.PersonRepository;
 
@@ -55,7 +54,7 @@ public class AddPersonActivity extends AppCompatActivity {
         addPersonNotesEditText = findViewById(R.id.add_person_notes_edittext);
 
         PersonDatabase personDatabase = PersonDatabase.getInstance(this);
-        personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
+        personRepository = PersonRepository.getInstance(PersonViewModel.getPersonInstance(personDatabase.personDao()));
 
         addPersonButton = findViewById(R.id.add_person_submit_button);
         addPersonButton.setOnClickListener(v -> {

@@ -1,54 +1,106 @@
 package com.ohmstheresistance.tribute.database;
 
+import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.os.AsyncTask;
+
 import java.util.List;
-import io.reactivex.Flowable;
 
 
-public class PersonRepository implements ModifyPerson {
+public class PersonRepository {
 
-    private PersonDataSource personDataSource;
-    private static PersonRepository personRepositoryInstance;
+    private  PersonDao personDao;
+    private LiveData<List<Person>> allPersons;
 
-    public PersonRepository(PersonDataSource personDataSource) {
-        this.personDataSource = personDataSource;
+    public PersonRepository(Application application) {
+       PersonDatabase personDatabase = PersonDatabase.getInstance(application);
+       personDao = personDatabase.personDao();
+       allPersons = personDao.getAllPersons();
     }
 
-    public static PersonRepository getInstance(PersonDataSource personDataSource){
-        if (personRepositoryInstance == null){
 
-            personRepositoryInstance = new PersonRepository(personDataSource);
-        }
-        return personRepositoryInstance;
-    }
+    public void addPerson(Person person) {
 
-    @Override
-    public void addPerson(Person... persons) {
-
-        personDataSource.addPerson(persons);
+        new AddPersonAsyncTask(personDao).execute(person);
 
     }
 
-    @Override
-    public void updatePerson(Person... persons) {
-        personDataSource.updatePerson(persons);
+    public void updatePerson(Person person) {
+
+        new UpdatePersonInfoAsyncTask(personDao).execute(person);
 
     }
 
-    @Override
+
     public void deletePerson(Person person) {
 
-        personDataSource.deletePerson(person);
-    }
+        new DeletePersonAsyncTask(personDao).execute(person);    }
 
-    @Override
+
     public void deleteAllPersons() {
 
-        personDataSource.deleteAllPersons();
-
+        new DeleteAllPersonsAsyncTask(personDao).execute();
     }
 
-    @Override
-    public Flowable<List<Person>> getAllPersons() {
-        return personDataSource.getAllPersons();
+
+    public LiveData<List<Person>> getAllPersons() {
+        return allPersons();
     }
+
+    private static class AddPersonAsyncTask extends AsyncTask<Person, Void, Void> {
+        private PersonDao personDao;
+
+        private AddPersonAsyncTask(PersonDao personDao) {
+            this.personDao = personDao;
+        }
+
+        @Override
+        protected Void doInBackground(Person... persons) {
+            personDao.addPerson(persons[0]);
+            return null;
+        }
+    }
+
+    private static class UpdatePersonInfoAsyncTask extends AsyncTask<Person, Void, Void> {
+        private PersonDao personDao;
+
+        private UpdatePersonInfoAsyncTask(PersonDao personDao) {
+            this.personDao = personDao;
+        }
+
+        @Override
+        protected Void doInBackground(Person... persons) {
+            personDao.updatePerson(persons[0]);
+            return null;
+        }
+    }
+
+    private static class DeletePersonAsyncTask extends AsyncTask<Person, Void, Void> {
+        private PersonDao personDao;
+
+        private DeletePersonAsyncTask(PersonDao personDao) {
+            this.personDao = personDao;
+        }
+
+        @Override
+        protected Void doInBackground(Person... persons) {
+            personDao.deletePerson(persons[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllPersonsAsyncTask extends AsyncTask<Void, Void, Void> {
+        private PersonDao personDao;
+
+        private DeleteAllPersonsAsyncTask(PersonDao personDao) {
+            this.personDao = personDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            personDao.deleteAllPersons();
+            return null;
+        }
+    }
+
 }

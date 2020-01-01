@@ -1,5 +1,7 @@
 package com.ohmstheresistance.tribute.database;
 
+import android.arch.lifecycle.LiveData;
+
 import java.util.List;
 import io.reactivex.Flowable;
 
@@ -10,7 +12,7 @@ public interface ModifyPerson {
         void updatePerson(Person... persons);
         void deletePerson(Person person);
         void deleteAllPersons();
-        Flowable<List<Person>> getAllPersons();
+        LiveData<List<Person>> getAllPersons();
     }
 
 

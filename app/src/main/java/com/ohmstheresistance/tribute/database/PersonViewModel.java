@@ -1,21 +1,22 @@
 package com.ohmstheresistance.tribute.database;
 
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+
 import java.util.List;
 
-import io.reactivex.Flowable;
+public class PersonViewModel extends AndroidViewModel {
 
-public class PersonDataSource implements ModifyPerson{
-
-    private static PersonDataSource personInstance;
+    private static PersonViewModel personInstance;
     private PersonDao personDao;
 
-    public PersonDataSource(PersonDao personDao) {
+    public PersonViewModel(PersonDao personDao) {
         this.personDao = personDao;
     }
 
-    public static PersonDataSource getPersonInstance(PersonDao personDao){
+    public static PersonViewModel getPersonInstance(PersonDao personDao){
         if(personInstance == null){
-            personInstance = new PersonDataSource(personDao);
+            personInstance = new PersonViewModel(personDao);
         }
         return personInstance;
 
@@ -47,7 +48,8 @@ public class PersonDataSource implements ModifyPerson{
     }
 
     @Override
-    public Flowable<List<Person>> getAllPersons() {
+    public LiveData<List<Person>> getAllPersons() {
+
         return personDao.getAllPersons();
     }
 }
