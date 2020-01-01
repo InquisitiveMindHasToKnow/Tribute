@@ -1,5 +1,6 @@
 package com.ohmstheresistance.tribute.database;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -8,17 +9,15 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
-
 @Dao
 public interface PersonDao {
 
 
     @Insert
-    void addPerson(Person... persons);
+    void addPerson(Person person);
 
     @Update
-    void updatePerson(Person... persons);
+    void updatePerson(Person person);
 
     @Delete
     void deletePerson(Person person);
@@ -27,6 +26,6 @@ public interface PersonDao {
     void deleteAllPersons();
 
     @Query("SELECT * FROM person_table ORDER BY personID ASC")
-    Flowable<List<Person>> getAllPersons();
+    LiveData<List<Person>> getAllPersons();
 }
 

@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -74,6 +73,9 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personSearchView.setIconified(false);
         personSearchView.clearFocus();
 
+        Log.e("personListonCreate: ", personList.size() + "");
+
+
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(true);
         personAdapter = new PersonAdapter(this);
@@ -107,24 +109,13 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     public void subscribe(ObservableEmitter<Object> emitter) {
 
 
-                        personList.remove(person);
                         personRepository.deletePerson(person);
                         Log.e("personListafterdelete: ", personList.size() + "");
                         emitter.onComplete();
 
-
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                personAdapter.notifyDataSetChanged();
-
-                            }
-                        });
-
                     }
                 })
+
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(o -> personAdapter.deletePerson(position), throwable ->
@@ -132,7 +123,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                                 Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show(), () -> {
 
                         });
-                compositeDisposable.add(disposable);
 
             }
 
@@ -153,7 +143,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             } else {
 
                 if (personList.size() <= 1) {
-                    getInfo();
+                    Toast.makeText(CreateListActivity.this, "There is only one person remaining.", Toast.LENGTH_LONG).show();
+                return;
                 }
 
                 Random randomNumber = new Random();
