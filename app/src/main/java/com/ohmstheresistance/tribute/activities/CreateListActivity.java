@@ -1,10 +1,13 @@
 package com.ohmstheresistance.tribute.activities;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +17,10 @@ import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -25,38 +28,29 @@ import android.widget.Toast;
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonViewModel;
-import com.ohmstheresistance.tribute.database.PersonDatabase;
-import com.ohmstheresistance.tribute.database.PersonRepository;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class CreateListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
+    public static final int ADD_PERSON_RESULT_CODE = 1;
+    public static final int EDIT_PERSON_REQUEST_CODE = 2;
+    private PersonViewModel personViewModel;
     private RecyclerView personRecyclerView;
     private FloatingActionButton personFab;
-    private CompositeDisposable compositeDisposable;
-    private PersonRepository personRepository;
 
     private List<Person> personList;
-    private PersonAdapter personAdapter;
     private Intent addPersonIntent;
-    private Intent cancelRandomIntent;
     private Button selectRandomPerson;
     private long lastButtonClickTime = 0;
     private SearchView personSearchView;
+
+    private PersonAdapter personAdapter;
 
 
     private static final String RANDOM_PERSON_KEY = "randomPersonKey";
@@ -67,29 +61,31 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         setContentView(R.layout.activity_create_list);
         personSearchView = findViewById(R.id.person_search_view);
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
+        personFab = findViewById(R.id.create_person_action_button);
+        selectRandomPerson = findViewById(R.id.select_random_person_button);
+
         personList = new ArrayList<>();
+
+        personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        personRecyclerView.setHasFixedSize(false);
+        personAdapter = new PersonAdapter(this);
+        personRecyclerView.setAdapter(personAdapter);
+
         personSearchView.setIconified(false);
         personSearchView.setFocusable(false);
         personSearchView.setIconified(false);
         personSearchView.clearFocus();
 
-        Log.e("personListonCreate: ", personList.size() + "");
+        personViewModel = ViewModelProviders.of(this).get(PersonViewModel.class);
+        personViewModel.getAllPersons().observe(this, new Observer<List<Person>>() {
+            @Override
+            public void onChanged(@Nullable List<Person> people) {
+
+                personAdapter.setPersons(people);
+            }
+        });
 
 
-        personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        personRecyclerView.setHasFixedSize(true);
-        personAdapter = new PersonAdapter(this);
-        personRecyclerView.setAdapter(personAdapter);
-
-        personFab = findViewById(R.id.create_person_action_button);
-        selectRandomPerson = findViewById(R.id.select_random_person_button);
-
-        compositeDisposable = new CompositeDisposable();
-
-        PersonDatabase personDatabase = PersonDatabase.getInstance(this);
-        personRepository = PersonRepository.getInstance(PersonViewModel.getPersonInstance(personDatabase.personDao()));
-
-        getInfo();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -101,59 +97,45 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
                 int position = viewHolder.getAdapterPosition();
-                Person person = personAdapter.getPersonAtPosition(position);
+                Person personToDelete = personAdapter.getPersonAtPosition(position);
 
+                personViewModel.deletePerson(personToDelete);
                 Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_LONG).show();
-                Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> emitter) {
-
-
-                        personRepository.deletePerson(person);
-                        Log.e("personListafterdelete: ", personList.size() + "");
-                        emitter.onComplete();
-
-                    }
-                })
-
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(o -> personAdapter.deletePerson(position), throwable ->
-
-                                Toast.makeText(CreateListActivity.this, "Error Removing Person Info" + throwable.getMessage(), Toast.LENGTH_LONG).show(), () -> {
-
-                        });
-
             }
 
         }).attachToRecyclerView(personRecyclerView);
 
-        selectRandomPerson.setOnClickListener(v -> {
-
-            if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
-                return;
-            }
-            lastButtonClickTime = SystemClock.elapsedRealtime();
-
-            if (personList.isEmpty()) {
-
-                Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
 
 
-            } else {
+        selectRandomPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                if (personList.size() <= 1) {
-                    Toast.makeText(CreateListActivity.this, "There is only one person remaining.", Toast.LENGTH_LONG).show();
-                return;
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                    return;
                 }
+                lastButtonClickTime = SystemClock.elapsedRealtime();
 
-                Random randomNumber = new Random();
-                Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
-                Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
-                randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+                if (personList.isEmpty()) {
 
-                personList.remove(randomPersonPicked);
-                startActivity(randomPersonIntent);
+                    Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
+
+
+                } else {
+
+                    if (personList.size() <= 1) {
+                        Toast.makeText(CreateListActivity.this, "There is only one person remaining.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    Random randomNumber = new Random();
+                    Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+                    Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
+                    randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+
+                    personList.remove(randomPersonPicked);
+                    CreateListActivity.this.startActivity(randomPersonIntent);
+                }
             }
         });
 
@@ -166,7 +148,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
             editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
             editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NOTES, person.getPersonNotes());
-            startActivity(editPersonIntent);
+            startActivityForResult(editPersonIntent, EDIT_PERSON_REQUEST_CODE);
 
         });
         {
@@ -179,30 +161,10 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 lastButtonClickTime = SystemClock.elapsedRealtime();
 
                 addPersonIntent = new Intent(CreateListActivity.this, AddPersonActivity.class);
-                startActivity(addPersonIntent);
+                startActivityForResult(addPersonIntent, ADD_PERSON_RESULT_CODE);
 
             });
         }
-    }
-
-    private void getInfo() {
-
-        Disposable disposable = personRepository.getAllPersons()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(people -> {
-                    onGetInfoSuccess(people);
-                    personSearchView.setOnQueryTextListener(CreateListActivity.this);
-                    personList.addAll(people);
-
-                }, throwable -> Toast.makeText(CreateListActivity.this, "Get person list info failed" + throwable.getMessage(), Toast.LENGTH_LONG).show());
-        compositeDisposable.add(disposable);
-
-    }
-
-    private void onGetInfoSuccess(List<Person> people) {
-        personAdapter.setPersons(people);
-
     }
 
     @Override
@@ -217,14 +179,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         switch (item.getItemId()) {
             case R.id.database_delete_all:
 
-                if(personList.isEmpty()){
-
-                    Toast.makeText(getApplicationContext(), "Nothing to delete.", Toast.LENGTH_LONG).show();
-
-                }else{
-
                     deleteDatabase();
-                }
 
                 break;
 
@@ -242,25 +197,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             @Override
             public void onClick(DialogInterface dialog1, int id) {
 
+                personViewModel.deleteAllPersons();
                 Toast.makeText(CreateListActivity.this, "Database Cleared", Toast.LENGTH_LONG).show();
-                Disposable disposable = Observable.create((ObservableEmitter<Object> emitter) -> {
-
-                    personList.clear();
-                    personRepository.deleteAllPersons();
-                    emitter.onComplete();
-
-                })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(o -> {
-
-                        }, throwable -> Toast.makeText(CreateListActivity.this, "Database Cleared" + throwable.getMessage(), Toast.LENGTH_LONG).show(), new Action() {
-                            @Override
-                            public void run() {
-
-                            }
-                        });
-                compositeDisposable.add(disposable);
 
             }
         })
@@ -296,6 +234,47 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         return false;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ADD_PERSON_RESULT_CODE && resultCode == RESULT_OK) {
+
+            String personName = data.getStringExtra(AddPersonActivity.PERSON_NAME);
+            String personNumber = data.getStringExtra(AddPersonActivity.PERSON_NUMBER);
+            String personEmail = data.getStringExtra(AddPersonActivity.PERSON_EMAIL);
+            String personNotes = data.getStringExtra(AddPersonActivity.PERSON_NOTES);
+
+            Person person = new Person(personName, personNumber, personEmail, personNotes);
+            personViewModel.addPerson(person);
+
+            Toast.makeText(CreateListActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
+
+        }else if (requestCode == EDIT_PERSON_REQUEST_CODE && resultCode == RESULT_OK) {
+                int personID = data.getIntExtra(EditPersonDataActivity.PERSON_ID, -1);
+
+                if (personID == -1) {
+                    Toast.makeText(this, "Person info can't be updated.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+            String personName = data.getStringExtra(EditPersonDataActivity.PERSON_NAME);
+            String personNumber = data.getStringExtra(EditPersonDataActivity.PERSON_NUMBER);
+            String personEmail = data.getStringExtra(EditPersonDataActivity.PERSON_EMAIL);
+            String personNotes = data.getStringExtra(EditPersonDataActivity.PERSON_NOTES);
+
+
+                Person personToEdit = new Person(personName, personNumber, personEmail, personNotes);
+                personToEdit.setPersonID(personID);
+                personViewModel.updatePerson(personToEdit);
+
+                Toast.makeText(this, "Person info updated", Toast.LENGTH_SHORT).show();
+        }else {
+
+            Toast.makeText(CreateListActivity.this, "Person Data Not Added", Toast.LENGTH_LONG).show();
+
+        }
+    }
 }
 
 

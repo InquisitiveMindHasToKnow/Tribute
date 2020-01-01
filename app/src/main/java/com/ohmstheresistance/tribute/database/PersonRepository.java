@@ -9,15 +9,14 @@ import java.util.List;
 
 public class PersonRepository {
 
-    private  PersonDao personDao;
+    private PersonDao personDao;
     private LiveData<List<Person>> allPersons;
 
     public PersonRepository(Application application) {
-       PersonDatabase personDatabase = PersonDatabase.getInstance(application);
-       personDao = personDatabase.personDao();
-       allPersons = personDao.getAllPersons();
+        PersonDatabase personDatabase = PersonDatabase.getInstance(application);
+        personDao = personDatabase.personDao();
+        allPersons = personDao.getAllPersons();
     }
-
 
     public void addPerson(Person person) {
 
@@ -44,8 +43,9 @@ public class PersonRepository {
 
 
     public LiveData<List<Person>> getAllPersons() {
-        return allPersons();
+        return allPersons;
     }
+
 
     private static class AddPersonAsyncTask extends AsyncTask<Person, Void, Void> {
         private PersonDao personDao;

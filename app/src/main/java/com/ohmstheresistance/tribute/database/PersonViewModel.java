@@ -1,55 +1,47 @@
 package com.ohmstheresistance.tribute.database;
 
+import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
 public class PersonViewModel extends AndroidViewModel {
 
-    private static PersonViewModel personInstance;
-    private PersonDao personDao;
+    private  PersonRepository personRepository;
+    private LiveData<List<Person>> allPersons;
 
-    public PersonViewModel(PersonDao personDao) {
-        this.personDao = personDao;
-    }
-
-    public static PersonViewModel getPersonInstance(PersonDao personDao){
-        if(personInstance == null){
-            personInstance = new PersonViewModel(personDao);
-        }
-        return personInstance;
-
+    public PersonViewModel(@NonNull Application application) {
+        super(application);
+        personRepository = new PersonRepository(application);
+        allPersons = personRepository.getAllPersons();
     }
 
 
-    @Override
-    public void addPerson(Person... persons) {
+    public void addPerson(Person person) {
 
-        personDao.addPerson(persons);
+        personRepository.addPerson(person);
     }
 
-    @Override
-    public void updatePerson(Person... persons) {
+    public void updatePerson(Person person) {
 
-        personDao.updatePerson(persons);
+        personRepository.updatePerson(person);
     }
 
-    @Override
     public void deletePerson(Person person) {
 
-        personDao.deletePerson(person);
+        personRepository.deletePerson(person);
     }
 
-    @Override
     public void deleteAllPersons() {
 
-        personDao.deleteAllPersons();
+        personRepository.deleteAllPersons();
     }
 
-    @Override
+
     public LiveData<List<Person>> getAllPersons() {
 
-        return personDao.getAllPersons();
+        return personRepository.getAllPersons();
     }
 }
