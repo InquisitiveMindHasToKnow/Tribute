@@ -50,7 +50,7 @@ public class AddPersonActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(addPersonNameEditText.getText()) || TextUtils.isEmpty(addPersonNumberEditText.getText())
                     || TextUtils.isEmpty(addPersonEmailEditText.getText()) || TextUtils.isEmpty(addPersonNotesEditText.getText())) {
                 setResult(RESULT_CANCELED, addPersonIntent);
-                Toast.makeText(AddPersonActivity.this, "Person Data Not Added. All fields must be filled.", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddPersonActivity.this, "All fields must be filled.", Toast.LENGTH_LONG).show();
             } else {
                 String person_name = addPersonNameEditText.getText().toString();
                 String person_number = addPersonNumberEditText.getText().toString();
@@ -63,9 +63,9 @@ public class AddPersonActivity extends AppCompatActivity {
                 addPersonIntent.putExtra(PERSON_NOTES, person_notes);
 
                 setResult(RESULT_OK, addPersonIntent);
+                Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
                 finish();
 
-                Toast.makeText(AddPersonActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
             }
 
         });

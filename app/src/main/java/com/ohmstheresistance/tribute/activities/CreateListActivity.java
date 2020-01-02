@@ -1,6 +1,7 @@
 package com.ohmstheresistance.tribute.activities;
 
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
@@ -35,7 +36,6 @@ import java.util.List;
 import java.util.Random;
 
 
-
 public class CreateListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     public static final int ADD_PERSON_RESULT_CODE = 1;
@@ -44,13 +44,12 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     private RecyclerView personRecyclerView;
     private FloatingActionButton personFab;
 
-    private List<Person> personList;
     private Intent addPersonIntent;
     private Button selectRandomPerson;
     private long lastButtonClickTime = 0;
     private SearchView personSearchView;
 
-    private PersonAdapter personAdapter;
+    private LiveData<List<Person>> personList;
 
 
     private static final String RANDOM_PERSON_KEY = "randomPersonKey";
@@ -64,11 +63,10 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personFab = findViewById(R.id.create_person_action_button);
         selectRandomPerson = findViewById(R.id.select_random_person_button);
 
-        personList = new ArrayList<>();
-
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(false);
-        personAdapter = new PersonAdapter(this);
+
+        final PersonAdapter personAdapter = new PersonAdapter();
         personRecyclerView.setAdapter(personAdapter);
 
         personSearchView.setIconified(false);
@@ -81,11 +79,12 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             @Override
             public void onChanged(@Nullable List<Person> people) {
 
-                personAdapter.setPersons(people);
+
+                personAdapter.submitList(people);
             }
         });
 
-
+        personList = personViewModel.getAllPersons();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -106,7 +105,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         }).attachToRecyclerView(personRecyclerView);
 
 
-
         selectRandomPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,40 +114,42 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();
 
-                if (personList.isEmpty()) {
+                if (personList == null) {
 
                     Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_LONG).show();
 
 
                 } else {
 
-                    if (personList.size() <= 1) {
+                    if (personList.getValue().size() <= 1) {
                         Toast.makeText(CreateListActivity.this, "There is only one person remaining.", Toast.LENGTH_LONG).show();
                         return;
                     }
 
-                    Random randomNumber = new Random();
-                    Person randomPersonPicked = personList.get(randomNumber.nextInt(personList.size()));
+//                    Random randomNumber = new Random();
+//                    Person randomPersonPicked = personList(randomNumber.nextInt(personList.size()));
                     Intent randomPersonIntent = new Intent(CreateListActivity.this, AnxietyBuilderActivity.class);
-                    randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
+                    // randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
 
-                    personList.remove(randomPersonPicked);
                     CreateListActivity.this.startActivity(randomPersonIntent);
                 }
             }
         });
 
 
-        personAdapter.SetItemClickListener(person -> {
+        personAdapter.SetItemClickListener(new PersonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(Person person) {
 
-            Intent editPersonIntent = new Intent(CreateListActivity.this, EditPersonDataActivity.class);
-            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_ID, person.getPersonID());
-            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NAME, person.getPersonName());
-            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
-            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
-            editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NOTES, person.getPersonNotes());
-            startActivityForResult(editPersonIntent, EDIT_PERSON_REQUEST_CODE);
+                Intent editPersonIntent = new Intent(CreateListActivity.this, EditPersonDataActivity.class);
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_ID, person.getPersonID());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NAME, person.getPersonName());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NUMBER, person.getPersonPhoneNumber());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_EMAIL, person.getPersonEmail());
+                editPersonIntent.putExtra(EditPersonDataActivity.PERSON_NOTES, person.getPersonNotes());
+                CreateListActivity.this.startActivityForResult(editPersonIntent, EDIT_PERSON_REQUEST_CODE);
 
+            }
         });
         {
 
@@ -178,6 +178,10 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.database_delete_all:
+
+                if (personList == null) {
+                    Toast.makeText(CreateListActivity.this, "Nothing to delete.", Toast.LENGTH_LONG).show();
+                } else
 
                     deleteDatabase();
 
@@ -222,15 +226,15 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
     @Override
     public boolean onQueryTextChange(String s) {
-        List<Person> newFellowList = new ArrayList<>();
-        for (Person persons : personList) {
-            if (persons.getPersonName().toLowerCase().contains(s.toLowerCase())) {
-                newFellowList.add(persons);
-            }
+//        List<Person> newPersonList = new ArrayList<>();
+//        for (Person persons : personList) {
+//            if (persons.getPersonName().toLowerCase().contains(s.toLowerCase())) {
+//                newPersonList.add(persons);
+//            }
+//
+//        }
 
-        }
-
-        personAdapter.setData(newFellowList);
+        //personAdapter.setData(newPersonList);
         return false;
     }
 
@@ -238,7 +242,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == ADD_PERSON_RESULT_CODE && resultCode == RESULT_OK) {
+        if (requestCode == ADD_PERSON_RESULT_CODE && resultCode == RESULT_OK) {
 
             String personName = data.getStringExtra(AddPersonActivity.PERSON_NAME);
             String personNumber = data.getStringExtra(AddPersonActivity.PERSON_NUMBER);
@@ -250,13 +254,13 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
             Toast.makeText(CreateListActivity.this, "Person Data Added", Toast.LENGTH_LONG).show();
 
-        }else if (requestCode == EDIT_PERSON_REQUEST_CODE && resultCode == RESULT_OK) {
-                int personID = data.getIntExtra(EditPersonDataActivity.PERSON_ID, -1);
+        } else if (requestCode == EDIT_PERSON_REQUEST_CODE && resultCode == RESULT_OK) {
+            int personID = data.getIntExtra(EditPersonDataActivity.PERSON_ID, -1);
 
-                if (personID == -1) {
-                    Toast.makeText(this, "Person info can't be updated.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            if (personID == -1) {
+                Toast.makeText(this, "Person info can't be updated.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             String personName = data.getStringExtra(EditPersonDataActivity.PERSON_NAME);
             String personNumber = data.getStringExtra(EditPersonDataActivity.PERSON_NUMBER);
@@ -264,12 +268,12 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             String personNotes = data.getStringExtra(EditPersonDataActivity.PERSON_NOTES);
 
 
-                Person personToEdit = new Person(personName, personNumber, personEmail, personNotes);
-                personToEdit.setPersonID(personID);
-                personViewModel.updatePerson(personToEdit);
+            Person personToEdit = new Person(personName, personNumber, personEmail, personNotes);
+            personToEdit.setPersonID(personID);
+            personViewModel.updatePerson(personToEdit);
 
-                Toast.makeText(this, "Person info updated", Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(this, "Person info updated", Toast.LENGTH_SHORT).show();
+        } else {
 
             Toast.makeText(CreateListActivity.this, "Person Data Not Added", Toast.LENGTH_LONG).show();
 

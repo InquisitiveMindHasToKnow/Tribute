@@ -64,8 +64,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(editPersonNameEditText.getText()) || TextUtils.isEmpty(editPersonNumberEditText.getText())
                     || TextUtils.isEmpty(editPersonEmailEditText.getText()) || TextUtils.isEmpty(editPersonNotesEditText.getText())) {
                 setResult(RESULT_CANCELED, modifyPersonIntent);
-                Toast.makeText(EditPersonDataActivity.this, "Person Data Not Modified. All fields must be filled!", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(EditPersonDataActivity.this, "All fields must be filled!", Toast.LENGTH_LONG).show();
 
             } else {
 
@@ -88,9 +87,9 @@ public class EditPersonDataActivity extends AppCompatActivity {
                 }
 
                 setResult(RESULT_OK, modifyPersonIntent);
+                Toast.makeText(EditPersonDataActivity.this, "Person Data Updated", Toast.LENGTH_LONG).show();
                 finish();
 
-                Toast.makeText(EditPersonDataActivity.this, "Person Data Updated", Toast.LENGTH_LONG).show();
 
             }
         });
