@@ -43,7 +43,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     private RecyclerView personRecyclerView;
     private FloatingActionButton personFab;
 
-    private List<Person> personList;
     private Intent addPersonIntent;
     private Button selectRandomPerson;
     private long lastButtonClickTime = 0;
@@ -61,8 +60,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personFab = findViewById(R.id.create_person_action_button);
         selectRandomPerson = findViewById(R.id.select_random_person_button);
 
-        personList = new ArrayList<>();
-
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(false);
 
@@ -78,8 +75,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personViewModel.getAllPersons().observe(this, new Observer<List<Person>>() {
             @Override
             public void onChanged(@Nullable List<Person> people) {
-
-               // personList.addAll(people);
 
                 personAdapter.submitList(people);
             }
@@ -99,7 +94,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                 Person personToDelete = personAdapter.getPersonAtPosition(position);
 
                 personViewModel.deletePerson(personToDelete);
-                personList.remove(personToDelete);
 
                 Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_SHORT).show();
             }
@@ -111,7 +105,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             @Override
             public void onClick(View v) {
 
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();
@@ -128,7 +122,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     }
 
                     Random randomNumber = new Random();
-                    Person randomPersonPicked = personViewModel.getAllPersons().getValue().get(randomNumber.nextInt(personViewModel.getAllPersons().getValue().size() -1));
+                    Person randomPersonPicked = personViewModel.getAllPersons().getValue().get(randomNumber.nextInt(personViewModel.getAllPersons().getValue().size() -1) +1);
 
                     Intent randomPersonIntent = new Intent(CreateListActivity.this, RandomPersonPickedActivity.class);
                     randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
@@ -181,7 +175,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         switch (item.getItemId()) {
             case R.id.database_delete_all:
 
-                 if(personList == null) {
+                 if(personViewModel.getAllPersons().getValue().isEmpty()) {
 
                 Toast.makeText(CreateListActivity.this, "Nothing to delete.", Toast.LENGTH_SHORT).show();
         }
@@ -230,12 +224,12 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     @Override
     public boolean onQueryTextChange(String s) {
         List<Person> newPersonList = new ArrayList<>();
-        for (Person persons : personList) {
-            if (persons.getPersonName().toLowerCase().contains(s.toLowerCase())) {
-                newPersonList.add(persons);
-            }
+//        for (Person persons : personList) {
+//            if (persons.getPersonName().toLowerCase().contains(s.toLowerCase())) {
+//                newPersonList.add(persons);
+//            }
 
-        }
+ //       }
 
         //personAdapter.setData(newPersonList);
         return false;
@@ -254,7 +248,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
             Person person = new Person(personName, personNumber, personEmail, personNotes);
             personViewModel.addPerson(person);
-            personList.add(person);
 
             Toast.makeText(CreateListActivity.this, "Person Data Added", Toast.LENGTH_SHORT).show();
 
