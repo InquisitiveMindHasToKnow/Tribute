@@ -122,7 +122,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
                     }
 
                     Random randomNumber = new Random();
-                    Person randomPersonPicked = personViewModel.getAllPersons().getValue().get(randomNumber.nextInt(personViewModel.getAllPersons().getValue().size() -1) +1);
+                    Person randomPersonPicked = personViewModel.getAllPersons().getValue()
+                            .get(randomNumber.nextInt(personViewModel.getAllPersons().getValue().size()));
 
                     Intent randomPersonIntent = new Intent(CreateListActivity.this, RandomPersonPickedActivity.class);
                     randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
