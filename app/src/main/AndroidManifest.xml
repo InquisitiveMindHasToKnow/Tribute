@@ -15,7 +15,6 @@
         <activity
             android:name=".activities.AboutTheCreator"
             android:label="@string/title_activity_about_the_creator" />
-        <activity android:name=".activities.AnxietyBuilderActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activities.RandomPersonPickedActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activities.EditPersonDataActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".activities.AddPersonActivity" android:windowSoftInputMode="adjustPan" android:configChanges="keyboardHidden|orientation|screenSize" />
