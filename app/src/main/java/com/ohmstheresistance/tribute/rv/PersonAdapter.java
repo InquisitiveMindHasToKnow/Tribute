@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v7.recyclerview.extensions.ListAdapter;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,20 +19,28 @@ import com.ohmstheresistance.tribute.database.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonViewHolder> {
-    private List<Person> personList = new ArrayList<>();
+public class PersonAdapter extends ListAdapter<Person, PersonAdapter.PersonViewHolder> {
     private OnItemClickListener itemClickListener;
 
-    private final LayoutInflater layoutInflater;
-    private Context layoutContext;
+  //  private final LayoutInflater layoutInflater;
+   // private Context layoutContext;
 
-
-    public PersonAdapter(Context context) {
-        layoutInflater = LayoutInflater.from(context);
-        layoutContext = context;
-
+    public PersonAdapter() {
+        super(DIFF_CALLBACK);
     }
 
+    private static final DiffUtil.ItemCallback<Person> DIFF_CALLBACK = new DiffUtil.ItemCallback<Person>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Person currentPerson, @NonNull Person newPerson) {
+            return currentPerson.getPersonID() == newPerson.getPersonID();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Person currentPerson, @NonNull Person newPerson) {
+            return currentPerson.getPersonName().equals(newPerson.getPersonName()) && currentPerson.getPersonPhoneNumber().equals(newPerson.getPersonPhoneNumber())
+                    && currentPerson.getPersonEmail().equals(newPerson.getPersonEmail()) && currentPerson.getPersonNotes().equals(newPerson.getPersonNotes());
+        }
+    };
 
     @NonNull
     @Override
@@ -41,7 +51,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
-        Person currentPerson = personList.get(position);
+        Person currentPerson = getItem(position);
 
         holder.personNameTextView.setText(currentPerson.getPersonName());
         holder.personPhoneNumberTextView.setText(currentPerson.getPersonPhoneNumber());
@@ -50,24 +60,15 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     }
 
-    @Override
-    public int getItemCount() {
-        return personList.size();
-    }
 
-    public void setPersons(List<Person> persons) {
-        this.personList = persons;
-        notifyDataSetChanged();
-    }
-
-    public void deletePerson(int position) {
-        personList.remove(position);
-        notifyDataSetChanged();
-    }
+//    public void deletePerson(int position) {
+//        personList.remove(position);
+//        notifyDataSetChanged();
+//    }
 
     public Person getPersonAtPosition(int position) {
 
-        return personList.get(position);
+        return getItem(position);
     }
 
     class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -96,7 +97,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
                 lastButtonClickTime = SystemClock.elapsedRealtime();
                 int position = getAdapterPosition();
                 if (itemClickListener != null && position != RecyclerView.NO_POSITION) {
-                    itemClickListener.onItemClicked(personList.get(position));
+                    itemClickListener.onItemClicked(getItem(position));
                 }
             });
         }
@@ -113,8 +114,5 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     }
 
-    public void setData(List<Person> newPersonList) {
-        this.personList = newPersonList;
-        notifyDataSetChanged();
-    }
+//
 }

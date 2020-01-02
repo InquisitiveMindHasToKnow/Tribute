@@ -5,25 +5,12 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
-import com.ohmstheresistance.tribute.database.Person;
-import com.ohmstheresistance.tribute.database.PersonDataSource;
-import com.ohmstheresistance.tribute.database.PersonDatabase;
-import com.ohmstheresistance.tribute.database.PersonRepository;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class EditPersonDataActivity extends AppCompatActivity {
 
@@ -36,7 +23,6 @@ public class EditPersonDataActivity extends AppCompatActivity {
     private long lastButtonClickTime = 0;
 
     private Button editPersonButton;
-    private PersonRepository personRepository;
     private EditText editPersonNameEditText;
     private EditText editPersonNumberEditText;
     private EditText editPersonEmailEditText;
@@ -54,9 +40,6 @@ public class EditPersonDataActivity extends AppCompatActivity {
         editPersonEmailEditText = findViewById(R.id.edit_person_email_edittext);
         editPersonNotesEditText = findViewById(R.id.edit_person_notes_edittext);
         editPersonButton = findViewById(R.id.edit_person_submit_button);
-
-        PersonDatabase personDatabase = PersonDatabase.getInstance(this);
-        personRepository = PersonRepository.getInstance(PersonDataSource.getPersonInstance(personDatabase.personDao()));
 
 
         editIntent = getIntent();
@@ -81,8 +64,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(editPersonNameEditText.getText()) || TextUtils.isEmpty(editPersonNumberEditText.getText())
                     || TextUtils.isEmpty(editPersonEmailEditText.getText()) || TextUtils.isEmpty(editPersonNotesEditText.getText())) {
                 setResult(RESULT_CANCELED, modifyPersonIntent);
-                Toast.makeText(EditPersonDataActivity.this, "Person Data Not Modified. All fields must be filled!", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(EditPersonDataActivity.this, "All fields must be filled!", Toast.LENGTH_LONG).show();
 
             } else {
 
@@ -105,33 +87,11 @@ public class EditPersonDataActivity extends AppCompatActivity {
                 }
 
                 setResult(RESULT_OK, modifyPersonIntent);
-
-                Person person = new Person(personName, personNumber, personEmail, personNotes);
-                person.setPersonID(personID);
-
-
                 Toast.makeText(EditPersonDataActivity.this, "Person Data Updated", Toast.LENGTH_LONG).show();
+                finish();
 
-                Disposable disposable = Observable.create(emitter -> {
-
-
-                    personRepository.updatePerson(person);
-                    emitter.onComplete();
-                })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(o -> {
-
-
-                        }, throwable -> Toast.makeText(EditPersonDataActivity.this, "Error Updating Person Data" + throwable.getMessage(), Toast.LENGTH_LONG).show(), new Action() {
-                            @Override
-                            public void run() {
-
-                            }
-                        });
 
             }
-            finish();
         });
 
     }

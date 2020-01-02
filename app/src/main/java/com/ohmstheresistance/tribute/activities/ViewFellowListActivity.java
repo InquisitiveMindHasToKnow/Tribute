@@ -8,7 +8,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +42,7 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
     private long lastButtonClickTime = 0;
     private static final String RANDOM_FELLOW_KEY = "randomFellowKey";
 
-    private List<Fellows> fellowList = new ArrayList<>();
+    private List<Fellows> fellowList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,7 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
             lastButtonClickTime = SystemClock.elapsedRealtime();
 
             if (fellowList.size() == 1) {
-                Toast.makeText(ViewFellowListActivity.this, "There is only one name left" , Toast.LENGTH_LONG).show();
+                Toast.makeText(ViewFellowListActivity.this, "There is only one name remaining." , Toast.LENGTH_LONG).show();
                 return;
                 }
 
@@ -106,6 +105,8 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
     }
 
     private void populateFellowList(){
+
+        fellowList = new ArrayList<>();
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitInstance();
         FellowService fellowService = retrofit.create(FellowService.class);
