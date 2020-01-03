@@ -49,6 +49,8 @@ public class AddPersonActivity extends AppCompatActivity {
         addPersonNotesEditText = findViewById(R.id.add_person_notes_edittext);
         addPersonActivityConstraintLayout = findViewById(R.id.addpersonactivity_constraint);
 
+        overridePendingTransition(0, 0);
+
         addPersonButton = findViewById(R.id.add_person_submit_button);
         addPersonButton.setOnClickListener(v -> {
 

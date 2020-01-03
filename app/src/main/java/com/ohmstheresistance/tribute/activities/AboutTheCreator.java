@@ -20,6 +20,8 @@ public class AboutTheCreator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_the_creator);
 
+        overridePendingTransition(0, 0);
+
 
         viewPager = findViewById(R.id.container);
         setUpViewPager(viewPager);

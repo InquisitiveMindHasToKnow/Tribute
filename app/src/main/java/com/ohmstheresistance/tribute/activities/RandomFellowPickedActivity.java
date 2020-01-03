@@ -34,6 +34,8 @@ public class RandomFellowPickedActivity extends AppCompatActivity {
         chosenFellowImageview = findViewById(R.id.i_choose_you_gif_imageview);
         fellowMotivationTextView = findViewById(R.id.fellow_motivation);
 
+        overridePendingTransition(0, 0);
+
         Glide.with(this)
                 .load(R.drawable.ashchoseyou)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

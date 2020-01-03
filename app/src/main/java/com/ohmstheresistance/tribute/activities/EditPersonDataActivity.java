@@ -53,6 +53,7 @@ public class EditPersonDataActivity extends AppCompatActivity {
         editPersonButton = findViewById(R.id.edit_person_submit_button);
         editPersonDataConstraintLayout = findViewById(R.id.editpersondata_constraint);
 
+        overridePendingTransition(0, 0);
 
         editIntent = getIntent();
 

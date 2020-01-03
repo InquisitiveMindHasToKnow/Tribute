@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         userNameIntent = getIntent();
         String userName = userNameIntent.getStringExtra(USER_NAME_KEY);
-        welcomeTextView.setText("Welcome, " + userName);
+        welcomeTextView.setText("Welcome, " + userName + "!");
 
 
         viewFellowListButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 lastButtonClickTime = SystemClock.elapsedRealtime();
                 navigationIntent = new Intent(MainActivity.this , ViewFellowListActivity.class);
                 startActivity(navigationIntent);
+                overridePendingTransition(0, 0);
 
             }
         });
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 lastButtonClickTime = SystemClock.elapsedRealtime();
                 navigationIntent = new Intent(MainActivity.this , CreateListActivity.class);
                 startActivity(navigationIntent);
+                overridePendingTransition(0, 0);
 
             }
         });
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 lastButtonClickTime = SystemClock.elapsedRealtime();
                 navigationIntent = new Intent(MainActivity.this , AboutTheCreator.class);
                 startActivity(navigationIntent);
+                overridePendingTransition(0, 0);
+
 
 
             }

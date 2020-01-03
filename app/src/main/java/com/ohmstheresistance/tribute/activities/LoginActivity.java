@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         userRegistrationButton = findViewById(R.id.register_button);
         loginActivityConstraintLayout = findViewById(R.id.loginactivity_constraint);
 
+        overridePendingTransition(0, 0);
+
         loginSharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFS_KEY, MODE_PRIVATE);
 
         if (loginSharedPreferences.getBoolean("isChecked", false)) {

@@ -22,6 +22,8 @@ public class RandomPersonPickedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_person_picked);
 
+        overridePendingTransition(0, 0);
+
         randomlySelectedPerson = findViewById(R.id.randomly_selected_person_textview);
 
         chosenPersonIntent = getIntent();
