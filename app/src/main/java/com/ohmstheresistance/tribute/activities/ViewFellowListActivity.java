@@ -62,6 +62,9 @@ public class ViewFellowListActivity extends AppCompatActivity implements SearchV
         pickRandomFellowButton = findViewById(R.id.pick_random_fellow_button);
         viewFellowListRelativeLayout = findViewById(R.id.view_fellow_list_relative_layout);
 
+        overridePendingTransition(0, 0);
+
+
         fellowSearchView.setOnQueryTextListener(ViewFellowListActivity.this);
         fellowSearchView.setIconified(false);
         fellowSearchView.setFocusable(false);

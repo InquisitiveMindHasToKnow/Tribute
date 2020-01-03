@@ -65,6 +65,8 @@ public class CreateListActivity extends AppCompatActivity {
         selectRandomPerson = findViewById(R.id.select_random_person_button);
         createListLinearLayout = findViewById(R.id.createlistlinear);
 
+        overridePendingTransition(0, 0);
+
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(false);
 
@@ -134,6 +136,8 @@ public class CreateListActivity extends AppCompatActivity {
                     randomPersonIntent.putExtra(RANDOM_PERSON_KEY, randomPersonPicked.getPersonName());
 
                     startActivity(randomPersonIntent);
+                    overridePendingTransition(0, 0);
+
                 }
             }
         });

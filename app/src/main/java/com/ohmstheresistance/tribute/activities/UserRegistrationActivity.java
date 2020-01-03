@@ -43,6 +43,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.user_registration_submit_button);
         userRegistrationConstraintLayout = findViewById(R.id.user_registration_constraint_layout);
 
+        overridePendingTransition(0, 0);
+
         registrationIntent = getIntent();
         registrationSharedPrefs = getApplicationContext().getSharedPreferences(registrationIntent.getStringExtra("testKey"), MODE_PRIVATE);
 
