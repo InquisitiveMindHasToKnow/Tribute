@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Gravity;
 import android.view.Menu;
@@ -40,7 +39,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class CreateListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class CreateListActivity extends AppCompatActivity {
 
     public static final int ADD_PERSON_RESULT_CODE = 1;
     public static final int EDIT_PERSON_REQUEST_CODE = 2;
@@ -51,7 +50,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     private Intent addPersonIntent;
     private Button selectRandomPerson;
     private long lastButtonClickTime = 0;
-    private SearchView personSearchView;
 
     private LinearLayout createListLinearLayout;
     private String createListActivitySnackBarText;
@@ -62,7 +60,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_list);
-        personSearchView = findViewById(R.id.person_search_view);
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
         personFab = findViewById(R.id.create_person_action_button);
         selectRandomPerson = findViewById(R.id.select_random_person_button);
@@ -73,11 +70,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
         final PersonAdapter personAdapter = new PersonAdapter();
         personRecyclerView.setAdapter(personAdapter);
-
-        personSearchView.setIconified(false);
-        personSearchView.setFocusable(false);
-        personSearchView.setIconified(false);
-        personSearchView.clearFocus();
 
         personViewModel = ViewModelProviders.of(this).get(PersonViewModel.class);
         personViewModel.getAllPersons().observe(this, new Observer<List<Person>>() {
@@ -121,14 +113,14 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
                 if (personViewModel.getAllPersons().getValue().isEmpty()) {
 
-                    createListActivitySnackBarText = "Cannot generate random person from an empty list.";
+                    createListActivitySnackBarText = "Cannot generate random person \n from an empty list.";
                     displayCreateListActivitySnackbar();
 
                 } else {
 
                     if (personViewModel.getAllPersons().getValue().size() <= 1) {
 
-                        createListActivitySnackBarText = "There's only one person remaining.";
+                        createListActivitySnackBarText = "There's only one \n person remaining.";
                         displayCreateListActivitySnackbar();
 
                         return;
@@ -232,17 +224,6 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         final AlertDialog alert = dialog.create();
         alert.show();
 
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
-
-        return false;
     }
 
     @Override

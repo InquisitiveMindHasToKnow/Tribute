@@ -18,6 +18,7 @@ import com.ohmstheresistance.tribute.database.Person;
 public class PersonAdapter extends ListAdapter<Person, PersonAdapter.PersonViewHolder> {
     private OnItemClickListener itemClickListener;
 
+
     public PersonAdapter() {
         super(DIFF_CALLBACK);
     }
