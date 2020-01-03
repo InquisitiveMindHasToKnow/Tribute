@@ -1,7 +1,6 @@
 package com.ohmstheresistance.tribute.rv;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
@@ -16,14 +15,8 @@ import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PersonAdapter extends ListAdapter<Person, PersonAdapter.PersonViewHolder> {
     private OnItemClickListener itemClickListener;
-
-  //  private final LayoutInflater layoutInflater;
-   // private Context layoutContext;
 
     public PersonAdapter() {
         super(DIFF_CALLBACK);
@@ -59,12 +52,6 @@ public class PersonAdapter extends ListAdapter<Person, PersonAdapter.PersonViewH
         holder.personNotesTextView.setText(currentPerson.getPersonNotes());
 
     }
-
-
-//    public void deletePerson(int position) {
-//        personList.remove(position);
-//        notifyDataSetChanged();
-//    }
 
     public Person getPersonAtPosition(int position) {
 
@@ -114,5 +101,4 @@ public class PersonAdapter extends ListAdapter<Person, PersonAdapter.PersonViewH
 
     }
 
-//
 }

@@ -5,10 +5,14 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,20 +21,21 @@ import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ohmstheresistance.tribute.R;
 import com.ohmstheresistance.tribute.database.Person;
 import com.ohmstheresistance.tribute.database.PersonViewModel;
 import com.ohmstheresistance.tribute.rv.PersonAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -48,6 +53,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
     private long lastButtonClickTime = 0;
     private SearchView personSearchView;
 
+    private LinearLayout createListLinearLayout;
+    private String createListActivitySnackBarText;
 
     private static final String RANDOM_PERSON_KEY = "randomPersonKey";
 
@@ -59,6 +66,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         personRecyclerView = findViewById(R.id.create_person_recycler_view);
         personFab = findViewById(R.id.create_person_action_button);
         selectRandomPerson = findViewById(R.id.select_random_person_button);
+        createListLinearLayout = findViewById(R.id.createlistlinear);
 
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         personRecyclerView.setHasFixedSize(false);
@@ -95,7 +103,8 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
                 personViewModel.deletePerson(personToDelete);
 
-                Toast.makeText(CreateListActivity.this, "Person Data Removed", Toast.LENGTH_SHORT).show();
+                createListActivitySnackBarText = "Person data deleted.";
+                displayCreateListActivitySnackbar();
             }
 
         }).attachToRecyclerView(personRecyclerView);
@@ -112,12 +121,16 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
                 if (personViewModel.getAllPersons().getValue().isEmpty()) {
 
-                    Toast.makeText(CreateListActivity.this, "Cannot Generate Random Person From An Empty List", Toast.LENGTH_SHORT).show();
+                    createListActivitySnackBarText = "Cannot generate random person from an empty list.";
+                    displayCreateListActivitySnackbar();
 
                 } else {
 
                     if (personViewModel.getAllPersons().getValue().size() <= 1) {
-                        Toast.makeText(CreateListActivity.this, "There is only one person remaining.", Toast.LENGTH_SHORT).show();
+
+                        createListActivitySnackBarText = "There's only one person remaining.";
+                        displayCreateListActivitySnackbar();
+
                         return;
                     }
 
@@ -152,7 +165,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
 
             personFab.setOnClickListener(v -> {
-                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 3000) {
+                if (SystemClock.elapsedRealtime() - lastButtonClickTime < 1000) {
                     return;
                 }
                 lastButtonClickTime = SystemClock.elapsedRealtime();
@@ -176,12 +189,15 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
         switch (item.getItemId()) {
             case R.id.database_delete_all:
 
-                 if(personViewModel.getAllPersons().getValue().isEmpty()) {
+                if (personViewModel.getAllPersons().getValue().isEmpty()) {
 
-                Toast.makeText(CreateListActivity.this, "Nothing to delete.", Toast.LENGTH_SHORT).show();
-        }
+                    createListActivitySnackBarText = "Nothing to delete.";
+                    displayCreateListActivitySnackbar();
 
-                deleteDatabase();
+                } else {
+
+                    deleteDatabase();
+                }
 
                 break;
 
@@ -200,8 +216,9 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             public void onClick(DialogInterface dialog1, int id) {
 
                 personViewModel.deleteAllPersons();
-                Toast.makeText(CreateListActivity.this, "Database Cleared", Toast.LENGTH_SHORT).show();
 
+                createListActivitySnackBarText = "All information erased.";
+                displayCreateListActivitySnackbar();
             }
         })
 
@@ -224,15 +241,7 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
 
     @Override
     public boolean onQueryTextChange(String s) {
-        List<Person> newPersonList = new ArrayList<>();
-//        for (Person persons : personList) {
-//            if (persons.getPersonName().toLowerCase().contains(s.toLowerCase())) {
-//                newPersonList.add(persons);
-//            }
 
- //       }
-
-        //personAdapter.setData(newPersonList);
         return false;
     }
 
@@ -250,13 +259,16 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             Person person = new Person(personName, personNumber, personEmail, personNotes);
             personViewModel.addPerson(person);
 
-            Toast.makeText(CreateListActivity.this, "Person Data Added", Toast.LENGTH_SHORT).show();
+            createListActivitySnackBarText = "Person data added.";
+            displayCreateListActivitySnackbar();
 
         } else if (requestCode == EDIT_PERSON_REQUEST_CODE && resultCode == RESULT_OK) {
             int personID = data.getIntExtra(EditPersonDataActivity.PERSON_ID, -1);
 
             if (personID == -1) {
-                Toast.makeText(this, "Person info can't be updated.", Toast.LENGTH_SHORT).show();
+
+                createListActivitySnackBarText = "Person info can't be updated.";
+                displayCreateListActivitySnackbar();
                 return;
             }
 
@@ -270,12 +282,40 @@ public class CreateListActivity extends AppCompatActivity implements SearchView.
             personToEdit.setPersonID(personID);
             personViewModel.updatePerson(personToEdit);
 
-            Toast.makeText(this, "Person info updated", Toast.LENGTH_SHORT).show();
+            createListActivitySnackBarText = "Person data updated";
+            displayCreateListActivitySnackbar();
+
         } else {
 
-            Toast.makeText(CreateListActivity.this, "Person Data Not Added", Toast.LENGTH_SHORT).show();
-
+            createListActivitySnackBarText = "Person data not updated.";
+            displayCreateListActivitySnackbar();
         }
+    }
+
+    private void displayCreateListActivitySnackbar() {
+        Snackbar createListSnackbar = Snackbar.make(createListLinearLayout, createListActivitySnackBarText, Snackbar.LENGTH_LONG);
+        View snackbarView = createListSnackbar.getView();
+        TextView snackBarTextView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+
+        snackBarTextView.setBackgroundResource(R.drawable.snackbar_background);
+        snackBarTextView.setTextSize(16);
+        snackBarTextView.setTypeface(snackBarTextView.getTypeface(), Typeface.BOLD_ITALIC);
+        snackBarTextView.setGravity(Gravity.CENTER);
+        snackBarTextView.setTextColor(getResources().getColor(R.color.mainBackgroundColor));
+        snackbarView.setBackgroundColor(Color.TRANSPARENT);
+
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+        layoutParams.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER;
+        layoutParams.bottomMargin = 120;
+        snackbarView.setLayoutParams(layoutParams);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            snackBarTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        else
+            snackBarTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        createListSnackbar.show();
     }
 }
 

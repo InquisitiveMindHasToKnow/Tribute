@@ -2,12 +2,20 @@ package com.ohmstheresistance.tribute.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.SystemClock;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ohmstheresistance.tribute.R;
@@ -22,6 +30,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
     private long lastButtonClickTime = 0;
     private Button registerButton;
 
+    private ConstraintLayout userRegistrationConstraintLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +41,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
         registrationPassword = findViewById(R.id.user_registration_password_edittext);
         confirmPassword = findViewById(R.id.user_registration_confirm_password_edittext);
         registerButton = findViewById(R.id.user_registration_submit_button);
+        userRegistrationConstraintLayout = findViewById(R.id.user_registration_constraint_layout);
 
         registrationIntent = getIntent();
         registrationSharedPrefs = getApplicationContext().getSharedPreferences(registrationIntent.getStringExtra("testKey"), MODE_PRIVATE);
@@ -54,9 +65,36 @@ public class UserRegistrationActivity extends AppCompatActivity {
             }
 
             if (!registrationPassword.getText().toString().equals(confirmPassword.getText().toString())) {
-                Toast.makeText(getApplicationContext(), "Try again. Both passwords have to match", Toast.LENGTH_LONG).show();
 
+                displayRegistrationPageSnackbar();
             }
         });
+    }
+
+    private void displayRegistrationPageSnackbar(){
+
+        Snackbar registrationPageSnackbar = Snackbar.make(userRegistrationConstraintLayout, "Try again. Both passwords have to match.", Snackbar.LENGTH_LONG);
+        View snackbarView = registrationPageSnackbar.getView();
+        TextView snackBarTextView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+
+        snackBarTextView.setBackgroundResource(R.drawable.snackbar_background);
+        snackBarTextView.setTextSize(16);
+        snackBarTextView.setTypeface(snackBarTextView.getTypeface(), Typeface.BOLD_ITALIC);
+        snackBarTextView.setGravity(Gravity.CENTER);
+        snackBarTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        snackbarView.setBackgroundColor(Color.TRANSPARENT);
+
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+        layoutParams.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = Gravity.BOTTOM|Gravity.CENTER;
+        layoutParams.bottomMargin = 120;
+        snackbarView.setLayoutParams(layoutParams);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            snackBarTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        else
+            snackBarTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        registrationPageSnackbar.show();
     }
 }
